@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// RIASEC travel quiz schema
+
+enum RiasecType {
+  REALISTIC
+  INVESTIGATIVE
+  ARTISTIC
+  SOCIAL
+  ENTERPRISING
+  CONVENTIONAL
+}
+
+model Question {
+  id       String   @id @default(cuid())
+  text     String
+  answers  Answer[]
+  order    Int
+}
+
+model Answer {
+  id           String     @id @default(cuid())
+  text         String
+  questionId   String
+  question     Question   @relation(fields: [questionId], references: [id])
+  riasecType   RiasecType
+}
+
+model TravelerType {
+  id             String     @id @default(cuid())
+  riasecType     RiasecType @unique
+  title          String
+  description    String
+  imageUrl       String
+  shareImageUrl  String
+  destinations   String
+  tips           String
+  trivia         String
+}
