@@ -137,22 +137,22 @@ const questions: Array<{
   answers: Array<{ text: string; riasecType: RiasecType }>;
 }> = [
   {
-    text: 'Your ideal vacation activity would be...',
+    text: 'In the first day of your trip, a wombat sneaks into camp and steals your snack. What’s your reaction?',
     answers: [
-      { text: 'Hiking a challenging mountain trail', riasecType: 'REALISTIC' },
-      { text: 'Visiting museums and historical sites', riasecType: 'INVESTIGATIVE' },
-      { text: 'Exploring local art scenes and galleries', riasecType: 'ARTISTIC' },
-      { text: 'Joining a group tour to meet new people', riasecType: 'SOCIAL' },
-      { text: 'Staying at a luxury resort with VIP experiences', riasecType: 'ENTERPRISING' },
+      { text: 'Observe its eating habits', riasecType: 'INVESTIGATIVE' },
+      { text: 'Check what food is left', riasecType: 'CONVENTIONAL' },
+      { text: 'Chase it to get back', riasecType: 'REALISTIC' },
+      { text: 'Plan how to guard food', riasecType: 'ENTERPRISING' },
+      { text: 'Write a funny poem', riasecType: 'ARTISTIC' },
     ],
   },
   {
-    text: 'When planning a trip, you prefer to...',
+    text: 'At night by the campfire, sparks suddenly fly up into the dark sky. What do you do?',
     answers: [
-      { text: 'Wing it and see where the day takes you', riasecType: 'ARTISTIC' },
-      { text: 'Create a detailed, day-by-day schedule', riasecType: 'CONVENTIONAL' },
-      { text: 'Ask friends for recommendations and go together', riasecType: 'SOCIAL' },
-      { text: 'Find the best deals on premium experiences', riasecType: 'ENTERPRISING' },
+      { text: 'Add more wood neatly', riasecType: 'CONVENTIONAL' },
+      { text: 'Point it out to friends', riasecType: 'SOCIAL' },
+      { text: 'Make a quick wish', riasecType: 'ENTERPRISING' },
+      { text: 'Imagine it’s fireworks', riasecType: 'ARTISTIC' },
     ],
   },
   {
