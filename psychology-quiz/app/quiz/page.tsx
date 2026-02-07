@@ -31,19 +31,19 @@ export default function QuizPage() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch('/api/questions');
+      const res = await fetch('/api/questions');
         if (!res.ok) {
           console.error('API error:', res.status, await res.text());
           return;
         }
-        const data = (await res.json()) as Question[];
+      const data = (await res.json()) as Question[];
         if (!Array.isArray(data)) {
           console.error('Invalid response:', data);
           return;
         }
-        setQuestions(data);
-        // initialize answers length based on fetched questions
-        setAnswers(new Array(data.length).fill(null));
+      setQuestions(data);
+      // initialize answers length based on fetched questions
+      setAnswers(new Array(data.length).fill(null));
       } catch (err) {
         console.error('Failed to fetch questions:', err);
       }
