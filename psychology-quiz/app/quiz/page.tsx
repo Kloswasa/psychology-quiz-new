@@ -13,12 +13,14 @@ type Answer = {
   id: string;
   text: string;
   riasecType: RiasecType;
+  imageUrl?: string;
 };
 
 type Question = {
   id: string;
   text: string;
   order: number;
+  backgroundImage: string;
   answers: Answer[];
 };
 
@@ -79,18 +81,33 @@ export default function QuizPage() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-6">
-      <div className="mb-6 flex items-center justify-between">
-        <ProgressBar current={current + 1} total={total} />
-        <BackButton onClick={goBack} disabled={current === 0} />
-      </div>
-      <QuestionCard
-        questionIndex={current}
-        questionText={currentQuestion.text}
-        answers={currentQuestion.answers.map((a) => ({ id: a.id, text: a.text, riasecType: a.riasecType }))}
-        selected={answers[current]}
-        onSelect={selectAnswer}
-      />
+    <div className="min-h-screen w-full overflow-hidden relative sm:flex sm:items-center sm:justify-center sm:bg-gray-100">
+      {/* Fixed header overlay */}
+      <header className="fixed top-0 left-0 right-0 z-20 p-4 sm:p-6 flex items-center justify-between bg-gradient-to-b from-black/50 to-transparent pointer-events-none">
+        <div className="pointer-events-auto">
+          <ProgressBar current={current + 1} total={total} />
+        </div>
+        <div className="pointer-events-auto">
+          <BackButton onClick={goBack} disabled={current === 0} />
+        </div>
+      </header>
+
+      {/* Main content area */}
+      <main className="h-screen w-full sm:h-auto sm:max-w-md sm:rounded-2xl sm:shadow-2xl sm:overflow-hidden">
+        <QuestionCard
+          questionIndex={current}
+          questionText={currentQuestion.text}
+          backgroundImage={currentQuestion.backgroundImage}
+          answers={currentQuestion.answers.map((a) => ({ 
+            id: a.id, 
+            text: a.text, 
+            riasecType: a.riasecType,
+            imageUrl: a.imageUrl 
+          }))}
+          selected={answers[current]}
+          onSelect={selectAnswer}
+        />
+      </main>
     </div>
   );
 }

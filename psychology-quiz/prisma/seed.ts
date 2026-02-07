@@ -134,11 +134,13 @@ const travelerTypes: Array<{
 
 const questions: Array<{
   text: string;
-  answers: Array<{ text: string; riasecType: RiasecType }>;
+  backgroundImage: string;
+  answers: Array<{ text: string; riasecType: RiasecType; imageUrl?: string }>;
 }> = [
   {
     text: 'In the first day of your trip, a wombat sneaks into camp and steals your snack. What’s your reaction?',
     answers: [
+    backgroundImage: '',
       { text: 'Observe its eating habits', riasecType: 'INVESTIGATIVE' },
       { text: 'Check what food is left', riasecType: 'CONVENTIONAL' },
       { text: 'Chase it to get back', riasecType: 'REALISTIC' },
@@ -148,6 +150,7 @@ const questions: Array<{
   },
   {
     text: 'At night by the campfire, sparks suddenly fly up into the dark sky. What do you do?',
+    backgroundImage: '',
     answers: [
       { text: 'Add more wood neatly', riasecType: 'CONVENTIONAL' },
       { text: 'Point it out to friends', riasecType: 'SOCIAL' },
@@ -157,6 +160,7 @@ const questions: Array<{
   },
   {
     text: 'After a long climb, you reach a mountain peak. What matters most to you in that moment?',
+    backgroundImage: '',
     answers: [
       { text: 'Enjoy the breathtaking view', riasecType: 'ARTISTIC' },
       { text: 'Celebrate as the leader', riasecType: 'ENTERPRISING' },
@@ -166,6 +170,7 @@ const questions: Array<{
   },
   {
     text: 'A strong wind blows your hat straight into a muddy pond. What do you do?',
+    backgroundImage: '',
     answers: [
       { text: 'Ask friends for help', riasecType: 'SOCIAL' },
       { text: 'Study the water currents', riasecType: 'INVESTIGATIVE' },
@@ -175,6 +180,7 @@ const questions: Array<{
   },
   {
     text: 'Deep in the rainforest, you hear an unfamiliar sound echoing around you on a rainy day. What’s your reaction?',
+    backgroundImage: '',
     answers: [
       { text: 'Mark the location down', riasecType: 'CONVENTIONAL' },
       { text: 'Imagine it as music', riasecType: 'ARTISTIC' },
@@ -184,6 +190,7 @@ const questions: Array<{
     ],
   },
   {
+    backgroundImage: '',
     text: 'A rainbow appears after the rain during your trip. What’s your first reaction?',
     answers: [
       { text: 'Think about light and water ', riasecType: 'INVESTIGATIVE' },
@@ -194,6 +201,7 @@ const questions: Array<{
   },
   {
     text: 'As the journey winds down, you find yourself under a clear sky full of stars. What do you do?',
+    backgroundImage: '/images/backgrounds/Q7.webp',
     answers: [
       { text: 'Note constellations for memory ', riasecType: 'CONVENTIONAL' },
       { text: 'Announce dreams for the future ', riasecType: 'ENTERPRISING' },
@@ -203,6 +211,7 @@ const questions: Array<{
   },
   {
     text: 'At the end of your trip, what makes you feel most fulfilled?',
+    backgroundImage: '',
     answers: [
       { text: 'Strong connections', riasecType: 'SOCIAL' },
       { text: 'Plans completed', riasecType: 'CONVENTIONAL' },
@@ -212,6 +221,7 @@ const questions: Array<{
   },
   {
     text: 'If you could sum up your whole adventure in one word, what would it be?',
+    backgroundImage: '',
     answers: [
       { text: 'Friendship', riasecType: 'REALISTIC' },
       { text: 'Inspiration', riasecType: 'ARTISTIC' },
@@ -222,6 +232,7 @@ const questions: Array<{
   },
   {
     text: 'What souvenir would you bring back from this trip?',
+    backgroundImage: '',
     answers: [
       { text: 'A group photo', riasecType: 'SOCIAL' },
       { text: 'A creative keepsake', riasecType: 'ARTISTIC' },
@@ -260,10 +271,12 @@ async function main() {
       data: {
         text: q.text,
         order: i + 1,
+        backgroundImage: q.backgroundImage || '',
         answers: {
           create: q.answers.map((a) => ({
             text: a.text,
             riasecType: a.riasecType,
+            imageUrl: a.imageUrl || null,
           })),
         },
       },

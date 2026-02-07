@@ -22,10 +22,11 @@ enum RiasecType {
 }
 
 model Question {
-  id       String   @id @default(cuid())
-  text     String
-  answers  Answer[]
-  order    Int
+  id              String   @id @default(cuid())
+  text            String
+  answers         Answer[]
+  order           Int
+  backgroundImage String   @default("")
 }
 
 model Answer {
@@ -34,6 +35,7 @@ model Answer {
   questionId   String
   question     Question   @relation(fields: [questionId], references: [id])
   riasecType   RiasecType
+  imageUrl     String?
 }
 
 model TravelerType {
