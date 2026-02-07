@@ -139,8 +139,8 @@ const questions: Array<{
 }> = [
   {
     text: 'In the first day of your trip, a wombat sneaks into camp and steals your snack. What’s your reaction?',
-    answers: [
     backgroundImage: '',
+    answers: [
       { text: 'Observe its eating habits', riasecType: 'INVESTIGATIVE' },
       { text: 'Check what food is left', riasecType: 'CONVENTIONAL' },
       { text: 'Chase it to get back', riasecType: 'REALISTIC' },
@@ -190,8 +190,8 @@ const questions: Array<{
     ],
   },
   {
+    text: 'A rainbow appears after the rain during your trip. What's your first reaction?',
     backgroundImage: '',
-    text: 'A rainbow appears after the rain during your trip. What’s your first reaction?',
     answers: [
       { text: 'Think about light and water ', riasecType: 'INVESTIGATIVE' },
       { text: 'Call others to take a group photo', riasecType: 'SOCIAL' },
