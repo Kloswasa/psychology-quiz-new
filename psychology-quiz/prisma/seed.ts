@@ -190,7 +190,7 @@ const questions: Array<{
     ],
   },
   {
-    text: 'A rainbow appears after the rain during your trip. What's your first reaction?',
+    text: 'A rainbow appears after the rain during your trip. What\'s your first reaction?',
     backgroundImage: '',
     answers: [
       { text: 'Think about light and water ', riasecType: 'INVESTIGATIVE' },
