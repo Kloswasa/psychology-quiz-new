@@ -65,31 +65,40 @@ export default function QuestionCard({
                 className={`
                   relative overflow-hidden
                   ${isGrid ? 'min-h-[120px] sm:min-h-[140px]' : 'min-h-[56px] sm:min-h-[64px]'}
-                  rounded-xl sm:rounded-2xl
+                  rounded-2xl sm:rounded-3xl
                   p-4 sm:p-5
-                  transition-all duration-200
+                  transition-all duration-300
                   active:scale-95
                   touch-manipulation
                   text-base sm:text-lg font-medium
+                  group
                   ${isActive 
-                    ? 'bg-blue-500 text-white shadow-lg ring-4 ring-blue-300' 
-                    : 'bg-white/90 text-gray-800 hover:bg-white active:bg-blue-50'}
+                    ? 'backdrop-blur-md bg-white/30 border-2 border-white/60 shadow-2xl ring-2 ring-white/50' 
+                    : 'backdrop-blur-sm bg-white/10 border border-white/30 hover:bg-white/20 hover:border-white/50 shadow-lg'}
                 `}
+                style={{
+                  backdropFilter: isActive ? 'blur(12px) saturate(180%)' : 'blur(8px) saturate(150%)',
+                  WebkitBackdropFilter: isActive ? 'blur(12px) saturate(180%)' : 'blur(8px) saturate(150%)',
+                }}
               >
                 {/* Answer image (if present) */}
                 {a.imageUrl && (
                   <img 
                     src={a.imageUrl} 
                     alt="" 
-                    className="absolute inset-0 w-full h-full object-cover brightness-75"
+                    className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity"
                   />
                 )}
+                
+                {/* Glassmorphic overlay effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-50" />
                 
                 {/* Answer text */}
                 <span className={`
                   relative z-10
-                  ${a.imageUrl ? 'text-white drop-shadow-lg' : ''}
+                  text-white drop-shadow-lg
                   ${isGrid ? 'text-center block' : 'text-left'}
+                  font-semibold
                 `}>
                   {a.text}
                 </span>
