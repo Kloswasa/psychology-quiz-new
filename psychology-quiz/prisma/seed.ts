@@ -180,7 +180,7 @@ const questions: Array<{
   },
   {
     text: 'Deep in the rainforest, you hear an unfamiliar sound echoing around you on a rainy day. What’s your reaction?',
-    backgroundImage: '',
+    backgroundImage: '/images/backgrounds/question5-bg.webp',
     answers: [
       { text: 'Mark the location down', riasecType: 'CONVENTIONAL' },
       { text: 'Imagine it as music', riasecType: 'ARTISTIC' },
@@ -191,7 +191,7 @@ const questions: Array<{
   },
   {
     text: 'A rainbow appears after the rain during your trip. What\'s your first reaction?',
-    backgroundImage: '',
+    backgroundImage: '/images/backgrounds/question6-bg.webp',
     answers: [
       { text: 'Think about light and water ', riasecType: 'INVESTIGATIVE' },
       { text: 'Call others to take a group photo', riasecType: 'SOCIAL' },
@@ -211,7 +211,7 @@ const questions: Array<{
   },
   {
     text: 'At the end of your trip, what makes you feel most fulfilled?',
-    backgroundImage: '',
+    backgroundImage: '/images/backgrounds/question8-bg.webp',
     answers: [
       { text: 'Strong connections', riasecType: 'SOCIAL' },
       { text: 'Plans completed', riasecType: 'CONVENTIONAL' },
@@ -221,7 +221,7 @@ const questions: Array<{
   },
   {
     text: 'If you could sum up your whole adventure in one word, what would it be?',
-    backgroundImage: '',
+    backgroundImage: '/images/backgrounds/question9-bg.webp',
     answers: [
       { text: 'Friendship', riasecType: 'REALISTIC' },
       { text: 'Inspiration', riasecType: 'ARTISTIC' },
