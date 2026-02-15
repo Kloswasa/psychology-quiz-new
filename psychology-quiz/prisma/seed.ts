@@ -150,7 +150,7 @@ const questions: Array<{
   },
   {
     text: 'At night by the campfire, sparks suddenly fly up into the dark sky. What do you do?',
-    backgroundImage: '',
+    backgroundImage: '/images/backgrounds/Q2.webp',
     answers: [
       { text: 'Add more wood neatly', riasecType: 'CONVENTIONAL' },
       { text: 'Point it out to friends', riasecType: 'SOCIAL' },
@@ -160,7 +160,7 @@ const questions: Array<{
   },
   {
     text: 'After a long climb, you reach a mountain peak. What matters most to you in that moment?',
-    backgroundImage: '',
+    backgroundImage: '/images/backgrounds/Q3.webp',
     answers: [
       { text: 'Enjoy the breathtaking view', riasecType: 'ARTISTIC' },
       { text: 'Celebrate as the leader', riasecType: 'ENTERPRISING' },
