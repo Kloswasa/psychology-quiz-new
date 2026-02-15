@@ -2,7 +2,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import ProgressBar from '@/components/ProgressBar';
+import ProgressBarMUI from '@/components/ProgressBarMUI';
 import BackButton from '@/components/BackButton';
 import QuestionCard from '@/components/QuestionCard';
 import { RiasecType } from '@/lib/types';
@@ -85,7 +85,7 @@ export default function QuizPage() {
       {/* Fixed header overlay */}
       <header className="fixed top-0 left-0 right-0 z-20 p-4 sm:p-6 flex items-center justify-between bg-gradient-to-b from-black/50 to-transparent pointer-events-none">
         <div className="pointer-events-auto">
-          <ProgressBar current={current + 1} total={total} />
+          <ProgressBarMUI current={current + 1} total={total} />
         </div>
         <div className="pointer-events-auto">
           <BackButton onClick={goBack} disabled={current === 0} />
