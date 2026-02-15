@@ -42,7 +42,8 @@ export default function QuestionCard({
         backgroundPosition: 'center',
       }}
     >
-      
+      {/* Gradient overlay for text readability */}
+      {/*<div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent sm:from-black/60 sm:via-black/30" />
       
       {/* Content */}
       <div className="relative z-10 space-y-4 sm:space-y-6 max-w-2xl mx-auto w-full">
