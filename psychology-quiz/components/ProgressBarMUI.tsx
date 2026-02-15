@@ -65,6 +65,9 @@ export default function ProgressBarMUI({ current, total }: { current: number; to
   const progress = (current / total) * 100;
   const isComplete = current === total;
   
+  // Debug logging
+  console.log('ProgressBarMUI:', { current, total, progress, isComplete });
+  
   return (
     <div className="flex-1 max-w-xs sm:max-w-sm">
       {/* Label */}
