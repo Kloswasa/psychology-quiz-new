@@ -170,7 +170,7 @@ const questions: Array<{
   },
   {
     text: 'A strong wind blows your hat straight into a muddy pond. What do you do?',
-    backgroundImage: '/images/backgrounds/question4-bg.png',
+    backgroundImage: '/images/backgrounds/question4-bg.webp',
     answers: [
       { text: 'Ask friends for help', riasecType: 'SOCIAL' },
       { text: 'Study the water currents', riasecType: 'INVESTIGATIVE' },
