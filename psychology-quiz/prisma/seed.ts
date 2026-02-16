@@ -139,7 +139,7 @@ const questions: Array<{
 }> = [
   {
     text: 'In the first day of your trip, a wombat sneaks into camp and steals your snack. What’s your reaction?',
-    backgroundImage: '',
+    backgroundImage: '/images/backgrounds/question1-bg.png',
     answers: [
       { text: 'Observe its eating habits', riasecType: 'INVESTIGATIVE' },
       { text: 'Check what food is left', riasecType: 'CONVENTIONAL' },
@@ -170,7 +170,7 @@ const questions: Array<{
   },
   {
     text: 'A strong wind blows your hat straight into a muddy pond. What do you do?',
-    backgroundImage: '',
+    backgroundImage: '/images/backgrounds/question4-bg.png',
     answers: [
       { text: 'Ask friends for help', riasecType: 'SOCIAL' },
       { text: 'Study the water currents', riasecType: 'INVESTIGATIVE' },
