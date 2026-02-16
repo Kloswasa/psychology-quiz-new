@@ -232,7 +232,7 @@ const questions: Array<{
   },
   {
     text: 'What souvenir would you bring back from this trip?',
-    backgroundImage: '',
+    backgroundImage: '/images/backgrounds/question6-bg.webp',
     answers: [
       { text: 'A group photo', riasecType: 'SOCIAL', imageUrl: '/images/answers/q10-1.webp' },
       { text: 'A creative keepsake', riasecType: 'ARTISTIC', imageUrl: '/images/answers/q10-4.webp' },
