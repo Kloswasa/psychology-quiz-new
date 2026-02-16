@@ -45,7 +45,7 @@ export default function ImageAnswer({
       </div>
 
       {/* Text */}
-      <div className="w-[136px] shrink-0">
+      <div className="w-full  shrink-0">
         <p className="text-center text-black text-base font-semibold leading-4">
           {text}
         </p>
