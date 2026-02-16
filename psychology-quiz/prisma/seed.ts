@@ -235,9 +235,9 @@ const questions: Array<{
     backgroundImage: '/images/backgrounds/question6-bg.webp',
     answers: [
       { text: 'A group photo', riasecType: 'SOCIAL', imageUrl: '/images/answers/q10-1.webp' },
-      { text: 'A creative keepsake', riasecType: 'ARTISTIC', imageUrl: '/images/answers/q10-4.webp' },
-      { text: 'A neat journal', riasecType: 'CONVENTIONAL', imageUrl: '/images/answers/q10-2.webp' },
-      { text: 'A rock or feather', riasecType: 'REALISTIC', imageUrl: '/images/answers/q10-3.webp' },
+      { text: 'A creative keepsake', riasecType: 'ARTISTIC', imageUrl: '/images/answers/q10-2.webp' },
+      { text: 'A neat journal', riasecType: 'CONVENTIONAL', imageUrl: '/images/answers/q10-3.webp' },
+      { text: 'A rock or feather', riasecType: 'REALISTIC', imageUrl: '/images/answers/q10-4.webp' },
     ],
   },
 ];
