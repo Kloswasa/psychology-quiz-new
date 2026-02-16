@@ -23,7 +23,7 @@ export default function ImageAnswer({
       className={`
         relative flex flex-col items-center justify-center
         gap-1
-        w-[164px] h-[182px]
+        w-full h-[182px]
         rounded-2xl
         bg-white
         shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)]
