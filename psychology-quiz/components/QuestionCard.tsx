@@ -1,6 +1,7 @@
 'use client';
 
 import { RiasecType } from '@/lib/types';
+import ImageAnswer from './ImageAnswer';
 
 type AnswerOption = {
   id: string;
@@ -53,59 +54,67 @@ export default function QuestionCard({
         </h2>
         
         {/* Answers - dynamic layout based on count */}
-        <div className={`
-          ${isGrid ? 'grid grid-cols-2 gap-3 sm:gap-4' : 'flex flex-col gap-3'}
-        `}>
-          {answers.map((a) => {
-            const isActive = selected === a.riasecType;
-            return (
-              <button
+        {hasImages ? (
+          // Image-based answers (2x2 grid layout)
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 justify-items-center">
+            {answers.map((a) => (
+              <ImageAnswer
                 key={a.id}
-                onClick={() => onSelect(a.riasecType)}
-                className={`
-                  relative overflow-hidden
-                  ${isGrid ? 'min-h-[140px] sm:min-h-[156px]' : 'min-h-[64x] sm:min-h-[64px]'}
-                  rounded-2xl sm:rounded-3xl
-                  p-4 sm:p-5
-                  transition-all duration-300
-                  active:scale-95
-                  touch-manipulation
-                  text-base sm:text-lg font-medium
-                  group
-                  ${isActive 
-                    ? 'backdrop-blur-md bg-white/30 border-2 border-white/60 shadow-2xl ring-2 ring-white/50' 
-                    : 'backdrop-blur-sm bg-white/10 border border-white/30 hover:bg-white/20 hover:border-white/50 shadow-lg'}
-                `}
-                style={{
-                  backdropFilter: isActive ? 'blur(12px) saturate(180%)' : 'blur(8px) saturate(150%)',
-                  WebkitBackdropFilter: isActive ? 'blur(12px) saturate(180%)' : 'blur(8px) saturate(150%)',
-                }}
-              >
-                {/* Answer image (if present) */}
-                {a.imageUrl && (
-                  <img 
-                    src={a.imageUrl} 
-                    alt="" 
-                    className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity"
-                  />
-                )}
-                
-                {/* Glassmorphic overlay effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-50" />
-                
-                {/* Answer text */}
-                <span className={`
-                  relative z-10
-                  text-white drop-shadow-lg
-                  ${isGrid ? 'text-center block' : 'text-left'}
-                  font-semibold
-                `}>
-                  {a.text}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+                imageUrl={a.imageUrl!}
+                text={a.text}
+                riasecType={a.riasecType}
+                isSelected={selected === a.riasecType}
+                onSelect={onSelect}
+              />
+            ))}
+          </div>
+        ) : (
+          // Text-only answers (original layout)
+          <div className={`
+            ${isGrid ? 'grid grid-cols-2 gap-3 sm:gap-4' : 'flex flex-col gap-3'}
+          `}>
+            {answers.map((a) => {
+              const isActive = selected === a.riasecType;
+              return (
+                <button
+                  key={a.id}
+                  onClick={() => onSelect(a.riasecType)}
+                  className={`
+                    relative overflow-hidden
+                    ${isGrid ? 'min-h-[140px] sm:min-h-[156px]' : 'min-h-[64x] sm:min-h-[64px]'}
+                    rounded-2xl sm:rounded-3xl
+                    p-4 sm:p-5
+                    transition-all duration-300
+                    active:scale-95
+                    touch-manipulation
+                    text-base sm:text-lg font-medium
+                    group
+                    ${isActive 
+                      ? 'backdrop-blur-md bg-white/30 border-2 border-white/60 shadow-2xl ring-2 ring-white/50' 
+                      : 'backdrop-blur-sm bg-white/10 border border-white/30 hover:bg-white/20 hover:border-white/50 shadow-lg'}
+                  `}
+                  style={{
+                    backdropFilter: isActive ? 'blur(12px) saturate(180%)' : 'blur(8px) saturate(150%)',
+                    WebkitBackdropFilter: isActive ? 'blur(12px) saturate(180%)' : 'blur(8px) saturate(150%)',
+                  }}
+                >
+                  {/* Glassmorphic overlay effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-50" />
+                  
+                  {/* Answer text */}
+                  <span className={`
+                    relative z-10
+                    text-white drop-shadow-lg
+                    ${isGrid ? 'text-center block' : 'text-left'}
+                    font-semibold
+                  `}>
+                    {a.text}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );

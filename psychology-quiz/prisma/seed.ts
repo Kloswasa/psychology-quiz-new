@@ -234,10 +234,10 @@ const questions: Array<{
     text: 'What souvenir would you bring back from this trip?',
     backgroundImage: '',
     answers: [
-      { text: 'A group photo', riasecType: 'SOCIAL' },
-      { text: 'A creative keepsake', riasecType: 'ARTISTIC' },
-      { text: 'A neat journal', riasecType: 'CONVENTIONAL' },
-      { text: 'A rock or feather', riasecType: 'REALISTIC' },
+      { text: 'A group photo', riasecType: 'SOCIAL', imageUrl: '/images/answers/q10-1.webp' },
+      { text: 'A creative keepsake', riasecType: 'ARTISTIC', imageUrl: '/images/answers/q10-4.webp' },
+      { text: 'A neat journal', riasecType: 'CONVENTIONAL', imageUrl: '/images/answers/q10-2.webp' },
+      { text: 'A rock or feather', riasecType: 'REALISTIC', imageUrl: '/images/answers/q10-3.webp' },
     ],
   },
 ];
