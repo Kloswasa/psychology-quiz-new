@@ -193,10 +193,10 @@ const questions: Array<{
     text: 'A rainbow appears after the rain during your trip. What\'s your first reaction?',
     backgroundImage: '/images/backgrounds/question6-bg.webp',
     answers: [
-      { text: 'Think about light and water ', riasecType: 'INVESTIGATIVE' },
-      { text: 'Call others to take a group photo', riasecType: 'SOCIAL' },
-      { text: 'Capture it in artn', riasecType: 'ARTISTIC' },
-      { text: 'Treat it as lucky', riasecType: 'ENTERPRISING' },
+      { text: 'Think about light and water ', riasecType: 'INVESTIGATIVE', imageUrl: '/images/answers/q6-1.webp' },
+      { text: 'Call others to take a group photo', riasecType: 'SOCIAL', imageUrl: '/images/answers/q6-2.webp' },
+      { text: 'Capture it in artn', riasecType: 'ARTISTIC', imageUrl: '/images/answers/q6-3.webp' },
+      { text: 'Treat it as lucky', riasecType: 'ENTERPRISING', imageUrl: '/images/answers/q6-4.webp' },
     ],
   },
   {
