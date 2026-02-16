@@ -8,6 +8,7 @@ type ImageAnswerProps = {
   riasecType: RiasecType;
   isSelected: boolean;
   onSelect: (type: RiasecType) => void;
+  textColor?: string;
 };
 
 export default function ImageAnswer({
@@ -16,6 +17,7 @@ export default function ImageAnswer({
   riasecType,
   isSelected,
   onSelect,
+  textColor = '#000000',
 }: ImageAnswerProps) {
   return (
     <button
@@ -46,7 +48,10 @@ export default function ImageAnswer({
 
       {/* Text */}
       <div className="w-full  shrink-0 px-4">
-        <p className="text-center text-black text-base font-semibold leading-4">
+        <p 
+          style={{ color: textColor }}
+          className="text-center text-base font-semibold leading-4"
+        >
           {text}
         </p>
       </div>

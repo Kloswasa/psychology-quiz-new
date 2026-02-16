@@ -27,6 +27,23 @@ export default function QuestionCard({
   selected,
   onSelect,
 }: Props) {
+  // Get text color based on question index
+  const getTextColor = (questionIndex: number) => {
+    const colors = [
+      '#212a37', // Q1: White
+      '#ffffff', // Q2: Amber
+      '#212a37', // Q3: Red
+      '#212a37', // Q4: Green
+      '#ffffff', // Q5: Blue
+      '#212a37', // Q6: Purple
+      '#ffffff', // Q7: Orange
+      '#ffffff ', // Q8: Cyan
+      '#ffffff', // Q9: Violet
+      '#212a37', // Q10: Pink
+    ];
+    return colors[questionIndex] || '#ffffff';
+  };
+
   // Determine if any answers have images
   const hasImages = answers.some(a => a.imageUrl);
   const answerCount = answers.length;
@@ -49,7 +66,10 @@ export default function QuestionCard({
       {/* Content */}
       <div className="relative z-10 space-y-4 sm:space-y-6 max-w-2xl mx-auto w-full">
         {/* Question text */}
-        <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white leading-tight drop-shadow-lg">
+        <h2 
+          style={{ color: getTextColor(questionIndex) }}
+          className="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight drop-shadow-lg"
+        >
           {questionText}
         </h2>
         
@@ -65,6 +85,7 @@ export default function QuestionCard({
                 riasecType={a.riasecType}
                 isSelected={selected === a.riasecType}
                 onSelect={onSelect}
+                textColor={getTextColor(questionIndex)}
               />
             ))}
           </div>
@@ -102,12 +123,14 @@ export default function QuestionCard({
                   <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-50" />
                   
                   {/* Answer text */}
-                  <span className={`
-                    relative z-10
-                    text-white drop-shadow-lg
-                    ${isGrid ? 'text-center block' : 'text-left'}
-                    font-semibold
-                  `}>
+                  <span 
+                    style={{ color: getTextColor(questionIndex) }}
+                    className={`
+                      relative z-10
+                      drop-shadow-lg
+                      ${isGrid ? 'text-center block' : 'text-left'}
+                      font-semibold
+                    `}>
                     {a.text}
                   </span>
                 </button>
