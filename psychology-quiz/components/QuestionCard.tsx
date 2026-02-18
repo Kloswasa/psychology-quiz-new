@@ -30,16 +30,16 @@ export default function QuestionCard({
   // Get text color based on question index
   const getTextColor = (questionIndex: number) => {
     const colors = [
-      '#212a37', // Q1: White
-      '#ffffff', // Q2: Amber
-      '#212a37', // Q3: Red
-      '#212a37', // Q4: Green
-      '#ffffff', // Q5: Blue
-      '#212a37', // Q6: Purple
-      '#ffffff', // Q7: Orange
-      '#ffffff ', // Q8: Cyan
-      '#ffffff', // Q9: Violet
-      '#212a37', // Q10: Pink
+      '#212a37', // Q1: Oxford Blue
+      '#ffffff', // Q2: White
+      '#212a37', // Q3: Oxford Blue
+      '#212a37', // Q4: Oxford Blue
+      '#ffffff', // Q5: White
+      '#212a37', // Q6: Oxford Blue
+      '#ffffff', // Q7: White
+      '#ffffff ', // Q8: White
+      '#ffffff', // Q9: White
+      '#212a37', // Q10: Oxford Blue
     ];
     return colors[questionIndex] || '#ffffff';
   };

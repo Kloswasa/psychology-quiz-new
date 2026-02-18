@@ -25,8 +25,7 @@ export default function ImageAnswer({
       className={`
         relative flex flex-col items-center justify-center
         gap-1
-        w-full h-[182px]
-        rounded-2xl
+w-full min-h-[140px] sm:min-h-[160px] md:h-[182px] h-auto        rounded-2xl
         bg-white
         shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)]
         transition-all duration-300
@@ -38,7 +37,7 @@ export default function ImageAnswer({
       `}
     >
       {/* Image container */}
-      <div className="relative w-[104px] h-[104px] shrink-0">
+      <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-[104px] md:h-[104px] shrink-0">
         <img
           src={imageUrl}
           alt={text}
@@ -50,7 +49,7 @@ export default function ImageAnswer({
       <div className="w-full  shrink-0 px-4">
         <p 
           style={{ color: textColor }}
-          className="text-center text-base font-semibold leading-4"
+          className="text-center text-sm sm:text-base font-semibold leading-4"
         >
           {text}
         </p>
