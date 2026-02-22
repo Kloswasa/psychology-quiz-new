@@ -153,6 +153,7 @@ export default function TravelerResult({
   shareUrl,
   shareTitle,
   imageUrl,
+  riasecType,
   themeColor,
   destinations,
   tips,
@@ -164,6 +165,7 @@ export default function TravelerResult({
   shareUrl: string;
   shareTitle: string;
   imageUrl?: string | null;
+  riasecType?: string;
   themeColor?: string;
   destinations: Destination[];
   tips: string[];
@@ -171,6 +173,8 @@ export default function TravelerResult({
 }) {
   const displayName = (personalityName ?? title).toUpperCase();
   const bgColor = themeColor ?? '#4A90D9';
+  const resultImageSrc =
+    imageUrl ?? (riasecType ? `/images/results/${riasecType}.png` : null);
 
   const handleSave = () => {
     // Placeholder: save result (e.g. download as image). Implement when ready.
@@ -196,12 +200,12 @@ export default function TravelerResult({
             <span className="text-sm font-medium text-[#4A90D9]">{title}</span>
           </div>
 
-          {/* Result image – fetched by personality; placeholder until image is provided */}
+          {/* Result image – from public/images/results/{riasecType}.png or imageUrl */}
           <div className="mt-4 aspect-[4/3] w-full overflow-hidden rounded-xl bg-[#E8E4DC]">
-            {imageUrl ? (
+            {resultImageSrc ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
-                src={imageUrl}
+                src={resultImageSrc}
                 alt={displayName}
                 className="h-full w-full object-cover"
               />
