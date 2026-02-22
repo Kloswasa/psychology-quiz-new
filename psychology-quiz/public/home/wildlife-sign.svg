@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 100" fill="none">
+  <path d="M45 5 L85 50 L45 95 L5 50 Z" fill="#FBBF24" stroke="#1D4ED8" strokeWidth="3"/>
+  <text x="45" y="52" textAnchor="middle" dominantBaseline="middle" fill="#1D4ED8" fontFamily="system-ui,sans-serif" fontSize="10" fontWeight="bold">WILDLIFE</text>
+  <text x="45" y="64" textAnchor="middle" dominantBaseline="middle" fill="#1D4ED8" fontFamily="system-ui,sans-serif" fontSize="10" fontWeight="bold">AHEAD</text>
+</svg>

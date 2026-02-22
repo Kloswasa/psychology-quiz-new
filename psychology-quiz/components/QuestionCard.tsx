@@ -53,7 +53,7 @@ export default function QuestionCard({
   
   return (
     <div 
-      className="relative min-h-screen w-full flex flex-col justify-end p-4 pb-safe"
+      className="relative min-h-screen w-full flex flex-col justify-end p-4 pb-safe sm:min-h-[600px] sm:rounded-2xl sm:overflow-hidden"
       style={{
         backgroundImage: backgroundImage ? `url(${backgroundImage})` : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
         backgroundSize: 'cover',

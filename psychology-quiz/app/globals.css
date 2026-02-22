@@ -101,3 +101,34 @@ body {
   right: 0;
   top: 50%;
 }
+
+/* Subtle bounce-up for swipe CTA (draws attention without being distracting) */
+@keyframes bounce-up {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  45% {
+    transform: translateY(0);
+  }
+  55% {
+    transform: translateY(-6px);
+  }
+  70% {
+    transform: translateY(-2px);
+  }
+  85% {
+    transform: translateY(-1px);
+  }
+}
+.animate-bounce-up {
+  animation: bounce-up 2.5s ease-in-out infinite;
+}
+
+/* Intro: graph paper background (Figma style) */
+.intro-graph-paper {
+  background-color: #f5f2eb;
+  background-image:
+    linear-gradient(rgba(179, 205, 224, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(179, 205, 224, 0.4) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
