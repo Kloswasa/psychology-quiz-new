@@ -1,7 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import TravelerResult from '@/components/TravelerResult';
-import ShareButton from '@/components/ShareButton';
-import { RiasecType, RIASEC_TYPES } from '@/lib/types';
+import { RiasecType, RIASEC_TYPES, PERSONALITY_THEME_COLORS } from '@/lib/types';
 import type { Metadata } from 'next';
 
 type Props = {
@@ -36,23 +35,32 @@ export default async function ResultPage({ searchParams }: Props) {
   const tips = JSON.parse(data.tips) as string[];
   const trivia = JSON.parse(data.trivia) as string[];
 
-  const url = `/result?type=${data.riasecType}`;
+  const shareUrl = `/result?type=${data.riasecType}`;
+  const shareTitle = `I'm ${data.title}! What's your travel personality?`;
+  const themeColor = PERSONALITY_THEME_COLORS[data.riasecType];
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-12 space-y-8">
+    <>
       <TravelerResult
         title={data.title}
         description={data.description}
+        shareUrl={shareUrl}
+        shareTitle={shareTitle}
         imageUrl={data.imageUrl}
+        themeColor={themeColor}
         destinations={destinations}
         tips={tips}
         trivia={trivia}
       />
-      <div>
-        <ShareButton url={url} title={`I'm ${data.title}! What's your travel personality?`} />
+      <div className="flex justify-center px-4 pb-8" style={{ backgroundColor: themeColor }}>
+        <a
+          href="/quiz"
+          className="text-white underline decoration-white/80 underline-offset-2 hover:decoration-white"
+        >
+          Retake Quiz
+        </a>
       </div>
-      <a href="/quiz" className="inline-block text-blue-600 hover:underline">Retake Quiz</a>
-    </div>
+    </>
   );
 }
 

@@ -90,7 +90,11 @@ const travelerTypes: Array<{
       'Stay in social accommodations',
       'Learn basic local phrases',
     ],
-    trivia: ['Food tours are among the top-rated social travel activities.'],
+    trivia: [
+      'Food tours are among the top-rated social travel activities.',
+      'The Old City of Lisbon is a UNESCO World Heritage Site.',
+      'Lisbon is the most walkable city in Europe.'
+    ],
   },
   {
     riasecType: 'ENTERPRISING',
