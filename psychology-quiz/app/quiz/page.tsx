@@ -74,16 +74,17 @@ export default function QuizPage() {
 
   if (!currentQuestion) {
     return (
-      <div className="mx-auto max-w-3xl px-6 py-12">
+      <div className="min-h-screen w-full flex items-center justify-center px-6">
         <div className="animate-pulse text-gray-500">Loading questions…</div>
       </div>
     );
   }
 
+ 
   return (
-    <div className="min-h-screen w-full overflow-hidden relative sm:flex sm:items-center sm:justify-center sm:bg-gray-100">
-      {/* Fixed header overlay */}
-      <header className="fixed top-0 left-0 right-0 z-20 p-4 sm:p-6 flex items-center justify-between bg-gradient-to-b from-black/50 to-transparent pointer-events-none">
+    <div className="min-h-screen w-full overflow-hidden relative flex flex-col">
+      {/* Header */}
+      <header className="flex-shrink-0 z-20 p-4 flex items-center justify-between bg-gradient-to-b from-black/50 to-transparent pointer-events-none">
         <div className="pointer-events-auto">
           <ProgressBar current={current + 1} total={total} />
         </div>
@@ -92,21 +93,23 @@ export default function QuizPage() {
         </div>
       </header>
 
-      {/* Main content area */}
-      <main className="h-screen w-full sm:h-auto sm:max-w-md sm:rounded-2xl sm:shadow-2xl sm:overflow-hidden">
+      {/* Main - full width so quiz fills screen, no side margins */}
+      <main className="flex-1 min-h-0 overflow-hidden flex flex-col">
+        <div className="flex-1 min-h-0 flex flex-col">
         <QuestionCard
           questionIndex={current}
           questionText={currentQuestion.text}
           backgroundImage={currentQuestion.backgroundImage}
-          answers={currentQuestion.answers.map((a) => ({ 
-            id: a.id, 
-            text: a.text, 
+          answers={currentQuestion.answers.map((a) => ({
+            id: a.id,
+            text: a.text,
             riasecType: a.riasecType,
-            imageUrl: a.imageUrl 
+            imageUrl: a.imageUrl,
           }))}
           selected={answers[current]}
           onSelect={selectAnswer}
         />
+        </div>
       </main>
     </div>
   );

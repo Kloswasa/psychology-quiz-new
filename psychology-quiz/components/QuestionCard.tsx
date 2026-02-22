@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { RiasecType } from '@/lib/types';
 import ImageAnswer from './ImageAnswer';
 
@@ -51,24 +52,34 @@ export default function QuestionCard({
   // Auto-determine layout: 2x2 grid for 4 answers, list for 5 answers
   const isGrid = answerCount === 4;
   
+  const bgStyle = !backgroundImage
+    ? { background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }
+    : undefined;
+
   return (
-    <div 
-      className="relative min-h-screen w-full flex flex-col justify-end p-4 pb-safe sm:min-h-[600px] sm:rounded-2xl sm:overflow-hidden"
-      style={{
-        backgroundImage: backgroundImage ? `url(${backgroundImage})` : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
-    >
-      {/* Gradient overlay for text readability */}
-      {/*<div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent sm:from-black/60 sm:via-black/30" />
-      
-      {/* Content */}
-      <div className="relative z-10 space-y-4 sm:space-y-6 max-w-2xl mx-auto w-full">
+    <div className="relative min-h-screen w-full rounded-2xl">
+      {/* Full-viewport background – fixed so image always shows full height */}
+      <div
+        className="fixed inset-0 z-0 w-full"
+        style={bgStyle}
+        aria-hidden
+      >
+        {backgroundImage && (
+          <Image
+            src={backgroundImage}
+            alt=""
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+        )}
+      </div>
+      {/* Content pinned to bottom */}
+      <div className="absolute bottom-0 left-0 right-0 z-10 space-y-4 w-full p-4 pb-safe">
         {/* Question text */}
         <h2 
           style={{ color: getTextColor(questionIndex) }}
-          className="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight drop-shadow-lg"
+          className="text-xl font-bold leading-tight drop-shadow-lg"
         >
           {questionText}
         </h2>
@@ -76,7 +87,7 @@ export default function QuestionCard({
         {/* Answers - dynamic layout based on count */}
         {hasImages ? (
           // Image-based answers (2x2 grid layout)
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 justify-items-center">
+          <div className="grid grid-cols-2 gap-3 justify-items-center">
             {answers.map((a) => (
               <ImageAnswer
                 key={a.id}
@@ -92,7 +103,7 @@ export default function QuestionCard({
         ) : (
           // Text-only answers (original layout)
           <div className={`
-            ${isGrid ? 'grid grid-cols-2 gap-3 sm:gap-4' : 'flex flex-col gap-3'}
+            ${isGrid ? 'grid grid-cols-2 gap-3' : 'flex flex-col gap-3'}
           `}>
             {answers.map((a) => {
               const isActive = selected === a.riasecType;
@@ -102,13 +113,13 @@ export default function QuestionCard({
                   onClick={() => onSelect(a.riasecType)}
                   className={`
                     relative overflow-hidden
-                    ${isGrid ? 'min-h-[140px] sm:min-h-[156px]' : 'min-h-[64x] sm:min-h-[64px]'}
-                    rounded-2xl sm:rounded-3xl
-                    p-4 sm:p-5
+                    ${isGrid ? 'min-h-[120px]' : 'min-h-[48px]'}
+                    rounded-2xl
+                    p-4
                     transition-all duration-300
                     active:scale-95
                     touch-manipulation
-                    text-base sm:text-lg font-medium
+                    text-base font-medium
                     group
                     ${isActive 
                       ? 'backdrop-blur-md bg-white/30 border-2 border-white/60 shadow-2xl ring-2 ring-white/50' 
