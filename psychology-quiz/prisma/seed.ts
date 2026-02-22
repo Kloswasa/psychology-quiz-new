@@ -19,7 +19,7 @@ const travelerTypes: Array<{
     title: 'The Adventure Seeker',
     description:
       'You thrive in the outdoors and seek hands-on experiences that challenge and energize you.',
-    imageUrl: '/images/types/adventure-seeker.png',
+    imageUrl: '/images/types/REALISTIC.png',
     shareImageUrl: '/images/share/adventure-seeker.png',
     destinations: [
       { name: 'Patagonia, Chile', reason: 'Epic treks and dramatic landscapes' },
@@ -40,7 +40,7 @@ const travelerTypes: Array<{
     title: 'The Cultural Explorer',
     description:
       'Curious and analytical, you love destinations rich with history, science, and discovery.',
-    imageUrl: '/images/types/cultural-explorer.png',
+    imageUrl: '/images/types/INVESTIGATIVE.png',
     shareImageUrl: '/images/share/cultural-explorer.png',
     destinations: [
       { name: 'Kyoto, Japan', reason: 'Temples, tea culture, and history' },
@@ -59,7 +59,7 @@ const travelerTypes: Array<{
     title: 'The Creative Wanderer',
     description:
       'You seek expressive, unique, and inspirational places—art, design, and creative scenes.',
-    imageUrl: '/images/types/creative-wanderer.png',
+    imageUrl: '/images/types/ARTISTIC.png',
     shareImageUrl: '/images/share/creative-wanderer.png',
     destinations: [
       { name: 'Barcelona, Spain', reason: 'Gaudí architecture and vibrant art' },
@@ -78,7 +78,7 @@ const travelerTypes: Array<{
     title: 'The Connection Traveler',
     description:
       'You enjoy meeting people, group activities, and immersive local experiences.',
-    imageUrl: '/images/types/connection-traveler.png',
+    imageUrl: '/images/types/SOCIAL.png',
     shareImageUrl: '/images/share/connection-traveler.png',
     destinations: [
       { name: 'Lisbon, Portugal', reason: 'Friendly vibe and social hostels' },
@@ -101,7 +101,7 @@ const travelerTypes: Array<{
     title: 'The Luxury Adventurer',
     description:
       'You love premium experiences, unique stays, and curated itineraries with flair.',
-    imageUrl: '/images/types/luxury-adventurer.png',
+    imageUrl: '/images/results/ENTERPRISING.png',
     shareImageUrl: '/images/share/luxury-adventurer.png',
     destinations: [
       { name: 'Dubai, UAE', reason: 'Iconic luxury and unique attractions' },
@@ -120,7 +120,7 @@ const travelerTypes: Array<{
     title: 'The Planned Traveler',
     description:
       'You appreciate organized trips, efficient schedules, and reliable comforts.',
-    imageUrl: '/images/types/planned-traveler.png',
+    imageUrl: '/images/types/CONVENTIONAL.png',
     shareImageUrl: '/images/share/planned-traveler.png',
     destinations: [
       { name: 'Tokyo, Japan', reason: 'Efficient transport and clean city' },

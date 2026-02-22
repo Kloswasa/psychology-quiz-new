@@ -174,7 +174,7 @@ export default function TravelerResult({
   const displayName = (personalityName ?? title).toUpperCase();
   const bgColor = themeColor ?? '#4A90D9';
   const resultImageSrc =
-    imageUrl ?? (riasecType ? `/images/results/${riasecType}.png` : null);
+    (riasecType ? `/images/results/${riasecType}.png` : null) ?? imageUrl ?? null;
 
   const handleSave = () => {
     // Placeholder: save result (e.g. download as image). Implement when ready.
@@ -187,32 +187,23 @@ export default function TravelerResult({
   return (
     <div className="min-h-screen px-4 py-6 pb-safe" style={{ backgroundColor: bgColor }}>
       <div className="mx-auto max-w-lg">
-        {/* Result card section */}
+        {/* Result card section – full image visible, no cropping */}
         <section
-          className={`${SECTION_RADIUS} overflow-hidden bg-[#F5F2EB] p-5 shadow-lg`}
+          className={`${SECTION_RADIUS} overflow-hidden bg-[#F5F2EB] shadow-lg`}
           data-result-card
         >
-          <p className="text-sm font-medium text-[#4A90D9]">You are</p>
-          <h1 className="mt-1 text-3xl font-bold tracking-tight text-[#4A90D9]">
-            {displayName}
-          </h1>
-          <div className="mt-2 inline-block rounded-full bg-[#B3CDE0] px-4 py-1.5">
-            <span className="text-sm font-medium text-[#4A90D9]">{title}</span>
-          </div>
-
-          {/* Result image – from public/images/results/{riasecType}.png or imageUrl */}
-          <div className="mt-4 aspect-[4/3] w-full overflow-hidden rounded-xl bg-[#E8E4DC]">
+          {/* Result image – full image shown at natural aspect ratio */}
+          <div className="w-full bg-[#E8E4DC]">
             {resultImageSrc ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={resultImageSrc}
                 alt={displayName}
-                className="h-full w-full object-cover"
+                className="h-auto w-full object-contain"
               />
             ) : null}
           </div>
-
-          <p className="mt-4 text-sm leading-relaxed text-neutral-900">
+          <p className="p-5 text-sm leading-relaxed text-neutral-900">
             {description}
           </p>
         </section>
