@@ -57,7 +57,7 @@ export default function QuestionCard({
     : undefined;
 
   return (
-    <div className="relative min-h-screen w-full rounded-2xl">
+    <div className="relative h-full min-h-0 w-full rounded-2xl">
       {/* Full-viewport background – fixed so image always shows full height */}
       <div
         className="fixed inset-0 z-0 w-full"
@@ -75,7 +75,7 @@ export default function QuestionCard({
         )}
       </div>
       {/* Content pinned to bottom */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 space-y-4 w-full p-4 pb-safe">
+      <div className="absolute bottom-0 left-0 right-0 z-10 space-y-4 w-full max-h-[85vh] overflow-y-auto p-4 pb-safe">
         {/* Question text */}
         <h2 
           style={{ color: getTextColor(questionIndex) }}

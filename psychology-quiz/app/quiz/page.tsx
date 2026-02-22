@@ -82,7 +82,7 @@ export default function QuizPage() {
 
  
   return (
-    <div className="min-h-screen w-full overflow-hidden relative flex flex-col">
+    <div className="h-screen w-full overflow-hidden relative flex flex-col">
       {/* Header */}
       <header className="flex-shrink-0 z-20 p-4 flex items-center justify-between bg-gradient-to-b from-black/50 to-transparent pointer-events-none">
         <div className="pointer-events-auto">
