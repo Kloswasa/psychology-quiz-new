@@ -22,8 +22,8 @@ export function IntroPage1() {
 
       {/* Lower card – on top of upper at bottom; responsive size + scroll when viewport small */}
       <div
-        className="absolute bottom-12 sm:bottom-16 left-6 right-6 z-10 max-w-[360px] mx-auto max-h-[55vh] overflow-y-auto rounded-2xl bg-[#FFF9D9] p-5 sm:p-7 md:p-10 shadow-lg"
-        style={{ transform: 'rotate(6deg)' }}
+        className="absolute bottom-14 sm:bottom-16 left-6 right-6 z-10 max-w-[290px] mx-auto max-h-[55vh] overflow-y-auto rounded-2xl bg-[#FFF9D9] p-5 sm:p-7 md:p-10 shadow-lg"
+        style={{ transform: 'rotate(8deg)' }}
       >
         <p className="text-sm text-black mb-3">
           This quiz is based on the{' '}
