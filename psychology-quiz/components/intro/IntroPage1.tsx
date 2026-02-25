@@ -3,9 +3,9 @@
 export function IntroPage1() {
   return (
     <div className="relative h-full w-full px-6 py-8">
-      {/* Upper card – full height of slide (fills to bottom of page) */}
+      {/* Upper card – full height; bottom padding reserves space so lower card doesn't block content */}
       <div
-        className="absolute top-12 left-12 right-12 bottom-8 bg-[#faf8f5] shadow-lg flex flex-col p-8"
+        className="absolute top-12 left-12 right-12 bottom-8 bg-[#faf8f5] shadow-lg flex flex-col p-6 sm:p-8 pb-48 sm:pb-60 md:pb-72"
       >
         <h2
           className="text-2xl font-bold text-[#0088ff] mb-3"
@@ -20,17 +20,21 @@ export function IntroPage1() {
         </p>
       </div>
 
-      {/* Lower card – sits on top of upper card at the bottom (Figma style) */}
+      {/* Lower card – on top of upper at bottom; responsive size + scroll when viewport small */}
       <div
-        className="absolute bottom-12 left-6 right-6 z-10 max-w-[360px] mx-auto rounded-2xl bg-[#FFF9D9] p-10 shadow-lg shrink-0"
+        className="absolute bottom-6 sm:bottom-12 left-6 right-6 z-10 max-w-[360px] mx-auto max-h-[55vh] overflow-y-auto rounded-2xl bg-[#FFF9D9] p-5 sm:p-7 md:p-10 shadow-lg"
         style={{ transform: 'rotate(6deg)' }}
       >
         <p className="text-sm text-black mb-3">
           This quiz is based on the{' '}
           <br /><span className="font-bold text-[#0088ff]">Holland model (RIASEC)</span><br />
         </p>
-        <div className="my-4 flex justify-center">
-          <img src="/intro/Hex.png" alt="RIASEC" style={{ width: '120px', height: '120px' }} className="w-full h-full object-contain" />
+        <div className="my-3 sm:my-4 flex justify-center">
+          <img
+            src="/intro/Hex.png"
+            alt="RIASEC"
+            className="w-20 h-20 sm:w-24 sm:h-24 md:w-[120px] md:h-[120px] object-contain"
+          />
         </div>
         <p className="text-sm text-black leading-relaxed">
           People will be grouped into{' '}
