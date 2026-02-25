@@ -17,39 +17,16 @@ export function IntroPage2() {
         <div className="flex justify-center gap-8">
           {/* Left: vertical options + one selected (orange) */}
           <div className="flex items-center gap-2">
-            <div className="flex flex-col gap-1">
-              <div className="w-8 h-8 rounded border-2 border-white/80" />
-              <div className="w-8 h-8 rounded border-2 border-white/80 bg-orange-400" />
-            </div>
-            <div className="w-8 h-8 rounded border-2 border-white/80" />
-            <span className="text-2xl" aria-hidden>👆</span>
+            <img src="/intro/instruct1.png" alt="Arrow up" className="w-20 h-22" />
+            <img src="/intro/instruct2.png" alt="Arrow up" className="w-20 h-24" />
           </div>
-          {/* Right: horizontal options + one selected */}
-          <div className="flex flex-col items-center gap-1">
-            <div className="flex gap-1">
-              <div className="w-6 h-8 rounded border border-white/80" />
-              <div className="w-6 h-8 rounded border border-white/80" />
-              <div className="w-6 h-8 rounded border border-white/80 bg-orange-400" />
-              <div className="w-6 h-8 rounded border border-white/80" />
-            </div>
-            <span className="text-2xl" aria-hidden>👆</span>
-          </div>
+          
         </div>
       </div>
 
       {/* Orange block – be yourself */}
-      <div className="w-full rounded-2xl bg-[#f97316] -mt-4 pt-6 px-6 pb-8 relative">
-        <div
-          className="inline-block bg-white rounded-lg px-4 py-2 shadow-md -translate-y-1"
-          style={{ transform: 'translateY(-8px)' }}
-        >
-          <span
-            className="text-xl font-bold text-[#0088ff]"
-            style={{ fontFamily: 'var(--font-caveat), cursive' }}
-          >
-            be yourself
-          </span>
-        </div>
+      <div className="w-full rounded-2xl bg-[#FFB200] -mt-4 pt-6 px-6 pb-8 relative">
+        <img src="/intro/buself.png" alt="Arrow up" />
         <p className="text-white text-center text-sm mt-4">
           It is the golden rule to play this quiz, more intuition you use, the best
           result it be.
