@@ -1,18 +1,15 @@
 'use client';
 
-import { RiasecHexagon } from './RiasecHexagon';
-
 export function IntroPage1() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-full px-6 py-8 overflow-y-auto">
-      {/* Upper card */}
+    <div className="relative h-full w-full px-6 py-8">
+      {/* Upper card – full height of slide (fills to bottom of page) */}
       <div
-        className="w-full max-w-[320px] rounded-2xl bg-[#faf8f5] p-5 shadow-lg z-10"
-        style={{ transform: 'rotate(2deg)' }}
+        className="absolute top-12 left-12 right-12 bottom-8 bg-[#faf8f5] shadow-lg flex flex-col p-8"
       >
         <h2
           className="text-2xl font-bold text-[#0088ff] mb-3"
-          style={{ fontFamily: 'var(--font-caveat), cursive' }}
+          style={{ fontFamily: 'var(--font-permanent-marker), cursive' }}
         >
           HI, HOW ARE YOU!
         </h2>
@@ -23,17 +20,17 @@ export function IntroPage1() {
         </p>
       </div>
 
-      {/* Lower card */}
+      {/* Lower card – sits on top of upper card at the bottom (Figma style) */}
       <div
-        className="w-full max-w-[320px] rounded-2xl bg-[#faf8f5] p-5 shadow-lg -mt-2"
-        style={{ transform: 'rotate(-1.5deg)' }}
+        className="absolute bottom-12 left-6 right-6 z-10 max-w-[360px] mx-auto rounded-2xl bg-[#FFF9D9] p-10 shadow-lg shrink-0"
+        style={{ transform: 'rotate(6deg)' }}
       >
         <p className="text-sm text-black mb-3">
           This quiz is based on the{' '}
-          <span className="font-bold text-[#0088ff]">Holland model (RIASEC)</span>
+          <br /><span className="font-bold text-[#0088ff]">Holland model (RIASEC)</span><br />
         </p>
         <div className="my-4 flex justify-center">
-          <RiasecHexagon size={120} />
+          <img src="/intro/Hex.png" alt="RIASEC" style={{ width: '120px', height: '120px' }} className="w-full h-full object-contain" />
         </div>
         <p className="text-sm text-black leading-relaxed">
           People will be grouped into{' '}

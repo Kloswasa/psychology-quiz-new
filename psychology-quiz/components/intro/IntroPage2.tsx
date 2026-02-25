@@ -7,7 +7,7 @@ export function IntroPage2() {
       <div className="w-full rounded-t-3xl rounded-b-2xl bg-[#0088ff] p-6 pb-8 text-white">
         <h2
           className="text-2xl font-bold mb-3"
-          style={{ fontFamily: 'var(--font-caveat), cursive' }}
+          style={{ fontFamily: 'var(--font-permanent-marker), cursive' }}
         >
           HOW TO PLAY?
         </h2>

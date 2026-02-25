@@ -11,7 +11,7 @@ export function IntroPage3() {
       <div className="text-center mb-4">
         <h2
           className="text-2xl font-bold text-[#0088ff]"
-          style={{ fontFamily: 'var(--font-caveat), cursive' }}
+          style={{ fontFamily: 'var(--font-permanent-marker), cursive' }}
         >
           WHAT YOU WILL GET?
         </h2>
@@ -66,7 +66,7 @@ export function IntroPage3() {
         </button>
         <p
           className="text-orange-500 font-bold text-lg mt-2 opacity-90"
-          style={{ fontFamily: 'var(--font-caveat), cursive' }}
+          style={{ fontFamily: 'var(--font-permanent-marker), cursive' }}
         >
           LET&apos;S WANDER IN DOWN UNDER
         </p>
