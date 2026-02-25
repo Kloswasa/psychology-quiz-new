@@ -5,7 +5,8 @@ export function IntroPage1() {
     <div className="relative h-full w-full px-6 py-8">
       {/* Upper card – full height; bottom padding reserves space so lower card doesn't block content */}
       <div
-        className="absolute top-12 left-12 right-12 bottom-8 bg-[#faf8f5] shadow-lg flex flex-col p-6 sm:p-8 pb-48 sm:pb-60 md:pb-72"
+        className="absolute top-12 left-12 right-12  bg-[#faf8f5] shadow-lg flex flex-col p-6 sm:p-8 pb-6 sm:pb-60 md:pb-72"
+        style={{ transform: 'rotate(-8deg)' }}
       >
         <h2
           className="text-2xl font-bold text-[#0088ff] mb-3"
@@ -22,7 +23,7 @@ export function IntroPage1() {
 
       {/* Lower card – on top of upper at bottom; responsive size + scroll when viewport small */}
       <div
-        className="absolute bottom-14 sm:bottom-16 left-6 right-6 z-10 max-w-[290px] mx-auto max-h-[55vh] overflow-y-auto rounded-2xl bg-[#FFF9D9] p-5 sm:p-7 md:p-10 shadow-lg"
+        className="absolute bottom-14 sm:bottom-16 left-6 right-6 z-10 max-w-[300px] mx-auto max-h-[55vh] overflow-y-auto rounded-2xl bg-[#FFF9D9] p-5 sm:p-7 md:p-10 shadow-lg"
         style={{ transform: 'rotate(8deg)' }}
       >
         <p className="text-sm text-black mb-3">
