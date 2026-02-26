@@ -64,7 +64,20 @@ function RecommendationCarousel({ destinations, themeColor }: { destinations: De
             </div>
             <button
               type="button"
-              className="mt-2 w-fit rounded-full border border-neutral-300 bg-white px-4 py-1.5 text-sm font-medium text-neutral-800 shadow-sm hover:bg-neutral-50"
+              className="mt-2 w-fit 
+              flex-1 rounded-full 
+              border border-neutral-300 
+              bg-white px-4 py-1.5 
+              text-base font-semibold 
+              transition 
+              shadow-sm 
+              hover:bg-neutral-100"
+              onClick={() => d.url && window.open(d.url, '_blank', 'noopener,noreferrer')}
+                // className="mt-2 w-fit   text-sm font-medium text-neutral-800 hover:bg-neutral-50"
+              style={{
+                borderColor: dotColor,
+                color: dotColor,
+              }}
             >
               Detail
             </button>
@@ -202,7 +215,7 @@ export default function TravelerResult({
       <div className="mx-auto max-w-lg">
         {/* Result card section – full image visible, no cropping */}
         <section
-          className={`${SECTION_RADIUS} overflow-hidden bg-[#F5F2EB] shadow-lg`}
+          className={`${SECTION_RADIUS} overflow-hidden bg-[#FFF5E5] shadow-lg`}
           data-result-card
         >
           {/* Result image – full image shown at natural aspect ratio */}
@@ -223,7 +236,7 @@ export default function TravelerResult({
 
         {/* Save and Share section */}
         <section
-          className={`${SECTION_RADIUS} overflow-hidden bg-[#F5F2EB] p-4 shadow-lg`}
+          className={`${SECTION_RADIUS} overflow-hidden bg-[#FFF5E5] p-4 shadow-lg`}
         >
           <div className="flex gap-3">
             <button
@@ -256,7 +269,7 @@ export default function TravelerResult({
         <section >
           {/* Recommendation subsection – carousel cards per Figma */}
           <div
-            className={`${SECTION_RADIUS} overflow-hidden bg-[#F5F2EB] p-5 shadow-lg`}
+            className={`${SECTION_RADIUS} overflow-hidden bg-[#FFF5E5] p-5 shadow-lg`}
           >
             <h2 className="text-3xl text-center font-bold uppercase tracking-wide" style={{ fontFamily: 'var(--font-permanent-marker), cursive', color: bgColor }} >
               Recommendation
@@ -268,7 +281,7 @@ export default function TravelerResult({
 
           {/* Tips of the day subsection – carousel */}
           <div
-            className={`${SECTION_RADIUS} overflow-hidden bg-[#F5F2EB] p-5 shadow-lg`}
+            className={`${SECTION_RADIUS} overflow-hidden bg-[#FFF5E5] p-5 shadow-lg`}
           >
             <h2 className="text-lg font-bold text-neutral-900">
               Tips of the day
@@ -278,7 +291,7 @@ export default function TravelerResult({
 
           {/* Trivia subsection – carousel */}
           <div
-            className={`${SECTION_RADIUS} overflow-hidden bg-[#F5F2EB] p-5 shadow-lg`}
+            className={`${SECTION_RADIUS} overflow-hidden bg-[#FFF5E5] p-5 shadow-lg`}
           >
             <h2 className="text-lg font-bold text-neutral-900">
               Travel trivia

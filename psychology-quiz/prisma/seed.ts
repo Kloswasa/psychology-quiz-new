@@ -117,7 +117,7 @@ const travelerTypes: Array<{
         url: "https://www.kkday.com/en-au/product/145500-sydney-opera-house-official-backstage-tour-with-breakfast-australia",
       },
       {
-        name: "[14-People Small Group] Hunter Valley Wineries Colourful Day Trip | Hunter Valley Departure",
+        name: "Hunter Valley Wineries Colourful Day Trip | Hunter Valley Departure",
         reason: "Small-group winery day with tastings and a fun, social vibe in Hunter Valley",
         url: "https://www.kkday.com/en-au/product/259557",
       },
@@ -167,7 +167,7 @@ const travelerTypes: Array<{
         url: "https://www.kkday.com/en-au/product/125961-melbourne-foodies-bucket-list-experience-victoria",
       },
       {
-        name: "[QR Direct Entry] LEGOLAND Discovery Centre Melbourne Ticket | Victoria",
+        name: "LEGOLAND Discovery Centre Melbourne Ticket | Victoria",
         reason: "Indoor LEGO-themed attraction — fun, interactive, and easy for a light activity day",
         url: "https://www.kkday.com/en-au/product/11880-legoland-discovery-centre-melbourne-australia",
       },
@@ -177,7 +177,7 @@ const travelerTypes: Array<{
         url: "https://www.kkday.com/en-au/product/286574",
       },
       {
-        name: "[Exclusive Event] Paint and Sip Experience at the Sydney Tower Eye | Australia",
+        name: "Paint and Sip Experience at the Sydney Tower Eye | Australia",
         reason: "Do a paint-and-sip session with a skyline view — relaxed, social, and very photo-friendly",
         url: "https://www.kkday.com/en-au/product/126915-paint-and-sip-sydney-tower-eye-experience-australia",
       },
@@ -212,7 +212,7 @@ const travelerTypes: Array<{
     shareImageUrl: '/images/share/connection-traveler.png',
     destinations: [
       {
-        name: "[DIRECT ENTRY] MONOPOLY DREAMS Melbourne Ticket | Australia",
+        name: "MONOPOLY DREAMS Melbourne Ticket | Australia",
         reason: "A playful, interactive attraction for quick fun photos and light entertainment in the city",
         url: "https://www.kkday.com/en-au/product/154807-monopoly-dreams-melbourne-ticket-australia",
       },
@@ -232,7 +232,7 @@ const travelerTypes: Array<{
         url: "https://www.kkday.com/en-au/product/133025-stefano-marvello-italian-cooking-class-with-dining-australia",
       },
       {
-        name: '[Shoden Exclusive] "Sydney Walking Tour with a Local Guide"',
+        name: 'Sydney Walking Tour with a Local Guide',
         reason: "Explore Sydney like a local with hidden spots, stories, and a flexible walking pace",
         url: "https://www.kkday.com/en-au/product/279510",
       },
@@ -260,7 +260,7 @@ const travelerTypes: Array<{
   },
   {
     riasecType: 'ENTERPRISING',
-    title: 'The Luxury Adventurer',
+    title: 'The Opportunistic Adventurer',
     description:
       'You love premium experiences, unique stays, and curated itineraries with flair.',
     imageUrl: '/images/results/ENTERPRISING.png',
@@ -282,7 +282,7 @@ const travelerTypes: Array<{
         url: "https://www.kkday.com/en-au/product/250384-wilsons-promontory-wilderness-tour-melbourne",
       },
       {
-        name: "[Small–Group] Marrickville Munch – Sydney Food Tour | Australia",
+        name: "Marrickville Munch – Sydney Food Tour | Australia",
         reason: "Small-group food crawl through Marrickville — awesome if you like local flavours and hidden gems",
         url: "https://www.kkday.com/en-au/product/270349",
       },
