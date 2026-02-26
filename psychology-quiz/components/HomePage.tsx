@@ -118,7 +118,7 @@ export function HomePage() {
       {/* Content area: all positions/sizes are % of this area. Heading is at PAGE_CENTER (50%, 50%); assign others e.g. leftPercent={PAGE_CENTER.left - 38} for "38% left of center". */}
       <div className="relative z-10 flex flex-1 min-h-0 w-full">
         {/* G'Day / sticker – top-left */}
-        <StaticAsset leftPercent={22} topPercent={10} widthPercent={22} rotate="-8deg" zIndex={3}>
+        <StaticAsset leftPercent={16} topPercent={13} widthPercent={23} rotate="-8deg" zIndex={3}>
           <button
             type="button"
             onClick={() => setAltShown('Good day mate')}
@@ -136,7 +136,7 @@ export function HomePage() {
         </StaticAsset>
 
         {/* Beach polaroid – top mid-left */}
-        <StaticAsset leftPercent={40} topPercent={24} widthPercent={57} rotate="-10deg" zIndex={2}>
+        <StaticAsset leftPercent={45} topPercent={24} widthPercent={63} rotate="-10deg" zIndex={2}>
           <button
             type="button"
             onClick={() => setAltShown('Beach')}
@@ -154,7 +154,7 @@ export function HomePage() {
         </StaticAsset>
 
         {/* Circular emblem – top-right */}
-        <StaticAsset leftPercent={68} topPercent={10} widthPercent={19} rotate="-12deg" zIndex={3}>
+        <StaticAsset leftPercent={76} topPercent={10} widthPercent={19} rotate="-12deg" zIndex={3}>
           <button
             type="button"
             onClick={() => setAltShown('Concentric circle emblem')}
@@ -172,7 +172,7 @@ export function HomePage() {
         </StaticAsset>
 
         {/* Koala stamp – upper right */}
-        <StaticAsset leftPercent={78} topPercent={32} widthPercent={20} rotate="15deg" zIndex={4}>
+        <StaticAsset leftPercent={85} topPercent={32} widthPercent={20} rotate="15deg" zIndex={4}>
           <button
             type="button"
             onClick={() => setAltShown('A stamp of Koala one of Australia nation animal.')}
@@ -192,7 +192,7 @@ export function HomePage() {
         {/* Australia Calls heading – page center (reference for other asset positions) */}
         <StaticAsset
           leftPercent={PAGE_CENTER.left}
-          topPercent={PAGE_CENTER.top}
+          topPercent={53}
           widthPercent={CENTER_HEADING_WIDTH_PERCENT}
           rotate="0deg"
           zIndex={5}
@@ -208,7 +208,7 @@ export function HomePage() {
         </StaticAsset>
 
         {/* Forest polaroid – lower left */}
-        <StaticAsset leftPercent={45} topPercent={85} widthPercent={42} rotate="15deg" zIndex={6}>
+        <StaticAsset leftPercent={45} topPercent={85} widthPercent={47} rotate="15deg" zIndex={6}>
           <button
             type="button"
             onClick={() => setAltShown('Bushland')}
@@ -226,7 +226,7 @@ export function HomePage() {
         </StaticAsset>
 
         {/* Wildlife ahead badge – lower left, over forest */}
-        <StaticAsset leftPercent={23} topPercent={75} widthPercent={18} rotate="6deg" zIndex={7}>
+        <StaticAsset leftPercent={18} topPercent={75} widthPercent={22} rotate="6deg" zIndex={7}>
           <button
             type="button"
             onClick={() => setAltShown('Wildlife ahead')}
@@ -244,7 +244,7 @@ export function HomePage() {
         </StaticAsset>
 
         {/* Kangaroo – lower middle */}
-        <StaticAsset leftPercent={70} topPercent={73} widthPercent={25} rotate="60deg" zIndex={8}>
+        <StaticAsset leftPercent={72} topPercent={73} widthPercent={30} rotate="60deg" zIndex={8}>
           <button
             type="button"
             onClick={() => setAltShown('Kangaroo')}
@@ -262,7 +262,7 @@ export function HomePage() {
         </StaticAsset>
 
         {/* Boomerang – lower right */}
-        <StaticAsset leftPercent={60} topPercent={88} widthPercent={70} rotate="-65deg" zIndex={6}>
+        <StaticAsset leftPercent={70} topPercent={88} widthPercent={70} rotate="-70deg" zIndex={6}>
           <button
             type="button"
             onClick={() => setAltShown('Boomerang')}
