@@ -1,13 +1,22 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 import ShareButton from '@/components/ShareButton';
 
 type Destination = { name: string; reason: string; url?: string };
 
+/** Darken a hex color by a factor 0–1 (0 = black, 1 = unchanged). */
+function darkenHex(hex: string, amount = 0.2): string {
+  const match = hex.replace(/^#/, '').match(/.{2}/g);
+  if (!match) return hex;
+  const [r, g, b] = match.map((x) => Math.max(0, Math.round(parseInt(x, 16) * (1 - amount))));
+  return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+}
+
 const SECTION_RADIUS = 'rounded-2xl';
 
-function RecommendationCarousel({ destinations }: { destinations: Destination[] }) {
+function RecommendationCarousel({ destinations, themeColor }: { destinations: Destination[]; themeColor?: string }) {
+  const dotColor = themeColor ?? '#4A90D9';
   const [index, setIndex] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const len = destinations.length;
@@ -48,7 +57,7 @@ function RecommendationCarousel({ destinations }: { destinations: Destination[] 
           {/* Right: title, description, Detail button */}
           <div className="flex flex-1 flex-col justify-between p-3">
             <div>
-              <h3 className="font-bold text-neutral-900">{d.name}</h3>
+              <h3 className="line-clamp-2 font-bold text-neutral-900">{d.name}</h3>
               <p className="mt-1 line-clamp-2 text-sm text-neutral-700">
                 {d.reason}
               </p>
@@ -70,9 +79,9 @@ function RecommendationCarousel({ destinations }: { destinations: Destination[] 
               key={i}
               type="button"
               onClick={() => setIndex(i)}
-              className="h-2 w-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#4A90D9] focus:ring-offset-1"
+              className="h-2 w-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1"
               style={{
-                backgroundColor: i === index ? '#6B7280' : '#D1D5DB',
+                backgroundColor: i === index ? dotColor : '#D1D5DB',
               }}
               aria-label={`Go to recommendation ${i + 1}`}
             />
@@ -86,10 +95,13 @@ function RecommendationCarousel({ destinations }: { destinations: Destination[] 
 function TextCarousel({
   items,
   ariaLabelPrefix,
+  themeColor,
 }: {
   items: string[];
   ariaLabelPrefix: string;
+  themeColor?: string;
 }) {
+  const dotColor = themeColor ?? '#4A90D9';
   const [index, setIndex] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const len = items.length;
@@ -120,11 +132,11 @@ function TextCarousel({
   return (
     <div className="mt-3">
       <div
-        className="overflow-hidden rounded-xl bg-white/80 py-3 px-4 shadow-sm"
+        className="flex min-h-[4.5rem] items-center justify-center overflow-hidden rounded-xl bg-white/80 px-4 py-3 shadow-sm"
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
       >
-        <p className="text-sm text-neutral-800">{text}</p>
+        <p className="line-clamp-3 text-left text-sm text-neutral-800">{text}</p>
       </div>
       {len > 1 && (
         <div className="mt-3 flex justify-center gap-1.5">
@@ -133,9 +145,9 @@ function TextCarousel({
               key={i}
               type="button"
               onClick={() => setIndex(i)}
-              className="h-2 w-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#4A90D9] focus:ring-offset-1"
+              className="h-2 w-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1"
               style={{
-                backgroundColor: i === index ? '#6B7280' : '#D1D5DB',
+                backgroundColor: i === index ? dotColor : '#D1D5DB',
               }}
               aria-label={`${ariaLabelPrefix} ${i + 1}`}
             />
@@ -173,6 +185,7 @@ export default function TravelerResult({
 }) {
   const displayName = (personalityName ?? title).toUpperCase();
   const bgColor = themeColor ?? '#4A90D9';
+  const bgColorHover = useMemo(() => darkenHex(bgColor, 0.2), [bgColor]);
   const resultImageSrc =
     (riasecType ? `/images/results/${riasecType}.png` : null) ?? imageUrl ?? null;
 
@@ -216,13 +229,26 @@ export default function TravelerResult({
             <button
               type="button"
               onClick={handleSave}
-              className="flex-1 rounded-xl border-2 border-[#4A90D9] bg-white py-3 text-base font-semibold text-[#4A90D9] transition hover:bg-[#E8F0F8]"
+              className="flex-1 rounded-xl border-2 bg-white py-3 text-base font-semibold transition"
+              style={{
+                borderColor: bgColor,
+                color: bgColor,
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = `${bgColor}20`;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = '';
+              }}
             >
               Save
             </button>
-            <div className="flex-1 [&>button]:h-full [&>button]:w-full [&>button]:rounded-xl [&>button]:bg-[#4A90D9] [&>button]:py-3 [&>button]:text-base [&>button]:font-semibold [&>button]:hover:bg-[#3A7BC2]">
-              <ShareButton url={shareUrl} title={shareTitle} />
-            </div>
+            <ShareButton
+              url={shareUrl}
+              title={shareTitle}
+              themeColor={bgColor}
+              themeColorHover={bgColorHover}
+            />
           </div>
         </section>
 
@@ -232,11 +258,11 @@ export default function TravelerResult({
           <div
             className={`${SECTION_RADIUS} overflow-hidden bg-[#F5F2EB] p-5 shadow-lg`}
           >
-            <h2 className="text-lg font-bold uppercase tracking-wide text-[#4A90D9]">
+            <h2 className="text-3xl text-center font-bold uppercase tracking-wide" style={{ fontFamily: 'var(--font-permanent-marker), cursive', color: bgColor }} >
               Recommendation
             </h2>
             {destinations.length > 0 ? (
-              <RecommendationCarousel destinations={destinations} />
+              <RecommendationCarousel destinations={destinations} themeColor={bgColor} />
             ) : null}
           </div>
 
@@ -247,7 +273,7 @@ export default function TravelerResult({
             <h2 className="text-lg font-bold text-neutral-900">
               Tips of the day
             </h2>
-            <TextCarousel items={tips} ariaLabelPrefix="Tip" />
+            <TextCarousel items={tips} ariaLabelPrefix="Tip" themeColor={bgColor} />
           </div>
 
           {/* Trivia subsection – carousel */}
@@ -257,7 +283,7 @@ export default function TravelerResult({
             <h2 className="text-lg font-bold text-neutral-900">
               Travel trivia
             </h2>
-            <TextCarousel items={trivia} ariaLabelPrefix="Trivia" />
+            <TextCarousel items={trivia} ariaLabelPrefix="Trivia" themeColor={bgColor} />
           </div>
         </section>
       </div>

@@ -1,6 +1,21 @@
 'use client';
 
-export default function ShareButton({ url, title }: { url: string; title: string }) {
+import type { FC } from 'react';
+import { useState } from 'react';
+
+export type ShareButtonProps = {
+  url: string;
+  title: string;
+  themeColor?: string;
+  themeColorHover?: string;
+};
+
+const ShareButton: FC<ShareButtonProps> = (props) => {
+  const { url, title, themeColor, themeColorHover } = props;
+  const [hover, setHover] = useState(false);
+  const bg = themeColor ?? '#4A90D9';
+  const bgHover = themeColorHover ?? '#3A7BC2';
+
   const share = async () => {
     const fullUrl =
       typeof window !== 'undefined' && url.startsWith('/')
@@ -31,9 +46,18 @@ export default function ShareButton({ url, title }: { url: string; title: string
   };
 
   return (
-    <button onClick={share} className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700" type="button">
+    <button
+      onClick={share}
+      className="flex-1 rounded-xl py-3 text-base font-semibold text-white transition"
+      type="button"
+      style={{ backgroundColor: hover ? bgHover : bg }}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+    >
       Share
     </button>
   );
-}
+};
+
+export default ShareButton;
 
