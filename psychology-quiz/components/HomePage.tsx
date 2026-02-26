@@ -193,7 +193,7 @@ export function HomePage() {
         <StaticAsset
           leftPercent={PAGE_CENTER.left}
           topPercent={53}
-          widthPercent={CENTER_HEADING_WIDTH_PERCENT}
+          widthPercent={85}
           rotate="0deg"
           zIndex={5}
         >
