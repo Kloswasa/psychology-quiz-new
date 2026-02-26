@@ -310,18 +310,16 @@ export function HomePage() {
             onMouseLeave={() => setSwipeHint(false)}
             className="
               w-full flex flex-col items-center justify-center gap-1 rounded-2xl px-6 py-3
-              bg-white/10 shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)]
+              bg-white/95 shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)]
               transition-all duration-300 touch-manipulation
-              hover:shadow-xl hover:bg-white/15
-              active:scale-95
+              hover:shadow-xl hover:bg-white/85
+              active:scale-75
               focus:outline-none
             "
             aria-label="Swipe up or press to continue"
           >
             <span className="flex items-center gap-2">
-              <span className={SWIPE_ZONE.caretClass}>^</span>
               <span className={SWIPE_ZONE.labelClass}>Swipe up</span>
-              <span className={SWIPE_ZONE.caretClass}>^</span>
             </span>
             <span
               className="h-1 rounded-full bg-black/30 transition-all duration-300"
