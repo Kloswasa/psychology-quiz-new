@@ -3,7 +3,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import ShareButton from '@/components/ShareButton';
 
-type Destination = { name: string; reason: string };
+type Destination = { name: string; reason: string; url?: string };
 
 const SECTION_RADIUS = 'rounded-2xl';
 

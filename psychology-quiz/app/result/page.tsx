@@ -3,6 +3,16 @@ import TravelerResult from '@/components/TravelerResult';
 import { RiasecType, RIASEC_TYPES, PERSONALITY_THEME_COLORS } from '@/lib/types';
 import type { Metadata } from 'next';
 
+/** Fisher–Yates shuffle then take first n. Returns up to n random items from the array. */
+function pickRandom<T>(arr: T[], n: number): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a.slice(0, n);
+}
+
 type Props = {
   searchParams: Promise<{ type?: string }>;
 };
@@ -31,7 +41,8 @@ export default async function ResultPage({ searchParams }: Props) {
     );
   }
 
-  const destinations = JSON.parse(data.destinations) as Array<{ name: string; reason: string }>;
+  const allDestinations = JSON.parse(data.destinations) as Array<{ name: string; reason: string; url?: string }>;
+  const destinations = pickRandom(allDestinations, 3);
   const tips = JSON.parse(data.tips) as string[];
   const trivia = JSON.parse(data.trivia) as string[];
 
