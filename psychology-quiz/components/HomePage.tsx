@@ -6,23 +6,43 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 const SWIPE_THRESHOLD = 60;
 
-/** Static position for a non-draggable asset on the home page */
+/**
+ * Page center: use this as the reference to assign other image positions.
+ * All positions/sizes are % of the content area (above the swipe footer).
+ * Example: leftPercent: PAGE_CENTER.left - 12  → 12% to the left of center.
+ */
+const PAGE_CENTER = { left: 50, top: 50 } as const;
+/** Heading width as % of content area – scales with screen (e.g. 70 = 70% of content width). */
+const CENTER_HEADING_WIDTH_PERCENT = 72;
+
+/**
+ * Responsive asset: position and size in % of container so layout scales
+ * without collisions on different screen sizes. Figma node 946:4243.
+ */
 function StaticAsset({
   children,
-  position,
+  leftPercent,
+  topPercent,
+  widthPercent,
   rotate,
+  zIndex = 1,
 }: {
   children: React.ReactNode;
-  position: { left: number; top: number };
+  leftPercent: number;
+  topPercent: number;
+  widthPercent: number;
   rotate: string;
+  zIndex?: number;
 }) {
   return (
     <div
-      className="absolute"
+      className="absolute min-w-0"
       style={{
-        left: position.left,
-        top: position.top,
-        transform: `translate(-50%, -50%) rotate(${rotate})`,
+        left: `${leftPercent}%`,
+        top: `${topPercent}%`,
+        width: `${widthPercent}%`,
+        zIndex,
+        transform: 'translate(-50%, -50%) rotate(' + rotate + ')',
       }}
     >
       {children}
@@ -86,7 +106,7 @@ export function HomePage() {
       {/* Full-height background – spans content + footer so image connects seamlessly */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/home/background.png"
+          src="/home/home-background.png"
           alt=""
           fill
           className="object-cover object-center"
@@ -95,153 +115,165 @@ export function HomePage() {
         />
       </div>
 
-      {/* Content area: static assets, click to show alt text (fills space above swipe zone) */}
-      <div className="relative z-10 flex flex-1 min-h-0">
-        <StaticAsset position={{ left: 70, top: 126 }} rotate="-8deg">
+      {/* Content area: all positions/sizes are % of this area. Heading is at PAGE_CENTER (50%, 50%); assign others e.g. leftPercent={PAGE_CENTER.left - 38} for "38% left of center". */}
+      <div className="relative z-10 flex flex-1 min-h-0 w-full">
+        {/* G'Day / sticker – top-left */}
+        <StaticAsset leftPercent={22} topPercent={10} widthPercent={22} rotate="-8deg" zIndex={3}>
           <button
             type="button"
             onClick={() => setAltShown('Good day mate')}
-            className="relative block w-[58px] cursor-pointer touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded"
+            className="block w-full cursor-pointer touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded drop-shadow-md"
           >
             <Image
               src="/home/sticker.png"
-              alt="A stamp of Koala one of Australia nation animal"
+              alt="Good day mate"
               width={58}
               height={70}
-              className="h-full w-full object-contain"
+              className="w-full h-auto object-contain"
               draggable={false}
             />
           </button>
         </StaticAsset>
 
-        <StaticAsset position={{ left: 200, top: 154 }} rotate="6deg">
+        {/* Beach polaroid – top mid-left */}
+        <StaticAsset leftPercent={40} topPercent={24} widthPercent={57} rotate="-10deg" zIndex={2}>
           <button
             type="button"
             onClick={() => setAltShown('Beach')}
-            className="relative block h-[100px] w-[85px] cursor-pointer touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded"
+            className="block w-full cursor-pointer touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded drop-shadow-md"
           >
             <Image
               src="/home/polaroid-beach.png"
               alt="Typical australian beach"
               width={115}
               height={130}
-              className="h-full w-full object-contain"
+              className="w-full h-auto object-contain"
               draggable={false}
             />
           </button>
         </StaticAsset>
 
-        <StaticAsset position={{ left: 320, top: 98 }} rotate="-12deg">
+        {/* Circular emblem – top-right */}
+        <StaticAsset leftPercent={68} topPercent={10} widthPercent={19} rotate="-12deg" zIndex={3}>
           <button
             type="button"
             onClick={() => setAltShown('Concentric circle emblem')}
-            className="relative block h-16 w-16 cursor-pointer touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded"
+            className="block w-full cursor-pointer touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded drop-shadow-md"
           >
             <Image
               src="/home/emblem-circle.png"
               alt="Concentric circle emblem"
               width={64}
               height={64}
-              className="h-full w-full object-contain"
+              className="w-full h-auto object-contain"
               draggable={false}
             />
           </button>
         </StaticAsset>
 
-        <StaticAsset position={{ left: 304, top: 224 }} rotate="8deg">
+        {/* Koala stamp – upper right */}
+        <StaticAsset leftPercent={78} topPercent={32} widthPercent={20} rotate="15deg" zIndex={4}>
           <button
             type="button"
             onClick={() => setAltShown('A stamp of Koala one of Australia nation animal.')}
-            className="relative block h-[70px] w-[58px] cursor-pointer touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded"
+            className="block w-full cursor-pointer touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded drop-shadow-md"
           >
             <Image
               src="/home/koala-stamp.png"
               alt="Koala stamp"
               width={58}
               height={70}
-              className="h-full w-full object-contain"
+              className="w-full h-auto object-contain"
               draggable={false}
             />
           </button>
         </StaticAsset>
 
-        {/* Center title – static, not an image */}
-        <StaticAsset position={{ left: 195, top: 294 }} rotate="0deg">
-          <div className="flex flex-col items-center gap-1 text-center">
-            <div className="rounded-2xl px-4 py-1 ">
-              <h1 className="text-4xl font-bold text-blue-900 sm:text-xl">Australia Calls</h1>
-            </div>
-            <div className="rounded-xl  px-3 ">
-              <p className="text-sm font-medium text-blue-600 sm:text-base">
-                Uncover Your True Adventure Soul
-              </p>
-            </div>
+        {/* Australia Calls heading – page center (reference for other asset positions) */}
+        <StaticAsset
+          leftPercent={PAGE_CENTER.left}
+          topPercent={PAGE_CENTER.top}
+          widthPercent={CENTER_HEADING_WIDTH_PERCENT}
+          rotate="0deg"
+          zIndex={5}
+        >
+          <div className="block w-full text-center">
+            <img
+              src="/home/heading.png"
+              alt="Australia Calls"
+              className="w-full h-auto object-contain drop-shadow-md"
+              style={{ maxWidth: '100%' }}
+            />
           </div>
         </StaticAsset>
 
-        <StaticAsset position={{ left: 86, top: 504 }} rotate="-5deg">
+        {/* Forest polaroid – lower left */}
+        <StaticAsset leftPercent={45} topPercent={85} widthPercent={42} rotate="15deg" zIndex={6}>
           <button
             type="button"
             onClick={() => setAltShown('Bushland')}
-            className="relative block h-[100px] w-[85px] cursor-pointer touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded"
+            className="block w-full cursor-pointer touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded drop-shadow-md"
           >
             <Image
               src="/home/polaroid-bushland.png"
               alt="Bushland"
               width={85}
               height={100}
-              className="h-full w-full object-contain"
+              className="w-full h-auto object-contain"
               draggable={false}
             />
           </button>
         </StaticAsset>
 
-        <StaticAsset position={{ left: 187, top: 546 }} rotate="10deg">
-          <button
-            type="button"
-            onClick={() => setAltShown('Kangaroo')}
-            className="relative block h-24 w-20 cursor-pointer touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded"
-          >
-            <Image
-              src="/home/kangaroo.png"
-              alt="Kangaroo"
-              width={80}
-              height={96}
-              className="h-full w-full object-contain"
-              draggable={false}
-            />
-          </button>
-        </StaticAsset>
-
-        <StaticAsset position={{ left: 320, top: 574 }} rotate="-15deg">
-          <button
-            type="button"
-            onClick={() => setAltShown('Boomerang')}
-            className="relative block h-14 w-28 cursor-pointer touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded"
-          >
-            <Image
-              src="/home/boomerang.png"
-              alt="Boomerang"
-              width={112}
-              height={56}
-              className="h-full w-full object-contain"
-              draggable={false}
-            />
-          </button>
-        </StaticAsset>
-
-        <StaticAsset position={{ left: 47, top: 476 }} rotate="6deg">
+        {/* Wildlife ahead badge – lower left, over forest */}
+        <StaticAsset leftPercent={23} topPercent={75} widthPercent={18} rotate="6deg" zIndex={7}>
           <button
             type="button"
             onClick={() => setAltShown('Wildlife ahead')}
-            className="relative block h-20 w-[72px] cursor-pointer touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded"
+            className="block w-full cursor-pointer touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded drop-shadow-md"
           >
             <Image
               src="/home/wildlife-sign.png"
               alt="Wildlife ahead"
               width={72}
               height={80}
-              className="h-full w-full object-contain"
+              className="w-full h-auto object-contain"
+              draggable={false}
+            />
+          </button>
+        </StaticAsset>
+
+        {/* Kangaroo – lower middle */}
+        <StaticAsset leftPercent={70} topPercent={73} widthPercent={25} rotate="60deg" zIndex={8}>
+          <button
+            type="button"
+            onClick={() => setAltShown('Kangaroo')}
+            className="block w-full cursor-pointer touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded drop-shadow-md"
+          >
+            <Image
+              src="/home/kangaroo.png"
+              alt="Kangaroo"
+              width={80}
+              height={96}
+              className="w-full h-auto object-contain"
+              draggable={false}
+            />
+          </button>
+        </StaticAsset>
+
+        {/* Boomerang – lower right */}
+        <StaticAsset leftPercent={60} topPercent={88} widthPercent={70} rotate="-65deg" zIndex={6}>
+          <button
+            type="button"
+            onClick={() => setAltShown('Boomerang')}
+            className="block w-full cursor-pointer touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded drop-shadow-md"
+          >
+            <Image
+              src="/home/boomerang.png"
+              alt="Boomerang"
+              width={112}
+              height={56}
+              className="w-full h-auto object-contain"
               draggable={false}
             />
           </button>
