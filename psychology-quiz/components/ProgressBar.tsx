@@ -30,15 +30,15 @@ export default function ProgressBar({ current, total }: { current: number; total
               borderRadius: '9999px',
             }}
           >
-            {/* Wavy gradient fill */}
+            {/* Wavy gradient fill - use longhand to avoid conflict with backgroundSize */}
             <div
               className="absolute inset-0 animate-wave"
               style={{
-                background: isComplete 
+                backgroundImage: isComplete
                   ? 'linear-gradient(90deg, #10b981 0%, #06b6d4 100%)' // Success gradient
                   : 'linear-gradient(90deg, #6366f1 0%, #8b5cf6 25%, #d946ef 50%, #8b5cf6 75%, #6366f1 100%)', // Expressive wave gradient
                 backgroundSize: '200% 100%',
-                boxShadow: isComplete 
+                boxShadow: isComplete
                   ? '0 0 16px rgba(16, 185, 129, 0.6), 0 0 8px rgba(6, 182, 212, 0.4)' // Success glow
                   : '0 0 12px rgba(139, 92, 246, 0.5), 0 2px 8px rgba(139, 92, 246, 0.3)', // Primary glow
                 animation: isComplete ? 'none' : 'wave 3s ease-in-out infinite',
