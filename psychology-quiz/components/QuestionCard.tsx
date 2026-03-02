@@ -1,6 +1,4 @@
 'use client';
-
-import Image from 'next/image';
 import { RiasecType } from '@/lib/types';
 import ImageAnswer from './ImageAnswer';
 
@@ -56,28 +54,24 @@ export default function QuestionCard({
   // 2x2 grid for 4 answers, list for 5 answers
   const isGrid = !hasImages && answerCount === 4;
   
-  const bgStyle = !backgroundImage
-    ? { background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }
-    : undefined;
+  const bgStyle = backgroundImage
+    ? {
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }
+    : {
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      };
 
   return (
     <div className="relative h-full min-h-0 w-full rounded-2xl">
       {/* Full-viewport background – fixed so image always shows full height */}
       <div
-        className="fixed inset-0 z-0 w-full"
+        className="fixed inset-0 z-0 w-full bg-no-repeat bg-cover bg-center"
         style={bgStyle}
         aria-hidden
-      >
-        {backgroundImage && (
-          <Image
-            src={backgroundImage}
-            alt=""
-            fill
-            className="object-cover object-center"
-            sizes="100vw"
-          />
-        )}
-      </div>
+      />
       {/* Content pinned to bottom */}
       <div className="absolute bottom-0 left-0 right-0 z-10 space-y-4 w-full max-h-[85vh] overflow-y-auto p-4 pb-safe">
         {/* Question text */}
