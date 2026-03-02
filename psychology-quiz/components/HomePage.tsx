@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 const SWIPE_THRESHOLD = 60;
 
@@ -64,16 +64,6 @@ export function HomePage() {
   const router = useRouter();
   const touchStartY = useRef(0);
   const [swipeHint, setSwipeHint] = useState(false);
-  const [altShown, setAltShown] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!altShown) return;
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setAltShown(null);
-    };
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
-  }, [altShown]);
 
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     touchStartY.current = e.touches[0].clientY;
@@ -112,6 +102,7 @@ export function HomePage() {
           className="object-cover object-center"
           priority
           sizes="430px"
+          quality={90}
         />
       </div>
 
@@ -119,74 +110,59 @@ export function HomePage() {
       <div className="relative z-10 flex flex-1 min-h-0 w-full">
         {/* G'Day / sticker – top-left */}
         <StaticAsset leftPercent={16} topPercent={13} widthPercent={23} rotate="-8deg" zIndex={3}>
-          <button
-            type="button"
-            onClick={() => setAltShown('Good day mate')}
-            className="block w-full cursor-pointer touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded drop-shadow-md"
-          >
+          <div className="block w-full touch-manipulation rounded drop-shadow-md">
             <Image
               src="/home/sticker.png"
               alt="Good day mate"
-              width={58}
-              height={70}
+              width={200}
+              height={240}
               className="w-full h-auto object-contain"
               draggable={false}
             />
-          </button>
+          </div>
         </StaticAsset>
 
         {/* Beach polaroid – top mid-left */}
         <StaticAsset leftPercent={45} topPercent={24} widthPercent={63} rotate="-10deg" zIndex={2}>
-          <button
-            type="button"
-            onClick={() => setAltShown('Beach')}
-            className="block w-full cursor-pointer touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded drop-shadow-md"
-          >
+          <div className="block w-full touch-manipulation rounded drop-shadow-md">
             <Image
               src="/home/polaroid-beach.png"
               alt="Typical australian beach"
-              width={115}
-              height={130}
+              width={540}
+              height={610}
               className="w-full h-auto object-contain"
               draggable={false}
+              quality={90}
             />
-          </button>
+          </div>
         </StaticAsset>
 
         {/* Circular emblem – top-right */}
         <StaticAsset leftPercent={76} topPercent={10} widthPercent={19} rotate="-12deg" zIndex={3}>
-          <button
-            type="button"
-            onClick={() => setAltShown('Concentric circle emblem')}
-            className="block w-full cursor-pointer touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded drop-shadow-md"
-          >
+          <div className="block w-full touch-manipulation rounded drop-shadow-md">
             <Image
               src="/home/emblem-circle.png"
               alt="Concentric circle emblem"
-              width={64}
-              height={64}
+              width={160}
+              height={160}
               className="w-full h-auto object-contain"
               draggable={false}
             />
-          </button>
+          </div>
         </StaticAsset>
 
         {/* Koala stamp – upper right */}
         <StaticAsset leftPercent={85} topPercent={32} widthPercent={20} rotate="15deg" zIndex={4}>
-          <button
-            type="button"
-            onClick={() => setAltShown('A stamp of Koala one of Australia nation animal.')}
-            className="block w-full cursor-pointer touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded drop-shadow-md"
-          >
+          <div className="block w-full touch-manipulation rounded drop-shadow-md">
             <Image
               src="/home/koala-stamp.png"
               alt="Koala stamp"
-              width={58}
-              height={70}
+              width={180}
+              height={217}
               className="w-full h-auto object-contain"
               draggable={false}
             />
-          </button>
+          </div>
         </StaticAsset>
 
         {/* Australia Calls heading – page center (reference for other asset positions) */}
@@ -209,93 +185,62 @@ export function HomePage() {
 
         {/* Forest polaroid – lower left */}
         <StaticAsset leftPercent={45} topPercent={85} widthPercent={47} rotate="15deg" zIndex={6}>
-          <button
-            type="button"
-            onClick={() => setAltShown('Bushland')}
-            className="block w-full cursor-pointer touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded drop-shadow-md"
-          >
+          <div className="block w-full touch-manipulation rounded drop-shadow-md">
             <Image
               src="/home/polaroid-bushland.png"
               alt="Bushland"
-              width={85}
-              height={100}
+              width={400}
+              height={471}
               className="w-full h-auto object-contain"
               draggable={false}
+              quality={90}
             />
-          </button>
+          </div>
         </StaticAsset>
 
         {/* Wildlife ahead badge – lower left, over forest */}
         <StaticAsset leftPercent={18} topPercent={75} widthPercent={22} rotate="6deg" zIndex={7}>
-          <button
-            type="button"
-            onClick={() => setAltShown('Wildlife ahead')}
-            className="block w-full cursor-pointer touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded drop-shadow-md"
-          >
+          <div className="block w-full touch-manipulation rounded drop-shadow-md">
             <Image
               src="/home/wildlife-sign.png"
               alt="Wildlife ahead"
-              width={72}
-              height={80}
+              width={190}
+              height={211}
               className="w-full h-auto object-contain"
               draggable={false}
             />
-          </button>
+          </div>
         </StaticAsset>
 
         {/* Kangaroo – lower middle */}
         <StaticAsset leftPercent={72} topPercent={73} widthPercent={30} rotate="60deg" zIndex={8}>
-          <button
-            type="button"
-            onClick={() => setAltShown('Kangaroo')}
-            className="block w-full cursor-pointer touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded drop-shadow-md"
-          >
+          <div className="block w-full touch-manipulation rounded drop-shadow-md">
             <Image
               src="/home/kangaroo.png"
               alt="Kangaroo"
-              width={80}
-              height={96}
+              width={260}
+              height={312}
               className="w-full h-auto object-contain"
               draggable={false}
             />
-          </button>
+          </div>
         </StaticAsset>
 
         {/* Boomerang – lower right */}
         <StaticAsset leftPercent={70} topPercent={88} widthPercent={70} rotate="-70deg" zIndex={6}>
-          <button
-            type="button"
-            onClick={() => setAltShown('Boomerang')}
-            className="block w-full cursor-pointer touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded drop-shadow-md"
-          >
+          <div className="block w-full touch-manipulation rounded drop-shadow-md">
             <Image
               src="/home/boomerang.png"
               alt="Boomerang"
-              width={112}
-              height={56}
+              width={600}
+              height={300}
               className="w-full h-auto object-contain"
               draggable={false}
+              quality={90}
             />
-          </button>
+          </div>
         </StaticAsset>
       </div>
-
-      {/* Alt text overlay – tap outside or on text to close */}
-      {altShown && (
-        <div
-          className="fixed inset-0 z-20 flex items-center justify-center bg-black/40 p-4"
-          onClick={() => setAltShown(null)}
-          role="presentation"
-        >
-          <div
-            className="rounded-2xl bg-white px-6 py-4 shadow-xl max-w-[280px]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <p className="text-center text-gray-800 font-medium">{altShown}</p>
-            <p className="mt-2 text-center text-sm text-gray-500">Tap outside to close</p>
-          </div>
-        </div>
-      )}
 
       {/* Swipe up CTA – separate footer div, always at the bottom; swipe up (from bottom zone) or tap to continue */}
       <div
