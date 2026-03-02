@@ -229,9 +229,9 @@ export default function TravelerResult({
               />
             ) : null}
           </div>
-          <p className="p-5 text-sm leading-relaxed text-neutral-900">
+          {/* <p className="p-5 text-sm leading-relaxed text-neutral-900">
             {description}
-          </p>
+          </p>*/}
         </section>
 
         {/* Save and Share section */}

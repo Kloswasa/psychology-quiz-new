@@ -50,13 +50,13 @@ export function IntroCarousel() {
           style={{ transform: `translateX(-${pageIndex * 100}%)` }}
         >
           <div className="h-full w-full flex-shrink-0">
-            <IntroPage1 />
+            <IntroPage1 isActive={pageIndex === 0} />
           </div>
           <div className="h-full w-full flex-shrink-0">
-            <IntroPage2 />
+            <IntroPage2 isActive={pageIndex === 1} />
           </div>
           <div className="h-full w-full flex-shrink-0">
-            <IntroPage3 />
+            <IntroPage3 isActive={pageIndex === 2} />
           </div>
         </div>
       </div>

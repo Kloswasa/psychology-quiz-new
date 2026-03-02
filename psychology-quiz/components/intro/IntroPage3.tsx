@@ -1,15 +1,33 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 
-export function IntroPage3() {
+const fadeInUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: 'easeOut' as const, delay: i * 0.12 },
+  }),
+};
+
+type IntroPage3Props = { isActive?: boolean };
+
+export function IntroPage3({ isActive = false }: IntroPage3Props) {
   const router = useRouter();
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
     <div className="flex flex-col items-center justify-center py-6  bg-white mx-8 my-6">
       {/* Header */}
-      <div className="text-center mb-4">
+      <motion.div
+        className="text-center mb-4"
+        initial="hidden"
+        animate={isActive ? 'visible' : 'hidden'}
+        variants={fadeInUp}
+        custom={0}
+      >
         <h2
           className="text-2xl font-bold text-[#0088ff]"
           style={{ fontFamily: 'var(--font-permanent-marker), cursive' }}
@@ -19,10 +37,16 @@ export function IntroPage3() {
         <p className="text-sm text-black mt-1">
           Your personal travel style <br/> with a handy information!
         </p>
-      </div>
+      </motion.div>
 
       {/* Orange panel + sample card */}
-      <div className="  bg-[#FFB200] p-4 pb-6 mx-[-1rem]">
+      <motion.div
+        className="  bg-[#FFB200] p-4 pb-6 mx-[-1rem]"
+        initial="hidden"
+        animate={isActive ? 'visible' : 'hidden'}
+        variants={fadeInUp}
+        custom={1}
+      >
         <div className="bg-white rounded-xl p-3 shadow-md flex gap-3">
           <div className="relative w-20 h-20 rounded-lg overflow-hidden shrink-0 bg-gradient-to-br from-blue-400 to-blue-600">
             <img
@@ -53,12 +77,24 @@ export function IntroPage3() {
           <div className="w-2 h-2 rounded-full bg-gray-300" />
           <div className="w-2 h-2 rounded-full bg-gray-300" />
         </div>
-      </div>
+      </motion.div>
 
       {/* CTA */}
       {/* Full-width dashed divider */}
-      <div className="mt-1 -mx-4 border-t-2 border-dashed border-[#0088ff]/50" />
-      <div className="text-center pt-4">
+      <motion.div
+        className="mt-1 -mx-4 border-t-2 border-dashed border-[#0088ff]/50"
+        initial="hidden"
+        animate={isActive ? 'visible' : 'hidden'}
+        variants={fadeInUp}
+        custom={2}
+      />
+      <motion.div
+        className="text-center pt-4"
+        initial="hidden"
+        animate={isActive ? 'visible' : 'hidden'}
+        variants={fadeInUp}
+        custom={3}
+      >
         <p className="text-sm text-[#0088ff] mb-3">If you ready, then shall we</p>
         <button
           type="button"
@@ -73,7 +109,7 @@ export function IntroPage3() {
         >
           &quot;LET&apos;S WANDER IN DOWN UNDER&quot;
         </p>
-      </div>
+      </motion.div>
     </div>
     </div>
   );
