@@ -48,9 +48,13 @@ export default function QuestionCard({
   // Determine if any answers have images
   const hasImages = answers.some(a => a.imageUrl);
   const answerCount = answers.length;
-  
-  // Auto-determine layout: 2x2 grid for 4 answers, list for 5 answers
-  const isGrid = answerCount === 4;
+  // Image layouts
+  const isImageGrid = hasImages && answerCount === 4;
+  const isImageListFive = hasImages && answerCount === 5;
+
+  // Auto-determine layout for text-only answers:
+  // 2x2 grid for 4 answers, list for 5 answers
+  const isGrid = !hasImages && answerCount === 4;
   
   const bgStyle = !backgroundImage
     ? { background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }
@@ -84,9 +88,9 @@ export default function QuestionCard({
           {questionText}
         </h2>
         
-        {/* Answers - dynamic layout based on count */}
-        {hasImages ? (
-          // Image-based answers (2x2 grid layout)
+        {/* Answers - dynamic layout based on count and type */}
+        {isImageGrid ? (
+          // Image-based answers (2x2 grid layout – used for 4 image answers)
           <div className="grid grid-cols-2 gap-3 justify-items-center">
             {answers.map((a) => (
               <ImageAnswer
@@ -97,9 +101,49 @@ export default function QuestionCard({
                 isSelected={selected === a.riasecType}
                 onSelect={onSelect}
                 textColor={getTextColor(questionIndex)}
-                variant={questionIndex === 8 ? 'full' : 'default'}
               />
             ))}
+          </div>
+        ) : isImageListFive ? (
+          // Full-image answers in a 5-answer vertical list (no visible text)
+          <div className="flex flex-col gap-3">
+            {answers.map((a) => {
+              const isActive = selected === a.riasecType;
+              return (
+                <button
+                  key={a.id}
+                  onClick={() => onSelect(a.riasecType)}
+                  className={`
+                    relative overflow-hidden
+                    min-h-[48px]
+                    rounded-2xl
+                    transition-all duration-300
+                    active:scale-95
+                    touch-manipulation
+                    group
+                    ${isActive 
+                      ? 'ring-2 ring-white/70 shadow-2xl' 
+                      : 'shadow-lg'}
+                  `}
+                  aria-label={a.text}
+                >
+                  {/* Full-bleed image fills the answer card */}
+                  <img
+                    src={a.imageUrl!}
+                    alt={a.text}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+
+                  {/* Overlay to keep consistency with other answers */}
+                  <div
+                    className={`
+                      absolute inset-0
+                      ${isActive ? 'bg-black/10' : 'bg-black/0 group-hover:bg-black/10'}
+                    `}
+                  />
+                </button>
+              );
+            })}
           </div>
         ) : (
           // Text-only answers (original layout)
