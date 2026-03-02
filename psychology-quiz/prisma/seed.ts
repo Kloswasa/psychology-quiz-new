@@ -461,11 +461,11 @@ const questions: Array<{
     text: 'If you could sum up your whole adventure in one word, what would it be?',
     backgroundImage: '/images/backgrounds/question9-bg.webp',
     answers: [
-      { text: 'Friendship', riasecType: 'REALISTIC', imageUrl: '/images/answers/q9-1.webp' },
-      { text: 'Inspiration', riasecType: 'ARTISTIC', imageUrl: '/images/answers/q9-2.webp' },
-      { text: 'Completion', riasecType: 'CONVENTIONAL', imageUrl: '/images/answers/q9-3.webp' },
-      { text: 'Discovery', riasecType: 'INVESTIGATIVE', imageUrl: '/images/answers/q9-4.webp' },
-      { text: 'Victory', riasecType: 'ENTERPRISING', imageUrl: '/images/answers/q9-5.webp' },
+      { text: 'Friendship', riasecType: 'REALISTIC' },
+      { text: 'Inspiration', riasecType: 'ARTISTIC' },
+      { text: 'Completion', riasecType: 'CONVENTIONAL' },
+      { text: 'Discovery', riasecType: 'INVESTIGATIVE' },
+      { text: 'Victory', riasecType: 'ENTERPRISING' },
     ],
   },
   {
