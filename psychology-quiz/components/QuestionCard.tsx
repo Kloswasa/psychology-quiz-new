@@ -86,20 +86,39 @@ export default function QuestionCard({
         
         {/* Answers - dynamic layout based on count */}
         {hasImages ? (
-          // Image-based answers (2x2 grid layout)
-          <div className="grid grid-cols-2 gap-3 justify-items-center">
-            {answers.map((a) => (
-              <ImageAnswer
-                key={a.id}
-                imageUrl={a.imageUrl!}
-                text={a.text}
-                riasecType={a.riasecType}
-                isSelected={selected === a.riasecType}
-                onSelect={onSelect}
-                textColor={getTextColor(questionIndex)}
-              />
-            ))}
-          </div>
+          // Image-based answers
+          questionIndex === 8 ? (
+            // Q9: full-width stacked image answers
+            <div className="flex flex-col gap-3">
+              {answers.map((a) => (
+                <ImageAnswer
+                  key={a.id}
+                  imageUrl={a.imageUrl!}
+                  text={a.text}
+                  riasecType={a.riasecType}
+                  isSelected={selected === a.riasecType}
+                  onSelect={onSelect}
+                  textColor={getTextColor(questionIndex)}
+                  variant="full"
+                />
+              ))}
+            </div>
+          ) : (
+            // Other questions with image answers: 2x2 grid
+            <div className="grid grid-cols-2 gap-3 justify-items-center">
+              {answers.map((a) => (
+                <ImageAnswer
+                  key={a.id}
+                  imageUrl={a.imageUrl!}
+                  text={a.text}
+                  riasecType={a.riasecType}
+                  isSelected={selected === a.riasecType}
+                  onSelect={onSelect}
+                  textColor={getTextColor(questionIndex)}
+                />
+              ))}
+            </div>
+          )
         ) : (
           // Text-only answers (original layout)
           <div className={`
