@@ -29,9 +29,14 @@ export default async function ResultPage({ searchParams }: Props) {
     );
   }
 
-  const data = await prisma.travelerType.findUnique({
-    where: { riasecType: typeKey },
-  });
+  const data = await prisma.travelerType
+    .findUnique({
+      where: { riasecType: typeKey },
+    })
+    .catch((err) => {
+      console.error('Failed to load traveler type result', err);
+      return null;
+    });
 
   if (!data) {
     return (
@@ -82,9 +87,14 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   if (!typeKey || !RIASEC_TYPES.includes(typeKey)) {
     return {};
   }
-  const data = await prisma.travelerType.findUnique({
-    where: { riasecType: typeKey },
-  });
+  const data = await prisma.travelerType
+    .findUnique({
+      where: { riasecType: typeKey },
+    })
+    .catch((err) => {
+      console.error('Failed to load traveler type metadata', err);
+      return null;
+    });
   if (!data) return {};
 
   const title = `I'm ${data.title}! What's your travel personality?`;
