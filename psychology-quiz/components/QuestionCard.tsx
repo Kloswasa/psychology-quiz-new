@@ -97,6 +97,7 @@ export default function QuestionCard({
                 isSelected={selected === a.riasecType}
                 onSelect={onSelect}
                 textColor={getTextColor(questionIndex)}
+                variant={questionIndex === 8 ? 'full' : 'default'}
               />
             ))}
           </div>
