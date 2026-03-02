@@ -464,27 +464,27 @@ const questions: Array<{
       {
         text: 'Friendship',
         riasecType: 'REALISTIC',
-        imageUrl: '/images/answers/q9-1.webp',
+        imageUrl: '/images/answers/q9-1.png',
       },
       {
         text: 'Inspiration',
         riasecType: 'ARTISTIC',
-        imageUrl: '/images/answers/q9-2.webp',
+        imageUrl: '/images/answers/q9-2.png',
       },
       {
         text: 'Completion',
         riasecType: 'CONVENTIONAL',
-        imageUrl: '/images/answers/q9-3.webp',
+        imageUrl: '/images/answers/q9-3.png',
       },
       {
         text: 'Discovery',
         riasecType: 'INVESTIGATIVE',
-        imageUrl: '/images/answers/q9-4.webp',
+        imageUrl: '/images/answers/q9-4.png',
       },
       {
         text: 'Victory',
         riasecType: 'ENTERPRISING',
-        imageUrl: '/images/answers/q9-5.webp',
+        imageUrl: '/images/answers/q9-5.png',
       },
     ],
   },
