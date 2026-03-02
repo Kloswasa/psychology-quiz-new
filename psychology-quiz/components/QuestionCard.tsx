@@ -109,7 +109,7 @@ export default function QuestionCard({
                   onClick={() => onSelect(a.riasecType)}
                   className={`
                     relative overflow-hidden
-                    min-h-[48px]
+                    min-h-[52px]
                     rounded-2xl
                     transition-all duration-300
                     active:scale-95
