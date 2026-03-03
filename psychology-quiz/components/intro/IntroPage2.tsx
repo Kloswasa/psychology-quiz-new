@@ -36,6 +36,7 @@ export function IntroPage2({ isActive = false }: IntroPage2Props) {
         animate={isActive ? 'visible' : 'hiddenLeft'}
         variants={cardVariants}
         custom={-3}
+        style={{ fontFamily: 'var(--font-bitter), sans-serif', fontWeight: '800' }}
       >
         <h2
           className="text-2xl font-bold mb-3 text-center"
@@ -43,7 +44,7 @@ export function IntroPage2({ isActive = false }: IntroPage2Props) {
         >
           HOW TO PLAY?
         </h2>
-        <p className="text-center text-sm mb-6">
+        <p className="text-center text-md mb-6 ">
           &ldquo;Simply through <br/> multiple choices quiz&rdquo;
         </p>
         <div className="flex justify-center gap-8">
@@ -64,8 +65,9 @@ export function IntroPage2({ isActive = false }: IntroPage2Props) {
         variants={cardVariants}
         custom={8}
         transition={{ duration: 0.5, ease: 'easeOut' as const, delay: isActive ? 0.2 : 0 }}
+        style={{ fontFamily: 'var(--font-bitter), sans-serif', fontWeight: '800' }}
       >
-        <p className="text-white text-center text-sm mt-6 " >
+        <p className="text-white text-center text-md mt-6 " >
           It is the golden rule to play this quiz, more intuition you use, the best
           result it be.
         </p>

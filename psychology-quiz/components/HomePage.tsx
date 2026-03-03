@@ -53,10 +53,10 @@ function StaticAsset({
 /** Swipe-up area at bottom – adjust these to change size and look */
 const SWIPE_ZONE = {
   minHeight: 120,          // min height (px); also used for “swipe starts in bottom zone” detection
-  paddingTop: 24,           // space above label (px); e.g. 24, 32, 48
+  paddingTop: 24,           // space above label (p x); e.g. 24, 32, 48
   textColor: 'text-black',  // 'text-white', 'text-black'
-  caretClass: 'text-lg',
-  labelClass: 'text-sm font-medium',
+  caretClass: 'text-xs',
+  labelClass: 'font-bold',
   barWidth: { idle: 48, hover: 56 },
 } as const;
 
@@ -245,7 +245,9 @@ export function HomePage() {
       {/* Swipe up CTA – separate footer div, always at the bottom; swipe up (from bottom zone) or tap to continue */}
       <div
         className={`relative z-10 flex shrink-0 flex-col items-center justify-center gap-1 px-4 sm:px-6 pb-safe ${SWIPE_ZONE.textColor} drop-shadow-md`}
-        style={{ minHeight: SWIPE_ZONE.minHeight, paddingTop: SWIPE_ZONE.paddingTop }}
+        style={{ minHeight: SWIPE_ZONE.minHeight, 
+          paddingTop: SWIPE_ZONE.paddingTop, 
+          fontFamily: 'var(--font-bitter), sans-serif', }}
       >
         <div className="animate-bounce-up w-full max-w-sm flex flex-col items-center">
           <button
@@ -266,12 +268,7 @@ export function HomePage() {
             <span className="flex items-center gap-2">
               <span className={SWIPE_ZONE.labelClass}>Swipe up</span>
             </span>
-            <span
-              className="h-1 rounded-full bg-black/30 transition-all duration-300"
-              style={{
-                width: swipeHint ? 'min(4rem, 20%)' : 'min(3rem, 15%)',
-              }}
-            />
+            <span/>
           </button>
         </div>
       </div>

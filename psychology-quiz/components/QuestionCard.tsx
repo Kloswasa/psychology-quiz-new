@@ -76,8 +76,10 @@ export default function QuestionCard({
       <div className="absolute bottom-0 left-0 right-0 z-10 space-y-4 w-full max-h-[85vh] overflow-y-auto p-4 pb-safe">
         {/* Question text */}
         <h2 
-          style={{ color: getTextColor(questionIndex) }}
-          className="text-xl font-bold leading-tight drop-shadow-lg"
+          style={{ color: getTextColor(questionIndex),
+            fontFamily: 'var(--font-bitter), sans-serif',
+            fontWeight: '800' }}
+          className="text-lg font-bold leading-tight drop-shadow-lg text-center w-full"
         >
           {questionText}
         </h2>

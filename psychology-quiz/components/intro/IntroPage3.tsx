@@ -95,16 +95,27 @@ export function IntroPage3({ isActive = false }: IntroPage3Props) {
         variants={fadeInUp}
         custom={3}
       >
-        <p className="text-sm text-[#0088ff] mb-3">If you ready, then shall we</p>
-        <button
+        <p className="text-sm text-[#0088ff] ">If you ready, then shall we</p>
+        <motion.button
           type="button"
           onClick={() => router.push('/quiz')}
-          className="my-2 w-full max-w-[200px] rounded-xl bg-[#0088ff] text-white font-semibold py-3 px-6 shadow-md active:scale-[0.98] transition-transform"
+          className="my-2 w-full max-w-[200px] rounded-xl bg-[#0088ff] text-white font-semibold py-3 px-6 shadow-md transition-transform"
+          animate={
+            isActive
+              ? { scale: [1, 0.95, 0.7] }
+              : { scale: 1 }
+          }
+          transition={
+            isActive
+              ? { duration: 0.8, repeat: Infinity, ease: 'easeInOut' }
+              : { duration: 0.2 }
+          }
+          whileTap={{ scale: 0.6 }}
         >
           Start
-        </button>
+        </motion.button>
         <p
-          className="text-[#FFB200] font-bold text-3xl my-4 opacity-90 overflow-hidden"
+          className="text-[#FFB200] font-bold text-3xl my-4 opacity-40 overflow-hidden"
           style={{ fontFamily: 'var(--font-permanent-marker), cursive', rotate: '-8deg' }}
         >
           &quot;LET&apos;S WANDER IN DOWN UNDER&quot;
