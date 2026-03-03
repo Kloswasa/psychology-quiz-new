@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Caveat, Permanent_Marker } from "next/font/google";
+import { Geist, Geist_Mono, Caveat, Permanent_Marker, Bitter, Inter } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -24,6 +24,20 @@ const permanentMarker = Permanent_Marker({
   weight: "400",
 });
 
+const bitter = Bitter({
+  variable: "--font-bitter",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["100","200","300","400","500","600","700","800","900"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Travel Personality Quiz",
   description: "Discover your travel personality type",
@@ -43,7 +57,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${caveat.variable} ${permanentMarker.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${caveat.variable} ${permanentMarker.variable} ${bitter.variable} ${inter.variable} antialiased`}
       >
         {children}
       </body>

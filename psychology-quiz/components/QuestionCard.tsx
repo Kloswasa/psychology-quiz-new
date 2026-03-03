@@ -1,6 +1,4 @@
 'use client';
-
-import Image from 'next/image';
 import { RiasecType } from '@/lib/types';
 import ImageAnswer from './ImageAnswer';
 
@@ -48,45 +46,47 @@ export default function QuestionCard({
   // Determine if any answers have images
   const hasImages = answers.some(a => a.imageUrl);
   const answerCount = answers.length;
+  // Image layouts
+  const isImageGrid = hasImages && answerCount === 4;
+  const isImageListFive = hasImages && answerCount === 5;
+
+  // Auto-determine layout for text-only answers:
+  // 2x2 grid for 4 answers, list for 5 answers
+  const isGrid = !hasImages && answerCount === 4;
   
-  // Auto-determine layout: 2x2 grid for 4 answers, list for 5 answers
-  const isGrid = answerCount === 4;
-  
-  const bgStyle = !backgroundImage
-    ? { background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }
-    : undefined;
+  const bgStyle = backgroundImage
+    ? {
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }
+    : {
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      };
 
   return (
     <div className="relative h-full min-h-0 w-full rounded-2xl">
       {/* Full-viewport background – fixed so image always shows full height */}
       <div
-        className="fixed inset-0 z-0 w-full"
+        className="fixed inset-0 z-0 w-full bg-no-repeat bg-cover bg-center"
         style={bgStyle}
         aria-hidden
-      >
-        {backgroundImage && (
-          <Image
-            src={backgroundImage}
-            alt=""
-            fill
-            className="object-cover object-center"
-            sizes="100vw"
-          />
-        )}
-      </div>
+      />
       {/* Content pinned to bottom */}
       <div className="absolute bottom-0 left-0 right-0 z-10 space-y-4 w-full max-h-[85vh] overflow-y-auto p-4 pb-safe">
         {/* Question text */}
         <h2 
-          style={{ color: getTextColor(questionIndex) }}
-          className="text-xl font-bold leading-tight drop-shadow-lg"
+          style={{ color: getTextColor(questionIndex),
+            fontFamily: 'var(--font-bitter), sans-serif',
+            fontWeight: '800' }}
+          className="text-lg font-bold leading-tight drop-shadow-lg text-center w-full"
         >
           {questionText}
         </h2>
         
-        {/* Answers - dynamic layout based on count */}
-        {hasImages ? (
-          // Image-based answers (2x2 grid layout)
+        {/* Answers - dynamic layout based on count and type */}
+        {isImageGrid ? (
+          // Image-based answers (2x2 grid layout – used for 4 image answers)
           <div className="grid grid-cols-2 gap-3 justify-items-center">
             {answers.map((a) => (
               <ImageAnswer
@@ -99,6 +99,47 @@ export default function QuestionCard({
                 textColor={getTextColor(questionIndex)}
               />
             ))}
+          </div>
+        ) : isImageListFive ? (
+          // Full-image answers in a 5-answer vertical list (no visible text)
+          <div className="flex flex-col gap-3">
+            {answers.map((a) => {
+              const isActive = selected === a.riasecType;
+              return (
+                <button
+                  key={a.id}
+                  onClick={() => onSelect(a.riasecType)}
+                  className={`
+                    relative overflow-hidden
+                    min-h-[56px]
+                    rounded-2xl
+                    transition-all duration-300
+                    active:scale-95
+                    touch-manipulation
+                    group
+                    ${isActive 
+                      ? 'ring-2 ring-white/70 shadow-2xl' 
+                      : 'shadow-lg'}
+                  `}
+                  aria-label={a.text}
+                >
+                  {/* Full-bleed image fills the answer card */}
+                  <img
+                    src={a.imageUrl!}
+                    alt={a.text}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+
+                  {/* Overlay to keep consistency with other answers */}
+                  <div
+                    className={`
+                      absolute inset-0
+                      ${isActive ? 'bg-black/10' : 'bg-black/0 group-hover:bg-black/10'}
+                    `}
+                  />
+                </button>
+              );
+            })}
           </div>
         ) : (
           // Text-only answers (original layout)
