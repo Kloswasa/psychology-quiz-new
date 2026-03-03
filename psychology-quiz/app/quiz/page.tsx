@@ -168,8 +168,8 @@ export default function QuizPage() {
   return (
     <div className="h-screen w-full overflow-hidden relative flex flex-col">
       {/* Header */}
-      <header className="flex-shrink-0 z-20 p-4 flex items-center justify-between bg-gradient-to-b from-black/50 to-transparent pointer-events-none">
-        <div className="pointer-events-auto">
+      <header className="flex-shrink-0 z-20 p-4 flex items-center justify-between gap-4 bg-gradient-to-b from-black/50 to-transparent pointer-events-none">
+        <div className="pointer-events-auto flex-1">
           <ProgressBar current={current + 1} total={total} />
         </div>
         <div className="pointer-events-auto">
