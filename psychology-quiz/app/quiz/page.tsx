@@ -129,6 +129,21 @@ export default function QuizPage() {
 
   const goBack = () => setCurrent((c) => Math.max(0, c - 1));
 
+  const textColors = [
+    '#212a37', // Q1: Oxford Blue
+    '#ffffff', // Q2: White
+    '#212a37', // Q3: Oxford Blue
+    '#212a37', // Q4: Oxford Blue
+    '#ffffff', // Q5: White
+    '#212a37', // Q6: Oxford Blue
+    '#ffffff', // Q7: White
+    '#ffffff', // Q8: White
+    '#ffffff', // Q9: White
+    '#212a37', // Q10: Oxford Blue
+  ];
+
+  const currentTextColor = textColors[current] ?? '#ffffff';
+
   const showQuiz = currentQuestion && imagesReady;
   if (!showQuiz) {
     return (
@@ -158,7 +173,7 @@ export default function QuizPage() {
           <ProgressBar current={current + 1} total={total} />
         </div>
         <div className="pointer-events-auto">
-          <BackButton onClick={goBack} disabled={current === 0} />
+          <BackButton onClick={goBack} disabled={current === 0} color={currentTextColor} />
         </div>
       </header>
 

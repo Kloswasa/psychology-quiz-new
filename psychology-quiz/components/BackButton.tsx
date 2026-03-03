@@ -1,6 +1,12 @@
 'use client';
 
-export default function BackButton({ onClick, disabled }: { onClick: () => void; disabled?: boolean }) {
+type BackButtonProps = {
+  onClick: () => void;
+  disabled?: boolean;
+  color?: string;
+};
+
+export default function BackButton({ onClick, disabled, color = '#ffffff' }: BackButtonProps) {
   return (
     <button
       type="button"
@@ -11,7 +17,6 @@ export default function BackButton({ onClick, disabled }: { onClick: () => void;
         rounded-2xl
         px-4 py-2
         text-sm font-medium
-        text-white
         transition-all duration-300
         active:scale-95
         touch-manipulation
@@ -19,6 +24,7 @@ export default function BackButton({ onClick, disabled }: { onClick: () => void;
         disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white/10 disabled:hover:border-white/30
       `}
       style={{
+        color,
         backdropFilter: 'blur(8px) saturate(150%)',
         WebkitBackdropFilter: 'blur(8px) saturate(150%)',
       }}
