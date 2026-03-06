@@ -69,7 +69,7 @@ export function IntroPage3({ isActive = false }: IntroPage3Props) {
             </button>
           </div>
         </div>
-        <p className="text-center font-bold text-black mt-3">Recommended locations or trips!</p>
+        <p className="text-center font-bold text-black mt-3">Recommended locations amd more!</p>
         
       </motion.div>
 
