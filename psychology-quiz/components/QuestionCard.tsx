@@ -111,7 +111,7 @@ export default function QuestionCard({
                   onClick={() => onSelect(a.riasecType)}
                   className={`
                     relative overflow-hidden
-                    min-h-[56px]
+                    min-h-[48px]
                     rounded-2xl
                     transition-all duration-300
                     active:scale-95
@@ -156,7 +156,7 @@ export default function QuestionCard({
                     relative overflow-hidden
                     ${isGrid ? 'min-h-[120px]' : 'min-h-[48px]'}
                     rounded-2xl
-                    p-4
+                    p-3
                     transition-all duration-300
                     active:scale-95
                     touch-manipulation

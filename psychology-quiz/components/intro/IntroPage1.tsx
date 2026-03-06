@@ -20,11 +20,11 @@ export function IntroPage1({ isActive = false }: IntroPage1Props) {
     <div className="flex flex-col items-center justify-center min-h-full px-6 py-8 overflow-y-auto">
       {/* Upper card – stacked, centered */}
       <motion.div
-        className="w-full max-w-[300px] rounded-2xl bg-[#faf8f5] shadow-lg p-6 py-6 sm:p-10 mb-6"
+        className="w-full max-w-[280px] rounded-2xl bg-[#faf8f5] shadow-lg p-6 py-6 sm:p-10 mb-6"
         initial="hiddenLeft"
         animate={isActive ? 'visible' : 'hiddenLeft'}
         variants={cardVariants}
-        custom={-3}
+        custom={2}
       >
         <h2
           className="text-2xl font-bold text-[#0088ff] text-center pb-1"
@@ -41,35 +41,52 @@ export function IntroPage1({ isActive = false }: IntroPage1Props) {
 
       {/* Lower card – continues below upper, centered */}
       <motion.div
-        className="w-full max-w-[320px] -mt-6 rounded-2xl bg-[#FFF9D9] p-6 sm:p-7 md:p-10 shadow-lg max-h-[55vh] overflow-y-auto"
+        className="w-full max-w-[260px] -mt6 rounded-2xl bg-[#FFF9D9] p-6 sm:p-7 md:p-10 shadow-lg max-h-[55vh] overflow-y-auto"
         initial="hiddenRight"
         animate={isActive ? 'visible' : 'hiddenRight'}
         variants={cardVariants}
-        custom={8}
+        custom={-2}
         transition={{ duration: 0.5, ease: 'easeOut' as const, delay: isActive ? 0.2 : 0 }}
       >
-        <p className="text-sm text-black mb-2 text-center">
-          This quiz is based on the{' '}
-          <br /><span className="font-bold text-[#0088ff]"
-          style={{ fontFamily: 'var(--font-bitter), sans-serif', fontWeight: '800' }}>Holland model (RIASEC)</span><br />
+       <p className="font-bold text-[#0088ff] text-2xl text-center mb-2"
+       style={{ fontFamily: 'var(--font-permanent-marker), cursive' }}> 
+       Holland model (RIASEC) </p>
+
+       <p className="text-sm text-black text-center">
+       is used in this quiz, showing how people explore the world in six personalities.   
         </p>
-        <div className="mb-2 sm:my-4 flex justify-center">
-          <img
-            src="/intro/Hex.png"
-            alt="RIASEC"
-            className="w-18 h-18 sm:w-24 sm:h-24 md:w-[120px] md:h-[120px] object-contain"
-          />
+          <div className="mt-2 sm:my-4 flex justify-center">
+          <motion.div
+            animate={
+              isActive
+                ? {
+                    rotate: [0, 60, 60, 120, 120, 180, 180, 240, 240, 300, 300, 360],
+                  }
+                : { rotate: 0 }
+            }
+            transition={{
+              rotate: {
+                repeat: Infinity,
+                duration: 12,
+                times: [0, 0.02, 0.186, 0.206, 0.372, 0.392, 0.558, 0.578, 0.744, 0.764, 0.93, 0.95, 1],
+                ease: 'linear',
+              },
+            }}
+            className="inline-block"
+          >
+            <img
+              src="/intro/Hex.png"
+              alt="RIASEC"
+              className="w-16 h-16 sm:w-24 sm:h-24 md:w-[120px] md:h-[120px] object-contain"
+            />
+          </motion.div>
         </div>
-        <p className="text-sm text-black text-center">
-          
-        People are grouped into <span className="font-bold"> six personality types </span> based on what they enjoy and how they explore the world.
-          
-          
-        </p>
-        <p className="text-sm text-[#0088ff] font-medium mt-2 text-center"
+        
+       
+        {/* <p className="text-sm text-[#0088ff] font-medium mt-2 text-center"
         style={{ fontFamily: 'var(--font-bitter), sans-serif', fontWeight: '800' }}>
-          Your result helps match you with travel experiences that fit you best.
-        </p>
+          Your result will help you find the best travel experiences!
+        </p> */}
       </motion.div>
     </div>
   );

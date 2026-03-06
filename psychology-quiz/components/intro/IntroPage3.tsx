@@ -34,9 +34,7 @@ export function IntroPage3({ isActive = false }: IntroPage3Props) {
         >
           WHAT YOU WILL GET?
         </h2>
-        <p className="text-sm text-black mt-1">
-          Your personal travel style <br/> with a handy information!
-        </p>
+        
       </motion.div>
 
       {/* Orange panel + sample card */}
@@ -72,11 +70,7 @@ export function IntroPage3({ isActive = false }: IntroPage3Props) {
           </div>
         </div>
         <p className="text-center font-bold text-black mt-3">Recommended locations or trips!</p>
-        <div className="flex justify-center gap-1.5 mt-2">
-          <div className="w-2 h-2 rounded-full bg-gray-700" />
-          <div className="w-2 h-2 rounded-full bg-gray-300" />
-          <div className="w-2 h-2 rounded-full bg-gray-300" />
-        </div>
+        
       </motion.div>
 
       {/* CTA */}

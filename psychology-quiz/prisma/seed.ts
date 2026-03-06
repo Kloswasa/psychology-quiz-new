@@ -490,7 +490,7 @@ const questions: Array<{
   },
   {
     text: 'What souvenir would you bring back from this trip?',
-    backgroundImage: '/images/backgrounds/question6-bg.webp',
+    backgroundImage: '/images/backgrounds/question10-bg.webp',
     answers: [
       { text: 'A group photo', riasecType: 'SOCIAL', imageUrl: '/images/answers/q10-1.webp' },
       { text: 'A creative keepsake', riasecType: 'ARTISTIC', imageUrl: '/images/answers/q10-2.webp' },
