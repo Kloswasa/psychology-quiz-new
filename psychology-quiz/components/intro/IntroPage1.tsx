@@ -41,7 +41,7 @@ export function IntroPage1({ isActive = false }: IntroPage1Props) {
 
       {/* Lower card – continues below upper, centered */}
       <motion.div
-        className="w-full max-w-[260px] -mt6 rounded-2xl bg-[#FFF9D9] p-6 sm:p-7 md:p-10 shadow-lg max-h-[55vh] overflow-y-auto"
+        className="w-full max-w-[260px] -mt6 rounded-2xl bg-[#FFF9D9] p-4 sm:p-7 md:p-10 shadow-lg max-h-[55vh] overflow-y-auto"
         initial="hiddenRight"
         animate={isActive ? 'visible' : 'hiddenRight'}
         variants={cardVariants}
@@ -55,7 +55,7 @@ export function IntroPage1({ isActive = false }: IntroPage1Props) {
        <p className="text-sm text-black text-center">
        is used in this quiz, showing how people explore the world in six personalities.   
         </p>
-          <div className="mt-2 sm:my-4 flex justify-center">
+          <div className="mt-2  flex justify-center">
           <motion.div
             animate={
               isActive
@@ -77,7 +77,7 @@ export function IntroPage1({ isActive = false }: IntroPage1Props) {
             <img
               src="/intro/Hex.png"
               alt="RIASEC"
-              className="w-16 h-16 sm:w-24 sm:h-24 md:w-[120px] md:h-[120px] object-contain"
+              className="w-16 h-16   object-contain"
             />
           </motion.div>
         </div>

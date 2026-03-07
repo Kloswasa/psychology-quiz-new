@@ -147,9 +147,11 @@ export default function QuizPage() {
   const showQuiz = currentQuestion && imagesReady;
   if (!showQuiz) {
     return (
-      <div className="min-h-screen w-full flex items-center justify-center px-6">
-        <div className="animate-pulse text-gray-500">
-          {!currentQuestion ? 'Loading questions…' : 'Preparing quiz…'}
+      <div className="min-h-screen w-full bg-neutral-200 flex items-center justify-center px-6">
+        <div className="mx-auto max-w-[430px] w-full flex items-center justify-center min-h-screen">
+          <div className="animate-pulse text-gray-500">
+            {!currentQuestion ? 'Loading questions…' : 'Preparing quiz…'}
+          </div>
         </div>
       </div>
     );
@@ -158,29 +160,22 @@ export default function QuizPage() {
   // After user chose final answer: show loading page before navigating to result
   if (resultLoading) {
     return (
-      <div className="min-h-screen w-full flex flex-col items-center justify-center gap-6 px-6 bg-gradient-to-br from-slate-900 to-slate-800">
-        <div className="w-10 h-10 border-2 border-white/30 border-t-white rounded-full animate-spin" aria-hidden />
-        <p className="text-white/90 text-lg font-medium">Calculating your result…</p>
+      <div className="min-h-screen w-full bg-neutral-200 flex items-center justify-center">
+        <div className="mx-auto max-w-[430px] w-full min-h-screen flex flex-col items-center justify-center gap-6 px-6 bg-gradient-to-br from-slate-900 to-slate-800">
+          <div className="w-10 h-10 border-2 border-white/30 border-t-white rounded-full animate-spin" aria-hidden />
+          <p className="text-white/90 text-lg font-medium">Calculating your result…</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="h-screen w-full overflow-hidden relative flex flex-col">
-      {/* Header */}
-      <header className="flex-shrink-0 z-20 p-4 flex items-center justify-between gap-4 bg-gradient-to-b from-black/50 to-transparent pointer-events-none">
-        <div className="pointer-events-auto flex-1">
-          <ProgressBar current={current + 1} total={total} />
-        </div>
-        <div className="pointer-events-auto">
-          <BackButton onClick={goBack} disabled={current === 0} color={currentTextColor} />
-        </div>
-      </header>
-
-      {/* Main - full width so quiz fills screen, no side margins */}
-      <main className="flex-1 min-h-0 overflow-hidden flex flex-col">
-        <div className="flex-1 min-h-0 flex flex-col">
-        <QuestionCard
+    <div className="min-h-screen w-full bg-neutral-200 flex justify-center">
+      <div className="h-screen max-w-[430px] w-full overflow-hidden relative flex flex-col">
+        {/* Main - card fills full height; header overlays on top of image area */}
+        <main className="flex-1 min-h-0 overflow-hidden flex flex-col relative">
+          <div className="flex-1 min-h-0 flex flex-col">
+          <QuestionCard
           questionIndex={current}
           questionText={currentQuestion.text}
           backgroundImage={currentQuestion.backgroundImage}
@@ -193,8 +188,18 @@ export default function QuizPage() {
           selected={answers[current]}
           onSelect={selectAnswer}
         />
-        </div>
-      </main>
+          </div>
+          {/* Progress bar + Back overlaid on top of image area */}
+          <header className="absolute top-0 left-0 right-0 z-20 p-4 flex items-center justify-between gap-4 bg-gradient-to-b from-black/40 to-transparent pointer-events-none">
+            <div className="pointer-events-auto flex-1">
+              <ProgressBar current={current + 1} total={total} />
+            </div>
+            <div className="pointer-events-auto">
+              <BackButton onClick={goBack} disabled={current === 0} color={currentTextColor} />
+            </div>
+          </header>
+        </main>
+      </div>
     </div>
   );
 }

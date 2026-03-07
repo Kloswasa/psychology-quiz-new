@@ -66,9 +66,9 @@ export default function QuestionCard({
 
   return (
     <div className="relative h-full min-h-0 w-full rounded-2xl">
-      {/* Full-viewport background – fixed so image always shows full height */}
+      {/* Background fills the card container (contained in max-w column on quiz page) */}
       <div
-        className="fixed inset-0 z-0 w-full bg-no-repeat bg-cover bg-center"
+        className="absolute inset-0 z-0 w-full bg-no-repeat bg-cover bg-center rounded-2xl"
         style={bgStyle}
         aria-hidden
       />
