@@ -3,7 +3,7 @@
 import { useState, useCallback, useEffect, useMemo } from 'react';
 import ShareButton from '@/components/ShareButton';
 
-type Destination = { name: string; reason: string; url?: string };
+type Destination = { name: string; reason: string; url?: string; imageUrl?: string };
 
 /** Darken a hex color by a factor 0–1 (0 = black, 1 = unchanged). */
 function darkenHex(hex: string, amount = 0.2): string {

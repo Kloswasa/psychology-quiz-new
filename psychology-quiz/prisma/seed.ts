@@ -2,7 +2,7 @@ import { PrismaClient, RiasecType } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-type Destination = { name: string; reason: string; url?: string };
+type Destination = { name: string; reason: string; url?: string; imageUrl?: string };
 
 const travelerTypes: Array<{
   riasecType: RiasecType;
@@ -26,51 +26,61 @@ const travelerTypes: Array<{
         name: "Old Melbourne Ghost Tour",
         reason: "A spooky night walk through Melbourne’s haunted history and hidden laneways",
         url: "https://www.kkday.com/en-au/product/170344",
+        imageUrl: '/images/destinations/1.webp',
       },
       {
         name: "Great Ocean Road Skydiving Experience",
         reason: "Tandem skydive with insane coastal views over one of Australia’s most iconic roads",
         url: "https://www.kkday.com/en-au/product/136533",
+        imageUrl: '/images/destinations/2.webp',
       },
       {
         name: "Bondi Beach Surf Lesson | Sydney",
         reason: "Learn to surf at Australia’s most famous beach with beginner-friendly coaching",
         url: "https://www.kkday.com/en-au/product/124344-bondi-beach-surf-lesson-sydney",
+        imageUrl: '/images/destinations/3.webp',
       },
       {
         name: "Guided Kayak Tour of Manly Cove Beaches | Sydney",
         reason: "Paddle around Manly’s calm coves and beaches for a scenic, active day on the water",
         url: "https://www.kkday.com/en-au/product/146496",
+        imageUrl: '/images/destinations/4.webp',
       },
       {
         name: "Melbourne Tandem Skydiving Experience | Victoria",
         reason: "Hit 15,000 ft for a proper adrenaline rush close to Melbourne",
         url: "https://www.kkday.com/en-au/product/121444-skydive-melbourne-15000-ft-tandem-skydive-australia",
+        imageUrl: '/images/destinations/5.webp',
       },
       {
         name: "Melbourne City Moonlight Kayak Tour",
         reason: "Night kayaking with city lights — super unique way to see Melbourne after dark",
         url: "https://www.kkday.com/en-au/product/164426",
+        imageUrl: '/images/destinations/6.webp',
       },
       {
         name: "Fishing & Beer Tasting Day Tour | Bellarine Peninsula",
         reason: "A fun outdoors day combining fishing vibes with local beer tastings",
         url: "https://www.kkday.com/en-au/product/132700",
+        imageUrl: '/images/destinations/7.webp',
       },
       {
         name: "Ocean Adventures Thundercat Boat Tour at Phillip Island | Melbourne",
         reason: "Fast boat thrills + wild ocean scenery around Phillip Island",
         url: "https://www.kkday.com/en-au/product/155229-thundercat-the-ride-melbourne-australia",
+        imageUrl: '/images/destinations/8.webp',
       },
       {
         name: "Hunter Valley Hot Air Balloon Experience | Australia",
         reason: "Sunrise balloon flight over vineyards — dreamy views and great for photos",
         url: "https://www.kkday.com/en-au/product/24838-hunter-valley-hot-air-balloon-experience-australia",
+        imageUrl: '/images/destinations/9.webp',
       },
       {
         name: "Skydiving Wollongong (With Transfer) from Sydney | NSW",
         reason: "Skydive near Wollongong for epic coastline + easy transfer from Sydney",
         url: "https://www.kkday.com/en-au/product/151061-skydiving-experience-wollongong-sydney-new-south-wales",
+        imageUrl: '/images/destinations/10.webp',
       },
     ],
     tips: [
@@ -215,36 +225,43 @@ const travelerTypes: Array<{
         name: "MONOPOLY DREAMS Melbourne Ticket | Australia",
         reason: "A playful, interactive attraction for quick fun photos and light entertainment in the city",
         url: "https://www.kkday.com/en-au/product/154807-monopoly-dreams-melbourne-ticket-australia",
+        imageUrl: '/images/destinations/11.webp',
       },
       {
         name: "Luna Park Melbourne Unlimited Ride Tickets | Victoria",
         reason: "Classic Melbourne amusement park vibes — unlimited rides for a full-on fun day",
         url: "https://www.kkday.com/en-au/product/170333",
+        imageUrl: '/images/destinations/s-2.webp',
       },
       {
         name: "Phillip Island Penguin Parade & Moonlit Sanctuary Wildlife Park Day Tour | Melbourne",
         reason: "One-day wildlife bucket list: penguin parade + sanctuary visit, super iconic for visitors",
         url: "https://www.kkday.com/en-au/product/138064-philip-island-penguin-parade-moonlit-sanctuary-wildlife-park-day-tour-melbourne",
+        imageUrl: '/images/destinations/13.webp',
       },
       {
         name: "Stefano Marvello Italian Cooking Class with Dining | Australia",
         reason: "Hands-on cooking class + sit-down meal — a cozy, social experience in Sydney",
         url: "https://www.kkday.com/en-au/product/133025-stefano-marvello-italian-cooking-class-with-dining-australia",
+        imageUrl: '/images/destinations/s-4.jpeg',
       },
       {
         name: 'Sydney Walking Tour with a Local Guide',
         reason: "Explore Sydney like a local with hidden spots, stories, and a flexible walking pace",
         url: "https://www.kkday.com/en-au/product/279510",
+        imageUrl: '/images/destinations/15.webp',
       },
       {
         name: "CERES Community Environment Park (Brunswick East)",
         reason: "A wholesome Melbourne spot for sustainability, gardens, workshops, and community culture",
         url: "https://school.ceres.org.au/adultlearning/",
+        imageUrl: '/images/destinations/s-6.jpeg',
       },
       {
         name: "Irukandji Shark & Ray Encounters Admission Ticket | New South Wales",
         reason: "Get up close with sharks and rays in a guided encounter — memorable and a bit thrilling",
         url: "https://www.kkday.com/en-au/product/132244-irukandji-shark-and-ray-encounters-ticket-new-south-wales-australia",
+        imageUrl: '/images/destinations/17.webp',
       },
     ],
     tips: [
