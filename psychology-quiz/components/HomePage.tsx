@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 const SWIPE_THRESHOLD = 60;
 
@@ -15,6 +15,13 @@ const PAGE_CENTER = { left: 50, top: 50 } as const;
 /** Heading width as % of content area – scales with screen (e.g. 70 = 70% of content width). */
 const CENTER_HEADING_WIDTH_PERCENT = 72;
 
+type AnimationPhase =
+  | 'offscreen'
+  | 'imagesToCenter'
+  | 'headingFadeIn'
+  | 'imagesSpread'
+  | 'readySwipe';
+
 /**
  * Responsive asset: position and size in % of container so layout scales
  * without collisions on different screen sizes. Figma node 946:4243.
@@ -26,6 +33,8 @@ function StaticAsset({
   widthPercent,
   rotate,
   zIndex = 1,
+  phase,
+  isHeading = false,
 }: {
   children: React.ReactNode;
   leftPercent: number;
@@ -33,16 +42,48 @@ function StaticAsset({
   widthPercent: number;
   rotate: string;
   zIndex?: number;
+  phase: AnimationPhase;
+  isHeading?: boolean;
 }) {
+  const isRightSide = leftPercent >= PAGE_CENTER.left;
+
+  let currentLeft = leftPercent;
+  let currentTop = topPercent;
+  let opacity = 1;
+
+  if (!isHeading) {
+    if (phase === 'offscreen') {
+      currentLeft = isRightSide ? 110 : -10;
+      currentTop = topPercent;
+      opacity = 0;
+    } else if (phase === 'imagesToCenter' || phase === 'headingFadeIn') {
+      currentLeft = PAGE_CENTER.left;
+      currentTop = PAGE_CENTER.top;
+      opacity = 1;
+    } else if (phase === 'imagesSpread' || phase === 'readySwipe') {
+      currentLeft = leftPercent;
+      currentTop = topPercent;
+    }
+  } else {
+    if (phase === 'offscreen' || phase === 'imagesToCenter') {
+      opacity = 0;
+    } else {
+      opacity = 1;
+    }
+  }
+
   return (
     <div
       className="absolute min-w-0"
       style={{
-        left: `${leftPercent}%`,
-        top: `${topPercent}%`,
+        left: `${currentLeft}%`,
+        top: `${currentTop}%`,
         width: `${widthPercent}%`,
         zIndex,
         transform: 'translate(-50%, -50%) rotate(' + rotate + ')',
+        opacity,
+        transition:
+          'left 800ms cubic-bezier(0.22, 0.61, 0.36, 1), top 800ms cubic-bezier(0.22, 0.61, 0.36, 1), opacity 600ms ease-out',
       }}
     >
       {children}
@@ -64,6 +105,21 @@ export function HomePage() {
   const router = useRouter();
   const touchStartY = useRef(0);
   const [swipeHint, setSwipeHint] = useState(false);
+  const [phase, setPhase] = useState<AnimationPhase>('offscreen');
+
+  useEffect(() => {
+    const toCenter = setTimeout(() => setPhase('imagesToCenter'), 50);
+    const headingIn = setTimeout(() => setPhase('headingFadeIn'), 850);
+    const spreadOut = setTimeout(() => setPhase('imagesSpread'), 1700);
+    const showSwipe = setTimeout(() => setPhase('readySwipe'), 2400);
+
+    return () => {
+      clearTimeout(toCenter);
+      clearTimeout(headingIn);
+      clearTimeout(spreadOut);
+      clearTimeout(showSwipe);
+    };
+  }, []);
 
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     touchStartY.current = e.touches[0].clientY;
@@ -109,7 +165,14 @@ export function HomePage() {
       {/* Content area: all positions/sizes are % of this area. Heading is at PAGE_CENTER (50%, 50%); assign others e.g. leftPercent={PAGE_CENTER.left - 38} for "38% left of center". */}
       <div className="relative z-10 flex flex-1 min-h-0 w-full">
         {/* G'Day / sticker – top-left */}
-        <StaticAsset leftPercent={16} topPercent={13} widthPercent={23} rotate="-8deg" zIndex={3}>
+        <StaticAsset
+          leftPercent={16}
+          topPercent={13}
+          widthPercent={23}
+          rotate="-8deg"
+          zIndex={3}
+          phase={phase}
+        >
           <div className="block w-full touch-manipulation rounded drop-shadow-md">
             <Image
               src="/home/sticker.png"
@@ -123,7 +186,14 @@ export function HomePage() {
         </StaticAsset>
 
         {/* Beach polaroid – top mid-left */}
-        <StaticAsset leftPercent={45} topPercent={24} widthPercent={63} rotate="-10deg" zIndex={2}>
+        <StaticAsset
+          leftPercent={45}
+          topPercent={24}
+          widthPercent={63}
+          rotate="-10deg"
+          zIndex={2}
+          phase={phase}
+        >
           <div className="block w-full touch-manipulation rounded drop-shadow-md">
             <Image
               src="/home/polaroid-beach.png"
@@ -138,7 +208,14 @@ export function HomePage() {
         </StaticAsset>
 
         {/* Circular emblem – top-right */}
-        <StaticAsset leftPercent={76} topPercent={10} widthPercent={19} rotate="-12deg" zIndex={3}>
+        <StaticAsset
+          leftPercent={76}
+          topPercent={10}
+          widthPercent={19}
+          rotate="-12deg"
+          zIndex={3}
+          phase={phase}
+        >
           <div className="block w-full touch-manipulation rounded drop-shadow-md">
             <Image
               src="/home/emblem-circle.png"
@@ -152,7 +229,14 @@ export function HomePage() {
         </StaticAsset>
 
         {/* Koala stamp – upper right */}
-        <StaticAsset leftPercent={85} topPercent={32} widthPercent={20} rotate="15deg" zIndex={4}>
+        <StaticAsset
+          leftPercent={85}
+          topPercent={32}
+          widthPercent={20}
+          rotate="15deg"
+          zIndex={4}
+          phase={phase}
+        >
           <div className="block w-full touch-manipulation rounded drop-shadow-md">
             <Image
               src="/home/koala-stamp.png"
@@ -171,7 +255,9 @@ export function HomePage() {
           topPercent={53}
           widthPercent={85}
           rotate="0deg"
-          zIndex={5}
+          zIndex={10}
+          phase={phase}
+          isHeading
         >
           <div className="block w-full text-center">
             <img
@@ -184,7 +270,14 @@ export function HomePage() {
         </StaticAsset>
 
         {/* Forest polaroid – lower left */}
-        <StaticAsset leftPercent={45} topPercent={85} widthPercent={47} rotate="15deg" zIndex={6}>
+        <StaticAsset
+          leftPercent={45}
+          topPercent={85}
+          widthPercent={47}
+          rotate="15deg"
+          zIndex={6}
+          phase={phase}
+        >
           <div className="block w-full touch-manipulation rounded drop-shadow-md">
             <Image
               src="/home/polaroid-bushland.png"
@@ -199,7 +292,14 @@ export function HomePage() {
         </StaticAsset>
 
         {/* Wildlife ahead badge – lower left, over forest */}
-        <StaticAsset leftPercent={18} topPercent={75} widthPercent={22} rotate="6deg" zIndex={7}>
+        <StaticAsset
+          leftPercent={18}
+          topPercent={75}
+          widthPercent={22}
+          rotate="6deg"
+          zIndex={7}
+          phase={phase}
+        >
           <div className="block w-full touch-manipulation rounded drop-shadow-md">
             <Image
               src="/home/wildlife-sign.png"
@@ -213,7 +313,14 @@ export function HomePage() {
         </StaticAsset>
 
         {/* Kangaroo – lower middle */}
-        <StaticAsset leftPercent={72} topPercent={73} widthPercent={30} rotate="60deg" zIndex={8}>
+        <StaticAsset
+          leftPercent={72}
+          topPercent={73}
+          widthPercent={30}
+          rotate="60deg"
+          zIndex={8}
+          phase={phase}
+        >
           <div className="block w-full touch-manipulation rounded drop-shadow-md">
             <Image
               src="/home/kangaroo.png"
@@ -227,7 +334,14 @@ export function HomePage() {
         </StaticAsset>
 
         {/* Boomerang – lower right */}
-        <StaticAsset leftPercent={70} topPercent={88} widthPercent={70} rotate="-70deg" zIndex={6}>
+        <StaticAsset
+          leftPercent={70}
+          topPercent={88}
+          widthPercent={70}
+          rotate="-70deg"
+          zIndex={6}
+          phase={phase}
+        >
           <div className="block w-full touch-manipulation rounded drop-shadow-md">
             <Image
               src="/home/boomerang.png"
@@ -249,26 +363,37 @@ export function HomePage() {
           paddingTop: SWIPE_ZONE.paddingTop, 
           fontFamily: 'var(--font-bitter), sans-serif', }}
       >
-        <div className="animate-bounce-up w-full max-w-sm flex flex-col items-center">
+        <div
+          className={`animate-bounce-up w-full max-w-sm flex flex-col items-center transition-all duration-700 ${
+            phase === 'readySwipe' ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6 pointer-events-none'
+          }`}
+        >
           <button
             type="button"
             onClick={handleSwipeZoneClick}
             onMouseEnter={() => setSwipeHint(true)}
             onMouseLeave={() => setSwipeHint(false)}
             className="
-              w-full flex flex-col items-center justify-center gap-1 rounded-2xl px-6 py-3
-              bg-white/95 shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)]
+              relative overflow-hidden w-full flex flex-col items-center justify-center gap-1 rounded-2xl px-6 py-3
+              backdrop-blur-sm bg-white/75 border border-white/30
               transition-all duration-300 touch-manipulation
-              hover:shadow-xl hover:bg-white/85
-              active:scale-75
+              hover:bg-white/20 hover:border-white/50 shadow-lg hover:shadow-xl
+              active:scale-95
               focus:outline-none
             "
+            style={{
+              backdropFilter: 'blur(8px) saturate(150%)',
+              WebkitBackdropFilter: 'blur(8px) saturate(150%)',
+            }}
             aria-label="Swipe up or press to continue"
           >
-            <span className="flex items-center gap-2">
+            {/* Glassmorphic overlay – same as choice answers */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-50" />
+            <span className="relative z-10 flex items-center gap-2">
+              <Image src="/icons/swipe-up.svg" alt="" width={20} height={20} className="size-5 shrink-0 opacity-90" aria-hidden />
               <span className={SWIPE_ZONE.labelClass}>Swipe up</span>
+              <Image src="/icons/swipe-up.svg" alt="" width={20} height={20} className="size-5 shrink-0 opacity-90" aria-hidden />
             </span>
-            <span/>
           </button>
         </div>
       </div>

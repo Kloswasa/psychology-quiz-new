@@ -71,7 +71,7 @@ export default async function ResultPage({ searchParams }: Props) {
       />
       <div className="flex justify-center px-4 pb-8" style={{ backgroundColor: themeColor }}>
         <a
-          href="/quiz"
+          href="/"
           className="text-white underline decoration-white/80 underline-offset-2 hover:decoration-white"
         >
           Retake Quiz
