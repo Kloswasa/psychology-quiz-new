@@ -52,8 +52,17 @@ function RecommendationCarousel({ destinations, themeColor }: { destinations: De
         <div className="flex min-h-[120px]">
           {/* Left: image – placeholder per Figma card (destination image when available) */}
           <div className="w-[42%] shrink-0 overflow-hidden rounded-l-xl bg-[#E8E4DC]">
-            <div className="h-full min-h-[120px] w-full" aria-hidden />
-          </div>
+  {d.imageUrl ? (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={d.imageUrl}
+      alt={d.name}
+      className="h-full min-h-[120px] w-full object-cover"
+    />
+  ) : (
+    <div className="h-full min-h-[120px] w-full" aria-hidden />
+  )}
+</div>
           {/* Right: title, description, Detail button */}
           <div className="flex flex-1 flex-col justify-between p-3">
             <div>
