@@ -20,7 +20,8 @@ type AnimationPhase =
   | 'imagesToCenter'
   | 'headingFadeIn'
   | 'imagesSpread'
-  | 'readySwipe';
+  | 'readySwipe'
+  | 'swipeComplete';
 
 /**
  * Responsive asset: position and size in % of container so layout scales
@@ -63,12 +64,18 @@ function StaticAsset({
     } else if (phase === 'imagesSpread' || phase === 'readySwipe') {
       currentLeft = leftPercent;
       currentTop = topPercent;
+    } else if (phase === 'swipeComplete') {
+      currentLeft = leftPercent;
+      currentTop = topPercent - 10;
+      opacity = 0;
     }
   } else {
     if (phase === 'offscreen' || phase === 'imagesToCenter') {
       opacity = 0;
-    } else {
+    } else if (phase === 'headingFadeIn' || phase === 'imagesSpread' || phase === 'readySwipe') {
       opacity = 1;
+    } else if (phase === 'swipeComplete') {
+      opacity = 0;
     }
   }
 
@@ -106,6 +113,7 @@ export function HomePage() {
   const touchStartY = useRef(0);
   const [swipeHint, setSwipeHint] = useState(false);
   const [phase, setPhase] = useState<AnimationPhase>('offscreen');
+  const [swipeCompleted, setSwipeCompleted] = useState(false);
 
   useEffect(() => {
     const toCenter = setTimeout(() => setPhase('imagesToCenter'), 50);
@@ -133,24 +141,36 @@ export function HomePage() {
         typeof window !== 'undefined' ? window.innerHeight - SWIPE_ZONE.minHeight : 500;
       const startInZone = touchStartY.current > bottomZoneStart;
       if (delta > SWIPE_THRESHOLD && startInZone) {
-        router.push('/intro');
+        setSwipeCompleted(true);
+        setPhase('swipeComplete');
+        setTimeout(() => {
+          router.push('/intro');
+        }, 800);
       }
     },
     [router]
   );
 
   const handleSwipeZoneClick = useCallback(() => {
-    router.push('/intro');
+    setSwipeCompleted(true);
+    setPhase('swipeComplete');
+    setTimeout(() => {
+      router.push('/intro');
+    }, 800);
   }, [router]);
 
   return (
     <div
-      className="relative mx-auto flex min-h-screen max-w-[430px] w-full flex-col overflow-hidden"
+      className="relative mx-auto flex min-h-screen max-w-[430px] w-full flex-col overflow-hidden bg-white"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
       {/* Full-height background – spans content + footer so image connects seamlessly */}
-      <div className="absolute inset-0 z-0">
+      <div
+        className={`absolute inset-0 z-0 transition-opacity duration-700 ${
+          swipeCompleted ? 'opacity-0' : 'opacity-100'
+        }`}
+      >
         <Image
           src="/home/home-background.png"
           alt=""
@@ -163,7 +183,11 @@ export function HomePage() {
       </div>
 
       {/* Content area: all positions/sizes are % of this area. Heading is at PAGE_CENTER (50%, 50%); assign others e.g. leftPercent={PAGE_CENTER.left - 38} for "38% left of center". */}
-      <div className="relative z-10 flex flex-1 min-h-0 w-full">
+      <div
+        className={`relative z-10 flex flex-1 min-h-0 w-full transition-opacity duration-700 ${
+          swipeCompleted ? 'opacity-0' : 'opacity-100'
+        }`}
+      >
         {/* G'Day / sticker – top-left */}
         <StaticAsset
           leftPercent={16}
@@ -358,14 +382,26 @@ export function HomePage() {
 
       {/* Swipe up CTA – separate footer div, always at the bottom; swipe up (from bottom zone) or tap to continue */}
       <div
-        className={`relative z-10 flex shrink-0 flex-col items-center justify-center gap-1 px-4 sm:px-6 pb-safe ${SWIPE_ZONE.textColor} drop-shadow-md`}
-        style={{ minHeight: SWIPE_ZONE.minHeight, 
-          paddingTop: SWIPE_ZONE.paddingTop, 
-          fontFamily: 'var(--font-bitter), sans-serif', }}
+        className={`relative z-10 flex shrink-0 flex-col items-center justify-center gap-1 px-4 sm:px-6 pb-safe ${SWIPE_ZONE.textColor} drop-shadow-md transition-opacity duration-700 ${
+          swipeCompleted ? 'opacity-0' : 'opacity-100'
+        }`}
+        style={{
+          minHeight: SWIPE_ZONE.minHeight,
+          paddingTop: SWIPE_ZONE.paddingTop,
+          fontFamily: 'var(--font-bitter), sans-serif',
+        }}
       >
         <div
-          className={`animate-bounce-up w-full max-w-sm flex flex-col items-center transition-all duration-700 ${
-            phase === 'readySwipe' ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6 pointer-events-none'
+          className={`w-full max-w-sm flex flex-col items-center transition-transform transition-opacity duration-700 ${
+            phase === 'readySwipe' && !swipeCompleted
+              ? 'opacity-100 translate-y-0 animate-bounce-up'
+              : ''
+          } ${
+            phase !== 'readySwipe' && !swipeCompleted
+              ? 'opacity-0 translate-y-6 pointer-events-none'
+              : ''
+          } ${
+            swipeCompleted ? '-translate-y-[120vh] opacity-0 pointer-events-none' : ''
           }`}
         >
           <button
