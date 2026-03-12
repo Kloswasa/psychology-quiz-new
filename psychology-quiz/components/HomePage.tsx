@@ -375,7 +375,7 @@ export function HomePage() {
             onMouseLeave={() => setSwipeHint(false)}
             className="
               relative overflow-hidden w-full flex flex-col items-center justify-center gap-1 rounded-2xl px-6 py-3
-              backdrop-blur-sm bg-white/75 border border-white/30
+              backdrop-blur-sm bg-white/85 border border-white/30
               transition-all duration-300 touch-manipulation
               hover:bg-white/20 hover:border-white/50 shadow-lg hover:shadow-xl
               active:scale-95
@@ -388,8 +388,8 @@ export function HomePage() {
             aria-label="Swipe up or press to continue"
           >
             {/* Glassmorphic overlay – same as choice answers */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-50" />
-            <span className="relative z-10 flex items-center gap-2">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-100" />
+            <span className="relative z-10 flex items-center gap-6">
               <Image src="/icons/swipe-up.svg" alt="" width={20} height={20} className="size-5 shrink-0 opacity-90" aria-hidden />
               <span className={SWIPE_ZONE.labelClass}>Swipe up</span>
               <Image src="/icons/swipe-up.svg" alt="" width={20} height={20} className="size-5 shrink-0 opacity-90" aria-hidden />
