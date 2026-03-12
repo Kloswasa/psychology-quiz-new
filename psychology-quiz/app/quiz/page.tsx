@@ -175,19 +175,20 @@ export default function QuizPage() {
         {/* Main - card fills full height; header overlays on top of image area */}
         <main className="flex-1 min-h-0 overflow-hidden flex flex-col relative">
           <div className="flex-1 min-h-0 flex flex-col">
-          <QuestionCard
-          questionIndex={current}
-          questionText={currentQuestion.text}
-          backgroundImage={currentQuestion.backgroundImage}
-          answers={currentQuestion.answers.map((a) => ({
-            id: a.id,
-            text: a.text,
-            riasecType: a.riasecType,
-            imageUrl: a.imageUrl,
-          }))}
-          selected={answers[current]}
-          onSelect={selectAnswer}
-        />
+            <QuestionCard
+              key={currentQuestion.id}
+              questionIndex={current}
+              questionText={currentQuestion.text}
+              backgroundImage={currentQuestion.backgroundImage}
+              answers={currentQuestion.answers.map((a) => ({
+                id: a.id,
+                text: a.text,
+                riasecType: a.riasecType,
+                imageUrl: a.imageUrl,
+              }))}
+              selected={answers[current]}
+              onSelect={selectAnswer}
+            />
           </div>
           {/* Progress bar + Back overlaid on top of image area */}
           <header className="absolute top-0 left-0 right-0 z-20 p-4 flex items-center justify-between gap-4 bg-gradient-to-b from-black/40 to-transparent pointer-events-none">

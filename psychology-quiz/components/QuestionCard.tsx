@@ -1,6 +1,7 @@
 'use client';
 import { RiasecType } from '@/lib/types';
 import ImageAnswer from './ImageAnswer';
+import { motion } from 'framer-motion';
 
 type AnswerOption = {
   id: string;
@@ -67,24 +68,37 @@ export default function QuestionCard({
   return (
     <div className="relative h-full min-h-0 w-full rounded-2xl">
       {/* Background fills the card container (contained in max-w column on quiz page) */}
-      <div
+      <motion.div
         className="absolute inset-0 z-0 w-full bg-no-repeat bg-cover bg-center rounded-2xl"
         style={bgStyle}
         aria-hidden
+        initial={{ opacity: 0, scale: 1.03 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
       />
       {/* Content pinned to bottom */}
       <div className="absolute bottom-0 left-0 right-0 z-10 space-y-4 w-full max-h-[85vh] overflow-y-auto p-4 pb-safe">
         {/* Question text */}
-        <h2 
-          style={{ color: getTextColor(questionIndex),
+        <motion.h2 
+          style={{ 
+            color: getTextColor(questionIndex),
             fontFamily: 'var(--font-bitter), sans-serif',
-            fontWeight: '800' }}
+            fontWeight: '800',
+          }}
           className="text-lg font-bold leading-tight drop-shadow-lg text-center w-full"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: 'easeOut', delay: 0.35 }}
         >
           {questionText}
-        </h2>
+        </motion.h2>
         
         {/* Answers - dynamic layout based on count and type */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.7 }}
+        >
         {isImageGrid ? (
           // Image-based answers (2x2 grid layout – used for 4 image answers)
           <div className="grid grid-cols-2 gap-3 justify-items-center">
@@ -190,6 +204,7 @@ export default function QuestionCard({
             })}
           </div>
         )}
+        </motion.div>
       </div>
     </div>
   );
