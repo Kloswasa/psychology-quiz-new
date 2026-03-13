@@ -487,10 +487,10 @@ const questions: Array<{
     text: 'A rainbow appears after the rain during your trip. What\'s your first reaction?',
     backgroundImage: '/images/backgrounds/question6-bg.webp',
     answers: [
-      { text: 'Think about light and water ', riasecType: 'INVESTIGATIVE', imageUrl: '/images/answers/q6-1.webp' },
-      { text: 'Call others to take a group photo', riasecType: 'SOCIAL', imageUrl: '/images/answers/q6-2.webp' },
-      { text: 'Capture it in artn', riasecType: 'ARTISTIC', imageUrl: '/images/answers/q6-3.webp' },
-      { text: 'Treat it as lucky', riasecType: 'ENTERPRISING', imageUrl: '/images/answers/q6-4.webp' },
+      { text: 'Think about light and water ', riasecType: 'INVESTIGATIVE', imageUrl: '/images/answers/q6-1.gif' },
+      { text: 'Call others to take a group photo', riasecType: 'SOCIAL', imageUrl: '/images/answers/q6-2.gif' },
+      { text: 'Capture it in artn', riasecType: 'ARTISTIC', imageUrl: '/images/answers/q6-3.gif' },
+      { text: 'Treat it as lucky', riasecType: 'ENTERPRISING', imageUrl: '/images/answers/q6-4.gif' },
     ],
   },
   {
@@ -548,10 +548,10 @@ const questions: Array<{
     text: 'What souvenir would you bring back from this trip?',
     backgroundImage: '/images/backgrounds/question10-bg.webp',
     answers: [
-      { text: 'A group photo', riasecType: 'SOCIAL', imageUrl: '/images/answers/q10-1.webp' },
-      { text: 'A creative keepsake', riasecType: 'ARTISTIC', imageUrl: '/images/answers/q10-2.webp' },
-      { text: 'A neat journal', riasecType: 'CONVENTIONAL', imageUrl: '/images/answers/q10-3.webp' },
-      { text: 'A rock or feather', riasecType: 'REALISTIC', imageUrl: '/images/answers/q10-4.webp' },
+      { text: 'A group photo', riasecType: 'SOCIAL', imageUrl: '/images/answers/q10-1.gif' },
+      { text: 'A creative keepsake', riasecType: 'ARTISTIC', imageUrl: '/images/answers/q10-2.gif' },
+      { text: 'A neat journal', riasecType: 'CONVENTIONAL', imageUrl: '/images/answers/q10-3.gif' },
+      { text: 'A rock or feather', riasecType: 'REALISTIC', imageUrl: '/images/answers/q10-4.gif' },
     ],
   },
 ];

@@ -54,6 +54,7 @@ export default function QuizPage() {
   const [imagesReady, setImagesReady] = useState(false);
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<(RiasecType | null)[]>(new Array(10).fill(null));
+  const [isAdvancing, setIsAdvancing] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -116,14 +117,32 @@ export default function QuizPage() {
   }, [resultLoading, router]);
 
   const selectAnswer = (type: RiasecType) => {
+    if (!questions || isAdvancing) return;
+
     const updated = [...answers];
     updated[current] = type;
     setAnswers(updated);
-    if (current === total - 1) {
-      const result = calculateResult(updated);
-      setResultLoading(result);
+
+    const hasGifAnswer =
+      questions[current]?.answers?.some((a) => a.imageUrl && a.imageUrl.endsWith('.gif')) ?? false;
+
+    const advance = () => {
+      if (current === total - 1) {
+        const result = calculateResult(updated);
+        setResultLoading(result);
+      } else {
+        setCurrent((c) => c + 1);
+      }
+    };
+
+    if (hasGifAnswer) {
+      setIsAdvancing(true);
+      setTimeout(() => {
+        advance();
+        setIsAdvancing(false);
+      }, 1800);
     } else {
-      setCurrent((c) => c + 1);
+      advance();
     }
   };
 

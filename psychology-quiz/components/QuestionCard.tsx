@@ -66,10 +66,10 @@ export default function QuestionCard({
       };
 
   return (
-    <div className="relative h-full min-h-0 w-full rounded-2xl">
+    <div className="relative h-full min-h-0 w-full ">
       {/* Background fills the card container (contained in max-w column on quiz page) */}
       <motion.div
-        className="absolute inset-0 z-0 w-full bg-no-repeat bg-cover bg-center rounded-2xl"
+        className="absolute inset-0 z-0 w-full bg-no-repeat bg-cover bg-center"
         style={bgStyle}
         aria-hidden
         initial={{ opacity: 0, scale: 1.03 }}
