@@ -87,11 +87,13 @@ const travelerTypes: Array<{
       'Slip, slop, slap — sunscreen, hat, and long sleeves are non‑negotiable in the Aussie sun.',
       'Book skydives, surf lessons, and kayak tours in advance; popular spots fill up in peak season.',
       'Check surf and weather conditions (BOM and local surf cams) before heading to beaches or trails.',
+      'Slow down a little—keep safety in mind and match the group’s pace.'
     ],
     trivia: [
       "The Great Ocean Road is one of the world's most scenic coastal drives, stretching 243 km along Victoria.",
       "Australia has over 10,000 beaches — you could visit a new one every day for 27 years.",
       "Uluru is taller than the Eiffel Tower and sacred to the Anangu people.",
+      "Kangaroo is the symbol of strength and resilience of aboriginal art in Australia",
     ],
   },
   {
@@ -162,11 +164,13 @@ const travelerTypes: Array<{
       'Pre-book Aboriginal cultural experiences and museum entry (e.g. NMA, MONA, Australian Museum).',
       'Download apps or guides for national parks and heritage sites before you hit patchy coverage.',
       'Plan rest days — Australia’s distances are huge; factor in travel time between cities and regions.',
+      'Zoom out regularly—don’t get stuck in details that slow you down.'
     ],
     trivia: [
       'The National Museum of Australia holds over 250,000 objects telling the story of the continent.',
       'Aboriginal culture is the oldest continuous culture on Earth — at least 65,000 years.',
       'MONA in Hobart is one of the world’s most provocative private museums, carved into a cliff.',
+      'Platypus is the symbol of individuality and being at peace alone in Australia aboriginal art',
     ],
   },
   {
@@ -224,6 +228,7 @@ const travelerTypes: Array<{
       'Hit Melbourne’s laneway galleries and Sydney’s Art Gallery of NSW on weekday mornings for fewer crowds.',
       'Bring a sketchbook or camera — street art in Melbourne and Sydney is world‑class and ever‑changing.',
       'Explore weekend markets: The Rocks (Sydney), Queen Vic (Melbourne), Salamanca (Hobart) for local crafts and vibes.',
+      'Set time checks—enjoy the scenery, but stay aware of the plan.'
     ],
     trivia: [
       'Melbourne’s laneways host one of the southern hemisphere’s biggest street art scenes.',
@@ -281,6 +286,7 @@ const travelerTypes: Array<{
       'Join small-group food, walking, or day tours in Sydney, Melbourne, or regional towns to meet others.',
       'Stay in social hostels or boutique B&Bs where hosts share local tips and often organise get-togethers.',
       'Learn a few Aussie phrases and say g’day — locals love a chat and will often point you to hidden spots.',
+      'Look after yourself too—your needs matter as much as everyone else’s.'
     ],
     trivia: [
       'Australians are among the world’s most outgoing travellers — and just as welcoming at home.',
@@ -337,6 +343,7 @@ const travelerTypes: Array<{
       'Book luxury lodges (Qualia, Southern Ocean Lodge, Lizard Island) and VIP experiences well in advance.',
       'Use airport lounges and premium transfers to make long domestic flights feel seamless.',
       'Shoulder season (Apr–May, Sep–Oct) often has better rates and fewer crowds at top spots.',
+      'Share control—invite input to avoid tension and keep things smooth.'
     ],
     trivia: [
       "Qualia on Hamilton Island is regularly named among the world's best luxury resorts.",
@@ -417,6 +424,7 @@ const travelerTypes: Array<{
       'Build buffer time — domestic flights and long drives (e.g. Sydney–Melbourne) eat into the day.',
       'Keep all bookings in one itinerary app; add confirmation numbers and contact details for tours and accommodation.',
       'Carry printed or digital copies of ID, bookings, and travel insurance; mobile coverage can drop in regional areas.',
+      'Leave buffer time—stick to the itinerary, but stay flexible when plans change.'
     ],
     trivia: [
       "Sydney's Opal and Melbourne's myki make public transport straightforward and predictable in the cities.",
