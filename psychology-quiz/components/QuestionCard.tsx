@@ -119,6 +119,9 @@ export default function QuestionCard({
           <div className="flex flex-col gap-3">
             {answers.map((a) => {
               const isActive = selected === a.riasecType;
+              const isGif = a.imageUrl?.toLowerCase().endsWith('.gif') ?? false;
+              const staticUrl = isGif ? a.imageUrl!.replace(/\.gif$/i, '.webp') : a.imageUrl!;
+              const displaySrc = isActive && isGif ? a.imageUrl! : staticUrl;
               return (
                 <button
                   key={a.id}
@@ -139,9 +142,14 @@ export default function QuestionCard({
                 >
                   {/* Full-bleed image fills the answer card */}
                   <img
-                    src={a.imageUrl!}
+                    src={displaySrc}
                     alt={a.text}
                     className="absolute inset-0 w-full h-full object-cover"
+                    onError={(e) => {
+                      if (!isActive && isGif && staticUrl !== a.imageUrl) {
+                        (e.currentTarget as HTMLImageElement).src = a.imageUrl!;
+                      }
+                    }}
                   />
 
                   {/* Overlay to keep consistency with other answers */}

@@ -1,6 +1,7 @@
 'use client';
 
 import { RiasecType } from '@/lib/types';
+import { useEffect, useState } from 'react';
 
 type ImageAnswerProps = {
   imageUrl: string;
@@ -19,6 +20,17 @@ export default function ImageAnswer({
   onSelect,
   textColor = '#000000',
 }: ImageAnswerProps) {
+  const isGif = imageUrl.toLowerCase().endsWith('.gif');
+  const staticUrl = isGif ? imageUrl.replace(/\.gif$/i, '.png') : imageUrl;
+
+  const [useGif, setUseGif] = useState(isSelected && isGif);
+
+  useEffect(() => {
+    setUseGif(isSelected && isGif);
+  }, [isSelected, isGif]);
+
+  const displaySrc = useGif ? imageUrl : staticUrl;
+
   return (
     <button
       onClick={() => onSelect(riasecType)}
@@ -39,9 +51,15 @@ w-full min-h-[140px] sm:min-h-[160px] md:h-[182px] h-auto        rounded-2xl
       {/* Image container */}
       <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-[104px] md:h-[104px] shrink-0">
         <img
-          src={imageUrl}
+          src={displaySrc}
           alt={text}
           className="w-full h-full object-cover rounded-lg"
+          onError={(e) => {
+            // If static placeholder is missing, fall back to GIF
+            if (!useGif && staticUrl !== imageUrl) {
+              (e.currentTarget as HTMLImageElement).src = imageUrl;
+            }
+          }}
         />
       </div>
 
