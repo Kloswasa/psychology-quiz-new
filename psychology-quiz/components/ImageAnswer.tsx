@@ -21,7 +21,7 @@ export default function ImageAnswer({
   textColor = '#000000',
 }: ImageAnswerProps) {
   const isGif = imageUrl.toLowerCase().endsWith('.gif');
-  const staticUrl = isGif ? imageUrl.replace(/\.gif$/i, '.png') : imageUrl;
+  const staticUrl = isGif ? imageUrl.replace(/\.gif$/i, '.webp') : imageUrl;
 
   const [useGif, setUseGif] = useState(isSelected && isGif);
 
