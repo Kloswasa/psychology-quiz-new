@@ -234,6 +234,7 @@ const travelerTypes: Array<{
       'Melbourne’s laneways host one of the southern hemisphere’s biggest street art scenes.',
       'The Sydney Opera House roof is made of over 1 million tiles and is a UNESCO World Heritage Site.',
       'MONA’s owner also runs Dark Mofo — Tasmania’s winter arts and music festival that draws crowds from across the country.',
+      'Brolga the Native Crane linked to dance and ceremony, graceful in aboriginal art',
     ],
   },
   {
@@ -292,6 +293,7 @@ const travelerTypes: Array<{
       'Australians are among the world’s most outgoing travellers — and just as welcoming at home.',
       'Food and wine tours in the Barossa, Hunter Valley, and Margaret River are top-rated for meeting people.',
       'Sydney’s Bondi to Coogee walk is as much a social experience as a scenic one — everyone says hi.',
+      'Southern Right Whale has seen as kin in Aboriginal culture, symbol of ancestry and care',
     ],
   },
   {
@@ -349,6 +351,7 @@ const travelerTypes: Array<{
       "Qualia on Hamilton Island is regularly named among the world's best luxury resorts.",
       "Australia has some of the most exclusive wilderness lodges, from the Kimberley to Tasmania.",
       "Wine regions like Barossa and Margaret River offer world-class cellar doors and fine dining.",
+      'Dingo resemble as Aboriginal kinship systems, as well as a symbol of adaptability',
     ],
   },
   {
@@ -430,6 +433,8 @@ const travelerTypes: Array<{
       "Sydney's Opal and Melbourne's myki make public transport straightforward and predictable in the cities.",
       "Australian long-distance trains (e.g. Indian Pacific, Ghan) run to a fixed schedule — plan around them.",
       "Driving on the left is the rule; speed limits are strictly enforced, especially in regional and outback areas.",
+      'Wombat got a respectation for its wisdom, resource use, land connection from Aboriginal culture',
+
     ],
   },
 ];
@@ -497,7 +502,7 @@ const questions: Array<{
     answers: [
       { text: 'Think about light and water ', riasecType: 'INVESTIGATIVE', imageUrl: '/images/answers/q6-1.gif' },
       { text: 'Call others to take a group photo', riasecType: 'SOCIAL', imageUrl: '/images/answers/q6-2.gif' },
-      { text: 'Capture it in artn', riasecType: 'ARTISTIC', imageUrl: '/images/answers/q6-3.gif' },
+      { text: 'Capture it in art', riasecType: 'ARTISTIC', imageUrl: '/images/answers/q6-3.gif' },
       { text: 'Treat it as lucky', riasecType: 'ENTERPRISING', imageUrl: '/images/answers/q6-4.gif' },
     ],
   },
