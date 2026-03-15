@@ -302,7 +302,7 @@ const travelerTypes: Array<{
     description:
       'You love premium experiences, unique stays, and curated itineraries with flair.',
     imageUrl: '/images/results/ENTERPRISING.png',
-    shareImageUrl: '/images/share/luxury-adventurer.png',
+    shareImageUrl: '/images/share/opportunistic-adventurer.png',
     destinations: [
       {
         name: "2-Hour Surfing Lesson at Torquay | Melbourne",

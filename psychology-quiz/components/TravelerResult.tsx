@@ -187,6 +187,7 @@ export default function TravelerResult({
   shareUrl,
   shareTitle,
   imageUrl,
+  shareImageUrl,
   riasecType,
   themeColor,
   destinations,
@@ -199,6 +200,7 @@ export default function TravelerResult({
   shareUrl: string;
   shareTitle: string;
   imageUrl?: string | null;
+  shareImageUrl?: string | null;
   riasecType?: string;
   themeColor?: string;
   destinations: Destination[];
@@ -211,13 +213,34 @@ export default function TravelerResult({
   const resultImageSrc =
     (riasecType ? `/images/results/${riasecType}.png` : null) ?? imageUrl ?? null;
 
-  const handleSave = () => {
-    // Placeholder: save result (e.g. download as image). Implement when ready.
-    if (typeof window !== 'undefined' && navigator.clipboard) {
-      navigator.clipboard.writeText(shareUrl);
-      alert('Link copied to clipboard. You can paste it to save.');
+  const [saving, setSaving] = useState(false);
+
+  const handleSave = useCallback(async () => {
+    const imageToSave = shareImageUrl ?? resultImageSrc ?? imageUrl;
+    if (!imageToSave || typeof window === 'undefined') {
+      alert('No image available to save.');
+      return;
     }
-  };
+    setSaving(true);
+    try {
+      const url = imageToSave.startsWith('http') ? imageToSave : `${window.location.origin}${imageToSave}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('Failed to load image');
+      const blob = await res.blob();
+      const filename =
+        (shareImageUrl && shareImageUrl.split('/').pop()) ||
+        (riasecType ? `travel-result-${riasecType}.png` : 'travel-result.png');
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    } catch {
+      alert('Could not save image. Try again.');
+    } finally {
+      setSaving(false);
+    }
+  }, [shareImageUrl, resultImageSrc, imageUrl, riasecType]);
 
   return (
     <div className="min-h-screen px-4 py-6 pb-safe" style={{ backgroundColor: bgColor }}>
@@ -251,19 +274,20 @@ export default function TravelerResult({
             <button
               type="button"
               onClick={handleSave}
-              className="flex-1 rounded-xl border-2 bg-white py-3 text-base font-semibold transition"
+              disabled={saving}
+              className="flex-1 rounded-xl border-2 bg-white py-3 text-base font-semibold transition disabled:opacity-60"
               style={{
                 borderColor: bgColor,
                 color: bgColor,
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = `${bgColor}20`;
+                if (!saving) e.currentTarget.style.backgroundColor = `${bgColor}20`;
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = '';
               }}
             >
-              Save
+              {saving ? 'Saving…' : 'Save'}
             </button>
             <ShareButton
               url={shareUrl}

@@ -63,6 +63,7 @@ export default async function ResultPage({ searchParams }: Props) {
         shareUrl={shareUrl}
         shareTitle={shareTitle}
         imageUrl={data.imageUrl}
+        shareImageUrl={data.shareImageUrl}
         riasecType={data.riasecType}
         themeColor={themeColor}
         destinations={destinations}
