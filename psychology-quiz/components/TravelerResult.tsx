@@ -213,6 +213,11 @@ export default function TravelerResult({
   const resultImageSrc =
     (riasecType ? `/images/results/${riasecType}.png` : null) ?? imageUrl ?? null;
 
+  const imageToShare = shareImageUrl ?? resultImageSrc ?? imageUrl ?? null;
+  const shareImageFilename =
+    (shareImageUrl && shareImageUrl.split('/').pop()) ||
+    (riasecType ? `travel-result-${riasecType}.png` : 'travel-result.png');
+
   const [saving, setSaving] = useState(false);
 
   const handleSave = useCallback(async () => {
@@ -294,6 +299,8 @@ export default function TravelerResult({
               title={shareTitle}
               themeColor={bgColor}
               themeColorHover={bgColorHover}
+              imageUrl={imageToShare}
+              imageFilename={shareImageFilename}
             />
           </div>
         </section>
