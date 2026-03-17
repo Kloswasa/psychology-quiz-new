@@ -164,6 +164,28 @@ export default function QuizPage() {
   const currentTextColor = textColors[current] ?? '#ffffff';
 
   const showQuiz = currentQuestion && imagesReady;
+
+  // Play per-question sound when a question becomes active
+  useEffect(() => {
+    if (!showQuiz) return;
+
+    const questionNumber = current + 1;
+    const audio = new Audio(`/sounds/question-${questionNumber}.mp3`);
+    audio.volume = 0.4;
+
+    const playPromise = audio.play();
+    if (playPromise && typeof playPromise.then === 'function') {
+      playPromise.catch(() => {
+        // Ignore autoplay errors; sound is non-critical
+      });
+    }
+
+    return () => {
+      audio.pause();
+      audio.currentTime = 0;
+    };
+  }, [showQuiz, current]);
+
   if (!showQuiz) {
     return (
       <div className="min-h-screen w-full bg-neutral-200 flex items-center justify-center px-6">

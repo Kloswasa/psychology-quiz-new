@@ -220,6 +220,27 @@ export default function TravelerResult({
 
   const [saving, setSaving] = useState(false);
 
+  // Play a one-off result sound per personality type, alongside the global background audio.
+  useEffect(() => {
+    if (!riasecType) return;
+
+    const src = `/sounds/result-${riasecType.toLowerCase()}.mp3`;
+    const audio = new Audio(src);
+    audio.volume = 0.9;
+
+    const playPromise = audio.play();
+    if (playPromise && typeof playPromise.then === 'function') {
+      playPromise.catch(() => {
+        // Ignore autoplay or loading errors; result sound is non-critical
+      });
+    }
+
+    return () => {
+      audio.pause();
+      audio.currentTime = 0;
+    };
+  }, [riasecType]);
+
   const handleSave = useCallback(async () => {
     const imageToSave = shareImageUrl ?? resultImageSrc ?? imageUrl;
     if (!imageToSave || typeof window === 'undefined') {
