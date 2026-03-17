@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Caveat, Permanent_Marker, Bitter, Inter } from "next/font/google";
 import "./globals.css";
-import { BackgroundAudioProvider } from "@/components/BackgroundAudioProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -60,7 +59,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${caveat.variable} ${permanentMarker.variable} ${bitter.variable} ${inter.variable} antialiased`}
       >
-        <BackgroundAudioProvider>{children}</BackgroundAudioProvider>
+        {children}
       </body>
     </html>
   );

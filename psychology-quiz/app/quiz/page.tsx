@@ -171,7 +171,7 @@ export default function QuizPage() {
 
     const questionNumber = current + 1;
     const audio = new Audio(`/sounds/question-${questionNumber}.mp3`);
-    audio.volume = 0.4;
+    audio.volume = 0.8;
 
     const playPromise = audio.play();
     if (playPromise && typeof playPromise.then === 'function') {
