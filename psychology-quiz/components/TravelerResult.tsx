@@ -375,7 +375,7 @@ export default function TravelerResult({
             <button
               type="button"
               onClick={handleScrollHintClick}
-              className="w-full rounded-2xl bg-gradient-to-t from-black/90 via-black/60 to-transparent py-6 text-center text-sm font-semibold tracking-wide text-white animate-bounce"
+              className="w-full bg-gradient-to-t from-[#FFF5E5]/90 via-black/60 to-transparent py-8 text-center text-sm font-semibold tracking-wide text-white animate-bounce"
             >
               Press to see your travel recommendations!
             </button>

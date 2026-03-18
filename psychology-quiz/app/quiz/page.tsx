@@ -188,11 +188,12 @@ export default function QuizPage() {
 
   if (!showQuiz) {
     return (
-      <div className="min-h-screen w-full bg-neutral-200 flex items-center justify-center px-6">
-        <div className="mx-auto max-w-[430px] w-full flex items-center justify-center min-h-screen">
-          <div className="animate-pulse text-gray-500">
-            {!currentQuestion ? 'Loading questions…' : 'Preparing quiz…'}
-          </div>
+      <div className="min-h-screen w-full bg-neutral-200 flex items-center justify-center">
+        <div className="mx-auto max-w-[430px] w-full min-h-screen flex flex-col items-center justify-center gap-6 px-6 bg-[#0088ff]">
+          <div className="w-10 h-10 border-2 border-white/30 border-t-white rounded-full animate-spin" aria-hidden />
+          <p className="text-white/90 text-lg font-medium">
+            {!currentQuestion ? 'Loading questions…' : 'Preparing your quiz…'}
+          </p>
         </div>
       </div>
     );
@@ -202,7 +203,7 @@ export default function QuizPage() {
   if (resultLoading) {
     return (
       <div className="min-h-screen w-full bg-neutral-200 flex items-center justify-center">
-        <div className="mx-auto max-w-[430px] w-full min-h-screen flex flex-col items-center justify-center gap-6 px-6 bg-gradient-to-br from-slate-900 to-slate-800">
+        <div className="mx-auto max-w-[430px] w-full min-h-screen flex flex-col items-center justify-center gap-6 px-6 bg-[#0088ff]">
           <div className="w-10 h-10 border-2 border-white/30 border-t-white rounded-full animate-spin" aria-hidden />
           <p className="text-white/90 text-lg font-medium">Calculating your result…</p>
         </div>
