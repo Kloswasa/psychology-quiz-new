@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { SoundToggleButton } from '@/components/SoundToggleButton';
 
 const SWIPE_THRESHOLD = 60;
 
@@ -90,8 +91,9 @@ function StaticAsset({
       currentLeft = leftPercent;
       currentTop = topPercent;
     } else if (phase === 'swipeComplete') {
-      currentLeft = leftPercent;
-      currentTop = topPercent - 10;
+      // On swipe complete, have images follow the leftward gesture
+      currentLeft = leftPercent - 30;
+      currentTop = topPercent;
       opacity = 0;
     }
   } else {
@@ -100,6 +102,9 @@ function StaticAsset({
     } else if (phase === 'headingFadeIn' || phase === 'imagesSpread' || phase === 'readySwipe') {
       opacity = 1;
     } else if (phase === 'swipeComplete') {
+      // Nudge heading left as well so it follows the swipe
+      currentLeft = PAGE_CENTER.left - 30;
+      currentTop = topPercent;
       opacity = 0;
     }
   }
@@ -157,6 +162,7 @@ export function HomePage() {
     };
   }, []);
 
+
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
   }, []);
@@ -193,6 +199,8 @@ export function HomePage() {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
+      <SoundToggleButton className="absolute right-3 top-3 z-30" />
+
       {/* Full-height background – spans content + footer so image connects seamlessly */}
       <div
         className={`absolute inset-0 z-0 transition-opacity duration-700 ${

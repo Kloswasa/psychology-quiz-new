@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { useSound } from '@/components/SoundContext';
 
 /**
  * Global background audio that starts once the user first interacts
@@ -9,6 +10,7 @@ import { usePathname } from 'next/navigation';
  */
 export function BackgroundAudio() {
   const pathname = usePathname();
+  const { enabled } = useSound();
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [hasStarted, setHasStarted] = useState(false);
 
@@ -28,7 +30,7 @@ export function BackgroundAudio() {
 
   // Start playback on first user interaction while on the homepage
   useEffect(() => {
-    if (hasStarted || pathname !== '/') return;
+    if (hasStarted || pathname !== '/' || !enabled) return;
     if (!audioRef.current) return;
 
     const startAudio = () => {
@@ -57,7 +59,21 @@ export function BackgroundAudio() {
       window.removeEventListener('touchstart', startAudio);
       window.removeEventListener('keydown', startAudio);
     };
-  }, [hasStarted, pathname]);
+  }, [hasStarted, pathname, enabled]);
+
+  // React to enabled state changes after audio has started
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio || !hasStarted) return;
+    if (enabled) {
+      const playPromise = audio.play();
+      if (playPromise && typeof playPromise.then === 'function') {
+        playPromise.catch(() => {});
+      }
+    } else {
+      audio.pause();
+    }
+  }, [enabled, hasStarted]);
 
   return null;
 }

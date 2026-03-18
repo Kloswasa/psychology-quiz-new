@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+import { SoundToggleButton } from '@/components/SoundToggleButton';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
@@ -18,7 +19,8 @@ export function IntroPage3({ isActive = false }: IntroPage3Props) {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="relative flex flex-col items-center justify-center min-h-screen">
+    <SoundToggleButton className="absolute right-3 top-3 z-30" />
     <div className="flex flex-col items-center justify-center py-6  bg-white mx-8 my-6">
       {/* Header */}
       <motion.div

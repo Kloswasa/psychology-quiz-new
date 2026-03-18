@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { SoundToggleButton } from '@/components/SoundToggleButton';
 
 const cardVariants = {
   hiddenLeft: { opacity: 0, x: -80 },
@@ -17,7 +18,9 @@ type IntroPage1Props = { isActive?: boolean };
 
 export function IntroPage1({ isActive = false }: IntroPage1Props) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-full px-6 py-8 overflow-y-auto">
+    <div className="relative flex flex-col items-center justify-center min-h-full px-6 py-8 overflow-y-auto">
+      {/* Sound toggle – glassmorphic, top right */}
+      <SoundToggleButton className="absolute right-3 top-3 z-30" />
       {/* Upper card – stacked, centered */}
       <motion.div
         className="w-full max-w-[280px] rounded-2xl bg-[#faf8f5] shadow-lg p-6 py-6 sm:p-10 mb-6"

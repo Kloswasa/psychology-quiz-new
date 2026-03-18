@@ -220,6 +220,34 @@ export default function TravelerResult({
 
   const [saving, setSaving] = useState(false);
 
+  // Show a one-time, bottom-of-screen hint overlay when the user first lands
+  // on the result page. It disappears on the first scroll and does not reappear
+  // until the user navigates back to this page again.
+  const [showScrollHint, setShowScrollHint] = useState(true);
+
+  useEffect(() => {
+    if (!showScrollHint) return;
+
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setShowScrollHint(false);
+        window.removeEventListener('scroll', handleScroll);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [showScrollHint]);
+
+  const handleScrollHintClick = useCallback(() => {
+    if (typeof window === 'undefined') return;
+    setShowScrollHint(false);
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    });
+  }, []);
+
   const handleSave = useCallback(async () => {
     const imageToSave = shareImageUrl ?? resultImageSrc ?? imageUrl;
     if (!imageToSave || typeof window === 'undefined') {
@@ -340,6 +368,20 @@ export default function TravelerResult({
           </div>
         </section>
       </div>
+
+      {showScrollHint && (
+        <div className="fixed inset-x-0 bottom-0 z-50">
+          <div className="mx-auto max-w-lg ">
+            <button
+              type="button"
+              onClick={handleScrollHintClick}
+              className="w-full rounded-2xl bg-gradient-to-t from-black/90 via-black/60 to-transparent py-6 text-center text-sm font-semibold tracking-wide text-white animate-bounce"
+            >
+              Press to see your travel recommendations!
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

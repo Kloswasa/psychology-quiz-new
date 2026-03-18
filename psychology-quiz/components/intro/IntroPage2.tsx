@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { SoundToggleButton } from '@/components/SoundToggleButton';
 
 const cardVariants = {
   hiddenLeft: { opacity: 0, x: -80 },
@@ -28,7 +29,9 @@ export function IntroPage2({ isActive = false }: IntroPage2Props) {
   }, [isActive, hasImageShown]);
 
   return (
-    <div className="flex flex-col min-h-full px-10 py-6 overflow-y-auto items-center justify-center">
+    <div className="relative flex flex-col min-h-full px-10 py-6 overflow-y-auto items-center justify-center">
+      {/* Sound toggle – glassmorphic, top right */}
+      <SoundToggleButton className="absolute right-3 top-3 z-30" />
       {/* Blue block – How to play */}
       <motion.div
         className="w-full  bg-[#0088ff] p-6 pb-8 text-white"
