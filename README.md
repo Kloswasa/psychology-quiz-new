@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Travel Personality Quiz
 
-## Getting Started
+A RIASEC-based travel personality quiz (Next.js): intro → quiz → result with shareable outcomes and destination recommendations.
 
-First, run the development server:
+## Tech stack
+
+| Layer | Technology |
+|-------|------------|
+| Framework | Next.js 16 (App Router) |
+| UI | React 19, Tailwind CSS 4, Framer Motion |
+| Data | PostgreSQL + Prisma |
+| Language | TypeScript |
+
+## Prerequisites
+
+- **Node.js** 20+ (LTS recommended)
+- **PostgreSQL** (local or hosted, e.g. [Neon](https://neon.tech), [Supabase](https://supabase.com), [Vercel Postgres](https://vercel.com/storage/postgres))
+
+## Quick start
+
+All commands below are from the **`psychology-quiz`** app directory.
 
 ```bash
+cd psychology-quiz
+npm install
+cp .env.example .env
+# Edit .env and set DATABASE_URL to your PostgreSQL connection string
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### First-time database setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The app uses Prisma. After setting `DATABASE_URL` in `.env`:
 
-## Learn More
+```bash
+npx prisma migrate deploy
+npx prisma db seed
+```
 
-To learn more about Next.js, take a look at the following resources:
+This creates tables and seeds questions, traveler types, and destination data.  
+**Note:** The `build` script runs `prisma generate`, `prisma migrate deploy`, and `prisma db seed` — ensure the database is reachable at build time if you deploy with seed-on-build.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Environment variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `DATABASE_URL` | Yes | PostgreSQL connection string (e.g. `postgresql://user:pass@host:5432/dbname`) |
 
-## Deploy on Vercel
+See `.env.example` in the `psychology-quiz` folder. Do not commit `.env`; it is gitignored.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Scripts (from `psychology-quiz/`)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Script | Description |
+|--------|-------------|
+| `npm run dev` | Start Next.js dev server |
+| `npm run build` | Generate Prisma client, run migrations, seed DB, build Next.js |
+| `npm run start` | Run production server (after `build`) |
+| `npm run lint` | Run ESLint |
+
+## Project structure (app: `psychology-quiz/`)
+
+```
+psychology-quiz/
+├── app/
+│   ├── page.tsx           # Home
+│   ├── intro/page.tsx     # Intro carousel
+│   ├── quiz/page.tsx      # Quiz flow
+│   ├── result/page.tsx    # Result + share
+│   ├── api/
+│   │   ├── questions/     # GET quiz questions
+│   │   └── traveler-type/[type]/  # GET result by RIASEC type
+│   ├── layout.tsx
+│   └── globals.css
+├── components/            # UI components (Home, Intro, Quiz, Result, Share)
+├── lib/
+│   ├── prisma.ts          # Prisma singleton
+│   └── types.ts           # RiasecType, theme colors
+├── prisma/
+│   ├── schema.prisma      # Questions, Answers, TravelerType
+│   └── seed.ts            # Seed data (questions, types, destinations)
+└── public/                # Static assets (see docs/ASSETS.md)
+```
+
+## Assets and content
+
+- **Media:** Images and sounds are referenced under `public/` (e.g. `public/images/`, `public/sounds/`). The seed and UI expect a specific set of files. See **`psychology-quiz/docs/ASSETS.md`** for the full list.
+- **Copy & destinations:** Quiz questions, answers, traveler type copy, and destination links are in **`prisma/seed.ts`**. Edit the seed and re-run `npx prisma db seed` (or reset DB) to change content.
+
+## Handoff and design
+
+- **Product/design handoff:** See **`psychology-quiz/docs/HANDOFF.md`** for user flows, design decisions, and what to hand off to the company.
+- **Design tokens:** Fonts and personality theme colors are documented in the handoff doc and in `lib/types.ts` / `app/globals.css`.
+
+## Deployment
+
+1. Set `DATABASE_URL` in the deployment environment (e.g. Vercel project env).
+2. Ensure the database is migrated and seeded (e.g. run `prisma migrate deploy` and `prisma db seed` in a build step or release pipeline).
+3. Build: from `psychology-quiz/`, run `npm run build` then `npm run start`, or connect the repo to Vercel and use the same build command.
+
+For Vercel: set the **root directory** to `psychology-quiz` if the repo root is one level up.
+
+## License
+
+Proprietary / as agreed with the company.

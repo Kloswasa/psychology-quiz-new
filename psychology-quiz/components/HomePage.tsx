@@ -23,6 +23,9 @@ type AnimationPhase =
   | 'readySwipe'
   | 'swipeComplete';
 
+/** Small random rotation (deg) for twitch; one of -2, -1, 1, 2 */
+const TWITCH_ANGLES = [-4, -1, 1, 3];
+
 /**
  * Responsive asset: position and size in % of container so layout scales
  * without collisions on different screen sizes. Figma node 946:4243.
@@ -47,6 +50,28 @@ function StaticAsset({
   isHeading?: boolean;
 }) {
   const isRightSide = leftPercent >= PAGE_CENTER.left;
+  const [twitchDeg, setTwitchDeg] = useState(0);
+
+  // Occasional small rotation twitch for non-heading assets (return to original)
+  useEffect(() => {
+    if (isHeading || phase !== 'readySwipe') return;
+    const timeouts: ReturnType<typeof setTimeout>[] = [];
+    const scheduleNext = () => {
+      const delay = 2500 + Math.random() * 3500; // 2.5–6 s between twitches
+      const t = setTimeout(() => {
+        const angle = TWITCH_ANGLES[Math.floor(Math.random() * TWITCH_ANGLES.length)];
+        setTwitchDeg(angle);
+        const reset = setTimeout(() => {
+          setTwitchDeg(0);
+          scheduleNext();
+        }, 200 + Math.random() * 150);
+        timeouts.push(reset);
+      }, delay);
+      timeouts.push(t);
+    };
+    scheduleNext();
+    return () => timeouts.forEach(clearTimeout);
+  }, [isHeading, phase]);
 
   let currentLeft = leftPercent;
   let currentTop = topPercent;
@@ -79,6 +104,9 @@ function StaticAsset({
     }
   }
 
+  const twitchRotate = isHeading ? 0 : twitchDeg;
+  const transform = `translate(-50%, -50%) rotate(${rotate}) rotate(${twitchRotate}deg)`;
+
   return (
     <div
       className="absolute min-w-0"
@@ -87,10 +115,10 @@ function StaticAsset({
         top: `${currentTop}%`,
         width: `${widthPercent}%`,
         zIndex,
-        transform: 'translate(-50%, -50%) rotate(' + rotate + ')',
+        transform,
         opacity,
         transition:
-          'left 800ms cubic-bezier(0.22, 0.61, 0.36, 1), top 800ms cubic-bezier(0.22, 0.61, 0.36, 1), opacity 600ms ease-out',
+          'left 800ms cubic-bezier(0.22, 0.61, 0.36, 1), top 800ms cubic-bezier(0.22, 0.61, 0.36, 1), opacity 600ms ease-out, transform 180ms ease-out',
       }}
     >
       {children}
@@ -98,7 +126,7 @@ function StaticAsset({
   );
 }
 
-/** Swipe-up area at bottom – adjust these to change size and look */
+/** Swipe-left area at bottom – adjust these to change size and look */
 const SWIPE_ZONE = {
   minHeight: 120,          // min height (px); also used for “swipe starts in bottom zone” detection
   paddingTop: 24,           // space above label (p x); e.g. 24, 32, 48
@@ -110,7 +138,7 @@ const SWIPE_ZONE = {
 
 export function HomePage() {
   const router = useRouter();
-  const touchStartY = useRef(0);
+  const touchStart = useRef({ x: 0, y: 0 });
   const [swipeHint, setSwipeHint] = useState(false);
   const [phase, setPhase] = useState<AnimationPhase>('offscreen');
   const [swipeCompleted, setSwipeCompleted] = useState(false);
@@ -130,16 +158,16 @@ export function HomePage() {
   }, []);
 
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    touchStartY.current = e.touches[0].clientY;
+    touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
   }, []);
 
   const handleTouchEnd = useCallback(
     (e: React.TouchEvent) => {
-      const endY = e.changedTouches[0].clientY;
-      const delta = touchStartY.current - endY;
+      const endX = e.changedTouches[0].clientX;
+      const delta = touchStart.current.x - endX;
       const bottomZoneStart =
         typeof window !== 'undefined' ? window.innerHeight - SWIPE_ZONE.minHeight : 500;
-      const startInZone = touchStartY.current > bottomZoneStart;
+      const startInZone = touchStart.current.y > bottomZoneStart;
       if (delta > SWIPE_THRESHOLD && startInZone) {
         setSwipeCompleted(true);
         setPhase('swipeComplete');
@@ -380,7 +408,7 @@ export function HomePage() {
         </StaticAsset>
       </div>
 
-      {/* Swipe up CTA – separate footer div, always at the bottom; swipe up (from bottom zone) or tap to continue */}
+      {/* Swipe left CTA – separate footer div, always at the bottom; swipe left (from bottom zone) or tap to continue */}
       <div
         className={`relative z-10 flex shrink-0 flex-col items-center justify-center gap-1 px-4 sm:px-6 pb-safe ${SWIPE_ZONE.textColor} drop-shadow-md transition-opacity duration-700 ${
           swipeCompleted ? 'opacity-0' : 'opacity-100'
@@ -401,7 +429,7 @@ export function HomePage() {
               ? 'opacity-0 translate-y-6 pointer-events-none'
               : ''
           } ${
-            swipeCompleted ? '-translate-y-[120vh] opacity-0 pointer-events-none' : ''
+            swipeCompleted ? '-translate-x-[120vw] opacity-0 pointer-events-none' : ''
           }`}
         >
           <button
@@ -421,16 +449,16 @@ export function HomePage() {
               backdropFilter: 'blur(8px) saturate(150%)',
               WebkitBackdropFilter: 'blur(8px) saturate(150%)',
             }}
-            aria-label="Swipe up or press to continue"
+            aria-label="Swipe left or press to continue"
           >
             {/* Glassmorphic overlay – same as choice answers */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-100" />
             <span className="relative z-10 flex items-center gap-6"
             style={{color: '#0088ff' }}
 >
-              <Image src="/icons/swipe-up.svg" alt="" width={20} height={20} className="size-5 shrink-0 opacity-90" aria-hidden />
-              <span className={SWIPE_ZONE.labelClass}>Swipe up</span>
-              <Image src="/icons/swipe-up.svg" alt="" width={20} height={20} className="size-5 shrink-0 opacity-90" aria-hidden />
+              <Image src="/icons/swipe-left.svg" alt="" width={20} height={20} className="size-5 shrink-0 opacity-90" aria-hidden />
+              <span className={SWIPE_ZONE.labelClass}>Swipe left</span>
+              <Image src="/icons/swipe-left.svg" alt="" width={20} height={20} className="size-5 shrink-0 opacity-90" aria-hidden />
             </span>
           </button>
         </div>
