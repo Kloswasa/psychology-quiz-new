@@ -5,6 +5,8 @@ import { useEffect, useMemo, useState } from 'react';
 import ProgressBar from '@/components/ProgressBar';
 import BackButton from '@/components/BackButton';
 import QuestionCard from '@/components/QuestionCard';
+import { SoundToggleButton } from '@/components/SoundToggleButton';
+import { useSound } from '@/components/SoundContext';
 import { RiasecType } from '@/lib/types';
 import { calculateResult } from '@/lib/calculateResult';
 import { useRouter } from 'next/navigation';
@@ -56,6 +58,7 @@ export default function QuizPage() {
   const [answers, setAnswers] = useState<(RiasecType | null)[]>(new Array(10).fill(null));
   const [isAdvancing, setIsAdvancing] = useState(false);
   const router = useRouter();
+  const { enabled: soundEnabled } = useSound();
 
   useEffect(() => {
     (async () => {
@@ -167,7 +170,7 @@ export default function QuizPage() {
 
   // Play per-question sound when a question becomes active
   useEffect(() => {
-    if (!showQuiz) return;
+    if (!showQuiz || !soundEnabled) return;
 
     const questionNumber = current + 1;
     const audio = new Audio(`/sounds/question-${questionNumber}.mp3`);
@@ -184,7 +187,7 @@ export default function QuizPage() {
       audio.pause();
       audio.currentTime = 0;
     };
-  }, [showQuiz, current]);
+  }, [showQuiz, current, soundEnabled]);
 
   if (!showQuiz) {
     return (
@@ -234,7 +237,8 @@ export default function QuizPage() {
           </div>
           {/* Progress bar + Back overlaid on top of image area */}
           <header className="absolute top-0 left-0 right-0 z-20 p-4 flex items-center justify-between gap-4 bg-gradient-to-b from-black/40 to-transparent pointer-events-none">
-            <div className="pointer-events-auto flex-1">
+            <div className="pointer-events-auto flex-1 flex items-center gap-3">
+              <SoundToggleButton className="shrink-0" />
               <ProgressBar current={current + 1} total={total} />
             </div>
             <div className="pointer-events-auto">
