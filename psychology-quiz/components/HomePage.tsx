@@ -227,7 +227,7 @@ export function HomePage() {
         {/* G'Day / sticker – top-left */}
         <StaticAsset
           leftPercent={16}
-          topPercent={13}
+          topPercent={8}
           widthPercent={23}
           rotate="-8deg"
           zIndex={3}
@@ -248,7 +248,7 @@ export function HomePage() {
         {/* Beach polaroid – top mid-left */}
         <StaticAsset
           leftPercent={45}
-          topPercent={24}
+          topPercent={19}
           widthPercent={63}
           rotate="-10deg"
           zIndex={2}
@@ -291,7 +291,7 @@ export function HomePage() {
         {/* Koala stamp – upper right */}
         <StaticAsset
           leftPercent={85}
-          topPercent={32}
+          topPercent={27}
           widthPercent={20}
           rotate="15deg"
           zIndex={4}
@@ -312,7 +312,7 @@ export function HomePage() {
         {/* Australia Calls heading – page center (reference for other asset positions) */}
         <StaticAsset
           leftPercent={PAGE_CENTER.left}
-          topPercent={53}
+          topPercent={43}
           widthPercent={85}
           rotate="0deg"
           zIndex={10}
@@ -329,10 +329,73 @@ export function HomePage() {
           </div>
         </StaticAsset>
 
+        {/* Swipe left CTA – positioned under heading */}
+        <StaticAsset
+          leftPercent={PAGE_CENTER.left}
+          topPercent={57}
+          widthPercent={76}
+          rotate="0deg"
+          zIndex={11}
+          phase={phase}
+        >
+          <div
+            className={`w-full max-w-sm flex flex-col items-center transition-transform transition-opacity duration-700 ${
+              phase === 'readySwipe' && !swipeCompleted
+                ? 'opacity-100 translate-y-0 animate-bounce-up'
+                : ''
+            } ${
+              phase !== 'readySwipe' && !swipeCompleted
+                ? 'opacity-0 translate-y-6 pointer-events-none'
+                : ''
+            } ${swipeCompleted ? '-translate-x-[120vw] opacity-0 pointer-events-none' : ''}`}
+          >
+            <button
+              type="button"
+              onClick={handleSwipeZoneClick}
+              onMouseEnter={() => setSwipeHint(true)}
+              onMouseLeave={() => setSwipeHint(false)}
+              className="
+                relative overflow-hidden w-full flex flex-col items-center justify-center gap-1 rounded-2xl px-6 py-2
+                backdrop-blur-sm bg-white/85 border border-white/30
+                transition-all duration-300 touch-manipulation
+                hover:bg-white/20 hover:border-white/50 shadow-lg hover:shadow-xl
+                active:scale-95
+                focus:outline-none
+              "
+              style={{
+                backdropFilter: 'blur(8px) saturate(150%)',
+                WebkitBackdropFilter: 'blur(8px) saturate(150%)',
+              }}
+              aria-label="Swipe left or press to continue"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-100" />
+              <span className="relative z-10 flex items-center gap-6" style={{ color: '#0088ff' }}>
+                <Image
+                  src="/icons/swipe-left.svg"
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="size-5 shrink-0 opacity-90"
+                  aria-hidden
+                />
+                <span className={SWIPE_ZONE.labelClass}>Swipe left</span>
+                <Image
+                  src="/icons/swipe-left.svg"
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="size-5 shrink-0 opacity-90"
+                  aria-hidden
+                />
+              </span>
+            </button>
+          </div>
+        </StaticAsset>
+
         {/* Forest polaroid – lower left */}
         <StaticAsset
           leftPercent={45}
-          topPercent={85}
+          topPercent={78}
           widthPercent={47}
           rotate="15deg"
           zIndex={6}
@@ -354,7 +417,7 @@ export function HomePage() {
         {/* Wildlife ahead badge – lower left, over forest */}
         <StaticAsset
           leftPercent={18}
-          topPercent={75}
+          topPercent={68}
           widthPercent={22}
           rotate="6deg"
           zIndex={7}
@@ -375,7 +438,7 @@ export function HomePage() {
         {/* Kangaroo – lower middle */}
         <StaticAsset
           leftPercent={72}
-          topPercent={73}
+          topPercent={68}
           widthPercent={30}
           rotate="60deg"
           zIndex={8}
@@ -396,7 +459,7 @@ export function HomePage() {
         {/* Boomerang – lower right */}
         <StaticAsset
           leftPercent={70}
-          topPercent={88}
+          topPercent={83}
           widthPercent={70}
           rotate="-70deg"
           zIndex={6}
@@ -414,62 +477,6 @@ export function HomePage() {
             />
           </div>
         </StaticAsset>
-      </div>
-
-      {/* Swipe left CTA – separate footer div, always at the bottom; swipe left (from bottom zone) or tap to continue */}
-      <div
-        className={`relative z-10 flex shrink-0 flex-col items-center justify-center gap-1 px-4 sm:px-6 pb-safe ${SWIPE_ZONE.textColor} drop-shadow-md transition-opacity duration-700 ${
-          swipeCompleted ? 'opacity-0' : 'opacity-100'
-        }`}
-        style={{
-          minHeight: SWIPE_ZONE.minHeight,
-          paddingTop: SWIPE_ZONE.paddingTop,
-          fontFamily: 'var(--font-bitter), sans-serif',
-        }}
-      >
-        <div
-          className={`w-full max-w-sm flex flex-col items-center transition-transform transition-opacity duration-700 ${
-            phase === 'readySwipe' && !swipeCompleted
-              ? 'opacity-100 translate-y-0 animate-bounce-up'
-              : ''
-          } ${
-            phase !== 'readySwipe' && !swipeCompleted
-              ? 'opacity-0 translate-y-6 pointer-events-none'
-              : ''
-          } ${
-            swipeCompleted ? '-translate-x-[120vw] opacity-0 pointer-events-none' : ''
-          }`}
-        >
-          <button
-            type="button"
-            onClick={handleSwipeZoneClick}
-            onMouseEnter={() => setSwipeHint(true)}
-            onMouseLeave={() => setSwipeHint(false)}
-            className="
-              relative overflow-hidden w-full flex flex-col items-center justify-center gap-1 rounded-2xl px-6 py-3
-              backdrop-blur-sm bg-white/85 border border-white/30
-              transition-all duration-300 touch-manipulation
-              hover:bg-white/20 hover:border-white/50 shadow-lg hover:shadow-xl
-              active:scale-95
-              focus:outline-none
-            "
-            style={{
-              backdropFilter: 'blur(8px) saturate(150%)',
-              WebkitBackdropFilter: 'blur(8px) saturate(150%)',
-            }}
-            aria-label="Swipe left or press to continue"
-          >
-            {/* Glassmorphic overlay – same as choice answers */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-100" />
-            <span className="relative z-10 flex items-center gap-6"
-            style={{color: '#0088ff' }}
->
-              <Image src="/icons/swipe-left.svg" alt="" width={20} height={20} className="size-5 shrink-0 opacity-90" aria-hidden />
-              <span className={SWIPE_ZONE.labelClass}>Swipe left</span>
-              <Image src="/icons/swipe-left.svg" alt="" width={20} height={20} className="size-5 shrink-0 opacity-90" aria-hidden />
-            </span>
-          </button>
-        </div>
       </div>
     </div>
   );

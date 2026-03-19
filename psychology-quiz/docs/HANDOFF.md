@@ -52,7 +52,7 @@ Home (/) → Intro (/intro) → Quiz (/quiz) → Result (/result)
 
 - **RIASEC model:** Six types — Realistic, Investigative, Artistic, Social, Enterprising, Conventional. Each type has a dedicated color and optional imagery (see `lib/types.ts` for `PERSONALITY_THEME_COLORS`).
 - **Mobile-first, PWA-friendly:** Viewport and touch-friendly targets; safe-area insets used for notched devices (e.g. `pb-safe`, `env(safe-area-inset-bottom)`).
-- **Background audio:** Optional BGM on home/quiz (see `BackgroundAudio.tsx` and quiz page). Company can make it toggleable or remove.
+- **Background audio:** Optional BGM on home/quiz (see `BackgroundAudio.tsx` and quiz page). The company can make it toggleable or remove.
 - **Share:** Result page supports sharing; asset expectations (e.g. share images per type) are in `docs/ASSETS.md`.
 
 ### Share behavior (clarify during integration)
