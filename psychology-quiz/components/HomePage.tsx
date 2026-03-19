@@ -370,23 +370,7 @@ export function HomePage() {
             >
               <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-100" />
               <span className="relative z-10 flex items-center gap-6" style={{ color: '#0088ff' }}>
-                <Image
-                  src="/icons/swipe-left.svg"
-                  alt=""
-                  width={20}
-                  height={20}
-                  className="size-5 shrink-0 opacity-90"
-                  aria-hidden
-                />
-                <span className={SWIPE_ZONE.labelClass}>Swipe left</span>
-                <Image
-                  src="/icons/swipe-left.svg"
-                  alt=""
-                  width={20}
-                  height={20}
-                  className="size-5 shrink-0 opacity-90"
-                  aria-hidden
-                />
+                <span className={SWIPE_ZONE.labelClass}>Press to start</span>
               </span>
             </button>
           </div>
@@ -438,7 +422,7 @@ export function HomePage() {
         {/* Kangaroo – lower middle */}
         <StaticAsset
           leftPercent={72}
-          topPercent={68}
+          topPercent={66}
           widthPercent={30}
           rotate="60deg"
           zIndex={8}

@@ -203,6 +203,7 @@ export default function QuestionCard({
                       relative z-10
                       drop-shadow-lg
                       ${isGrid ? 'text-center block' : 'text-left'}
+                      text-base font-medium
                       font-semibold
                     `}>
                     {a.text}
