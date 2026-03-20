@@ -77,7 +77,7 @@ export default function QuestionCard({
         transition={{ duration: 0.6, ease: 'easeOut' }}
       />
       {/* Content pinned to bottom */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 space-y-4 w-full max-h-[85vh] overflow-y-auto p-4 pb-safe">
+      <div className="absolute bottom-0 left-0 right-0 z-10 space-y-3 sm:space-y-4 w-full max-h-[85vh] max-h-[min(85dvh,85svh)] overflow-y-auto p-3 sm:p-4 md:p-5 pb-safe">
         {/* Question text */}
         <motion.h2 
           style={{ 
@@ -85,7 +85,7 @@ export default function QuestionCard({
             fontFamily: 'var(--font-bitter), sans-serif',
             fontWeight: '800',
           }}
-          className="text-lg font-bold leading-tight drop-shadow-lg text-center w-full"
+          className="text-base sm:text-lg font-bold leading-tight drop-shadow-lg text-center w-full"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, ease: 'easeOut', delay: 0.35 }}
@@ -166,7 +166,7 @@ export default function QuestionCard({
         ) : (
           // Text-only answers (original layout)
           <div className={`
-            ${isGrid ? 'grid grid-cols-2 gap-3' : 'flex flex-col gap-3'}
+            ${isGrid ? 'grid grid-cols-2 gap-2.5 sm:gap-3' : 'flex flex-col gap-2.5 sm:gap-3'}
           `}>
             {answers.map((a) => {
               const isActive = selected === a.riasecType;
@@ -176,13 +176,13 @@ export default function QuestionCard({
                   onClick={() => onSelect(a.riasecType)}
                   className={`
                     relative overflow-hidden
-                    ${isGrid ? 'min-h-[120px]' : 'min-h-[48px]'}
+                    ${isGrid ? 'min-h-[120px]' : 'min-h-[40px] sm:min-h-[48px]'}
                     rounded-2xl
-                    p-3
+                    ${isGrid ? 'p-3' : 'p-2 sm:p-3'}
                     transition-all duration-300
                     active:scale-95
                     touch-manipulation
-                    text-base font-medium
+                    text-sm sm:text-base font-medium
                     group
                     ${isActive 
                       ? 'backdrop-blur-md bg-white/30 border-2 border-white/60 shadow-2xl ring-2 ring-white/50' 
@@ -203,7 +203,7 @@ export default function QuestionCard({
                       relative z-10
                       drop-shadow-lg
                       ${isGrid ? 'text-center block' : 'text-left'}
-                      text-base font-medium
+                      text-sm sm:text-base font-medium
                       font-semibold
                     `}>
                     {a.text}
