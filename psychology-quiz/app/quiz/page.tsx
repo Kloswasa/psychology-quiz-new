@@ -216,7 +216,7 @@ export default function QuizPage() {
 
   return (
     <div className="min-h-screen w-full bg-neutral-200 flex justify-center">
-      <div className="h-screen h-[100dvh] max-w-[430px] w-full overflow-hidden relative flex flex-col">
+      <div className="h-screen max-w-[430px] w-full overflow-hidden relative flex flex-col">
         {/* Main - card fills full height; header overlays on top of image area */}
         <main className="flex-1 min-h-0 overflow-hidden flex flex-col relative">
           <div className="flex-1 min-h-0 flex flex-col">
