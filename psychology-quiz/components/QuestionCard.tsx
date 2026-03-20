@@ -1,8 +1,7 @@
 'use client';
 import { RiasecType } from '@/lib/types';
 import ImageAnswer from './ImageAnswer';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 
 type AnswerOption = {
   id: string;
@@ -28,30 +27,6 @@ export default function QuestionCard({
   selected,
   onSelect,
 }: Props) {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollMore, setCanScrollMore] = useState(false);
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-
-    const checkOverflow = () => {
-      const scrollable = el.scrollHeight > el.clientHeight + 4;
-      const atBottom = el.scrollHeight - el.scrollTop <= el.clientHeight + 4;
-      setCanScrollMore(scrollable && !atBottom);
-    };
-
-    const ro = new ResizeObserver(checkOverflow);
-    ro.observe(el);
-    el.addEventListener('scroll', checkOverflow);
-    checkOverflow();
-
-    return () => {
-      ro.disconnect();
-      el.removeEventListener('scroll', checkOverflow);
-    };
-  }, []);
-
   // Get text color based on question index
   const getTextColor = (questionIndex: number) => {
     const colors = [
@@ -91,8 +66,8 @@ export default function QuestionCard({
       };
 
   return (
-    <div className="relative h-full min-h-0 w-full ">
-      {/* Background fills the card container (contained in max-w column on quiz page) */}
+    <div className="relative h-full min-h-0 w-full">
+      {/* Background fills the card container */}
       <motion.div
         className="absolute inset-0 z-0 w-full bg-no-repeat bg-cover bg-center"
         style={bgStyle}
@@ -101,16 +76,16 @@ export default function QuestionCard({
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
       />
-      {/* Content pinned to bottom */}
-      <div ref={scrollRef} className="absolute bottom-0 left-0 right-0 z-10 space-y-4 w-full max-h-[85vh] overflow-y-auto p-4 pb-safe">
+      {/* Content pinned to bottom – flex column so answers fill remaining space */}
+      <div className="absolute bottom-0 left-0 right-0 z-10 flex flex-col gap-3 w-full max-h-[85vh] overflow-hidden p-4 pb-safe">
         {/* Question text */}
-        <motion.h2 
+        <motion.h2
           style={{ 
             color: getTextColor(questionIndex),
             fontFamily: 'var(--font-bitter), sans-serif',
             fontWeight: '800',
           }}
-          className="text-lg font-bold leading-tight drop-shadow-lg text-center w-full"
+          className="shrink-0 text-lg font-bold leading-tight drop-shadow-lg text-center w-full"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, ease: 'easeOut', delay: 0.35 }}
@@ -118,15 +93,16 @@ export default function QuestionCard({
           {questionText}
         </motion.h2>
         
-        {/* Answers - dynamic layout based on count and type */}
+        {/* Answers – flex-1 so it fills the remaining vertical space */}
         <motion.div
+          className="flex-1 min-h-0 flex flex-col"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: 'easeOut', delay: 0.7 }}
         >
         {isImageGrid ? (
           // Image-based answers (2x2 grid layout – used for 4 image answers)
-          <div className="grid grid-cols-2 gap-2 sm:gap-3 justify-items-center">
+          <div className="grid grid-cols-2 gap-2 sm:gap-3 justify-items-center h-full">
             {answers.map((a) => (
               <ImageAnswer
                 key={a.id}
@@ -140,8 +116,8 @@ export default function QuestionCard({
             ))}
           </div>
         ) : isImageListFive ? (
-          // Full-image answers in a 5-answer vertical list (no visible text)
-          <div className="flex flex-col gap-2 sm:gap-3">
+          // Full-image answers in a 5-answer vertical list – each button stretches equally
+          <div className="flex flex-col gap-2 h-full">
             {answers.map((a) => {
               const isActive = selected === a.riasecType;
               const isGif = a.imageUrl?.toLowerCase().endsWith('.gif') ?? false;
@@ -152,8 +128,8 @@ export default function QuestionCard({
                   key={a.id}
                   onClick={() => onSelect(a.riasecType)}
                   className={`
+                    flex-1 min-h-0
                     relative overflow-hidden
-                    min-h-[48px]
                     rounded-2xl
                     transition-all duration-300
                     active:scale-95
@@ -191,7 +167,9 @@ export default function QuestionCard({
         ) : (
           // Text-only answers (original layout)
           <div className={`
-            ${isGrid ? 'grid grid-cols-2 gap-2 sm:gap-3' : 'flex flex-col gap-2 sm:gap-3'}
+            ${isGrid
+              ? 'grid grid-cols-2 gap-2 sm:gap-3 h-full'
+              : 'flex flex-col gap-2 h-full'}
           `}>
             {answers.map((a) => {
               const isActive = selected === a.riasecType;
@@ -201,7 +179,7 @@ export default function QuestionCard({
                   onClick={() => onSelect(a.riasecType)}
                   className={`
                     relative overflow-hidden
-                    ${isGrid ? 'min-h-[120px]' : 'min-h-[48px]'}
+                    ${isGrid ? 'min-h-[80px]' : 'flex-1 min-h-0'}
                     rounded-2xl
                     p-3
                     transition-all duration-300
@@ -240,42 +218,6 @@ export default function QuestionCard({
         )}
         </motion.div>
       </div>
-
-      {/* Scroll hint – visible only when answers overflow the panel */}
-      <AnimatePresence>
-        {canScrollMore && (
-          <motion.div
-            className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 h-20 flex flex-col items-center justify-end pb-3"
-            style={{
-              background: 'linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 100%)',
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-          >
-            <motion.div
-              animate={{ y: [0, 5, 0] }}
-              transition={{ duration: 1.1, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="white"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden
-              >
-                <polyline points="6 9 12 15 18 9" />
-              </svg>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
-
