@@ -39,9 +39,9 @@ export function IntroPage3({ isActive = false }: IntroPage3Props) {
         
       </motion.div>
 
-      {/* Orange panel + sample image */}
+      {/* Hype panel + sample animal image */}
       <motion.div
-        className="  bg-[#FFF5E5] p-2 pb-6 mx-[-1rem]"
+        className="  bg-[#FFF5E5] p-2 pb-6 mx-[-1rem] shadow-md"
         initial="hidden"
         animate={isActive ? 'visible' : 'hidden'}
         variants={fadeInUp}

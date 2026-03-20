@@ -1,5 +1,6 @@
 'use client';
 
+import { useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { SoundToggleButton } from '@/components/SoundToggleButton';
 
@@ -17,6 +18,37 @@ const cardVariants = {
 type IntroPage1Props = { isActive?: boolean };
 
 export function IntroPage1({ isActive = false }: IntroPage1Props) {
+  const [showSwipeHint, setShowSwipeHint] = useState(false);
+
+  useEffect(() => {
+    let timeoutId: number | undefined;
+
+    const handleScroll = () => {
+      setShowSwipeHint(false);
+      if (timeoutId) window.clearTimeout(timeoutId);
+      window.removeEventListener('scroll', handleScroll);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    timeoutId = window.setTimeout(() => {
+      setShowSwipeHint(true);
+    }, 3000);
+
+    return () => {
+      if (timeoutId) window.clearTimeout(timeoutId);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const handleSwipeHintClick = useCallback(() => {
+    if (typeof window === 'undefined') return;
+    setShowSwipeHint(false);
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    });
+  }, []);
+
   return (
     <div className="relative flex flex-col items-center justify-center min-h-full px-6 py-8 overflow-y-auto">
       {/* Sound toggle – glassmorphic, top right */}
@@ -91,6 +123,20 @@ export function IntroPage1({ isActive = false }: IntroPage1Props) {
           Your result will help you find the best travel experiences!
         </p> */}
       </motion.div>
+
+      {showSwipeHint && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
+          <div className="w-full max-w-[430px]">
+            <button
+              type="button"
+              onClick={handleSwipeHintClick}
+              className="w-full rounded-2xl bg-gradient-to-t from-transparent via-black/50 to-transparent py-6 text-center text-sm font-semibold tracking-wide text-white animate-bounce"
+            >
+              Swipe left for more introduction
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
