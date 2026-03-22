@@ -446,7 +446,7 @@ const questions: Array<{
 }> = [
   {
     text: 'In the first day of your trip, a wombat sneaks into camp and steals your snack. What’s your reaction?',
-    backgroundImage: '/images/backgrounds/question1-bg.png',
+    backgroundImage: '/images/backgrounds/question1-bg.webp',
     answers: [
       { text: 'Observe its eating habits', riasecType: 'INVESTIGATIVE' },
       { text: 'Check what food is left', riasecType: 'CONVENTIONAL' },
