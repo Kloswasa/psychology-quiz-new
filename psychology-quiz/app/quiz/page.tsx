@@ -7,7 +7,7 @@ import BackButton from '@/components/BackButton';
 import QuestionCard from '@/components/QuestionCard';
 import { SoundToggleButton } from '@/components/SoundToggleButton';
 import { useSound } from '@/components/SoundContext';
-import { RiasecType } from '@/lib/types';
+import { RiasecType, RIASEC_TYPES } from '@/lib/types';
 import { calculateResult } from '@/lib/calculateResult';
 import { useRouter } from 'next/navigation';
 
@@ -204,11 +204,26 @@ export default function QuizPage() {
 
   // After user chose final answer: show loading page before navigating to result
   if (resultLoading) {
+    const startIndex = RIASEC_TYPES.indexOf(resultLoading);
+    const cycleTypes =
+      startIndex >= 0
+        ? [...RIASEC_TYPES.slice(startIndex), ...RIASEC_TYPES.slice(0, startIndex)]
+        : RIASEC_TYPES;
+
     return (
       <div className="min-h-screen w-full bg-neutral-200 flex items-center justify-center">
-        <div className="mx-auto max-w-[430px] w-full min-h-screen flex flex-col items-center justify-center gap-6 px-6 bg-[#0088ff]">
-          <div className="w-10 h-10 border-2 border-white/30 border-t-white rounded-full animate-spin" aria-hidden />
-          <p className="text-white/90 text-lg font-medium">Calculating your result…</p>
+        <div className="mx-auto max-w-[430px] w-full min-h-screen flex flex-col items-center justify-center gap-6 px-6 bg-white">
+          <div className="result-type-carousel w-40 h-40" aria-hidden>
+            {cycleTypes.map((type) => (
+              <img
+                key={type}
+                src={`/images/results/${'result-' + type}.webp`}
+                alt=""
+                className="result-type-carousel-img"
+              />
+            ))}
+          </div>
+          <p className="text-[#0088ff]/90 text-lg font-medium " style={{ fontFamily: 'var(--font-permanent-marker), cursive' }}>Calculating your result…</p>
         </div>
       </div>
     );
