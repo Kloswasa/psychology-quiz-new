@@ -86,10 +86,33 @@ export default function QuizPage() {
   // Once we have questions, preload all images (background + answer images) so the quiz runs seamlessly
   useEffect(() => {
     if (!questions?.length) return;
-    const urls = questions.flatMap((q) => [
-      q.backgroundImage,
-      ...(q.answers?.map((a) => a.imageUrl).filter(Boolean) ?? []),
-    ]) as string[];
+    const choiceImageUrls = questions.flatMap((q) =>
+      (q.answers ?? [])
+        .map((a) => a.imageUrl)
+        .filter((u): u is string => Boolean(u))
+        .flatMap((url) => {
+          // For GIF choices, the UI shows the `.webp` first and swaps to the GIF on selection.
+          // Preload both to prevent any visual "pop" during/after user selection.
+          const gifMatch = url.match(/\.gif$/i);
+          if (gifMatch) {
+            const staticUrl = url.replace(/\.gif$/i, '.webp');
+            return [url, staticUrl];
+          }
+          return [url];
+        }),
+    );
+
+    const backgroundImageUrls = questions.map((q) => q.backgroundImage).filter(Boolean);
+
+    const resultLoadingImageUrls = RIASEC_TYPES.map(
+      (type) => `/images/results/result-${type}.webp`,
+    );
+
+    const urls = [
+      ...backgroundImageUrls,
+      ...choiceImageUrls,
+      ...resultLoadingImageUrls,
+    ] as string[];
     let cancelled = false;
     preloadImages(urls).then(() => {
       if (!cancelled) setImagesReady(true);
