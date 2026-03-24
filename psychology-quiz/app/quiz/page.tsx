@@ -215,7 +215,7 @@ export default function QuizPage() {
   if (!showQuiz) {
     return (
       <div className="min-h-screen w-full bg-neutral-200 flex items-center justify-center">
-        <div className="mx-auto max-w-[430px] w-full min-h-screen flex flex-col items-center justify-center   bg-[#adbb45]">
+        <div className="mx-auto max-w-[430px] w-full min-h-screen flex flex-col items-center justify-center px-6 bg-[#adbb45]">
           <img
             src="/images/results/quiz-loading.gif"
             alt="Loading wombat"
