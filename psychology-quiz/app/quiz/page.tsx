@@ -215,8 +215,13 @@ export default function QuizPage() {
   if (!showQuiz) {
     return (
       <div className="min-h-screen w-full bg-neutral-200 flex items-center justify-center">
-        <div className="mx-auto max-w-[430px] w-full min-h-screen flex flex-col items-center justify-center gap-6 px-6 bg-[#0088ff]">
-          <div className="w-10 h-10 border-2 border-white/30 border-t-white rounded-full animate-spin" aria-hidden />
+        <div className="mx-auto max-w-[430px] w-full min-h-screen flex flex-col items-center justify-center   bg-[#adbb45]">
+          <img
+            src="/images/results/quiz-loading.gif"
+            alt="Loading wombat"
+            aria-hidden
+            className="w-40 h-40 object-contain"
+          />
           <p className="text-white/90 text-lg font-medium">
             {!currentQuestion ? 'Loading questions…' : 'Preparing your quiz…'}
           </p>
