@@ -214,8 +214,8 @@ export default function QuizPage() {
 
   if (!showQuiz) {
     return (
-      <div className="min-h-[100dvh] w-full bg-neutral-200 flex items-center justify-center">
-        <div className="mx-auto max-w-[430px] w-full min-h-[100dvh] flex flex-col items-center justify-center px-6 bg-[#adbb45]">
+      <div className="min-h-screen w-full bg-neutral-200 flex items-center justify-center">
+        <div className="mx-auto max-w-[430px] w-full min-h-screen flex flex-col items-center justify-center px-6 bg-[#adbb45]">
           <img
             src="/images/results/quiz-loading.gif"
             alt="Loading wombat"
@@ -239,8 +239,8 @@ export default function QuizPage() {
         : RIASEC_TYPES;
 
     return (
-      <div className="min-h-[100dvh] w-full bg-neutral-200 flex items-center justify-center">
-        <div className="mx-auto max-w-[430px] w-full min-h-[100dvh] flex flex-col items-center justify-center gap-6 px-6 bg-white">
+      <div className="min-h-screen w-full bg-neutral-200 flex items-center justify-center">
+        <div className="mx-auto max-w-[430px] w-full min-h-screen flex flex-col items-center justify-center gap-6 px-6 bg-white">
           <div className="result-type-carousel w-40 h-40" aria-hidden>
             {cycleTypes.map((type) => (
               <img
@@ -258,8 +258,8 @@ export default function QuizPage() {
   }
 
   return (
-    <div className="min-h-[100dvh] w-full bg-neutral-200 flex justify-center">
-      <div className="h-[100dvh] max-w-[430px] w-full overflow-hidden relative flex flex-col">
+    <div className="min-h-screen w-full bg-neutral-200 flex justify-center">
+      <div className="h-screen max-w-[430px] w-full overflow-hidden relative flex flex-col">
         {/* Main - card fills full height; header overlays on top of image area */}
         <main className="flex-1 min-h-0 overflow-hidden flex flex-col relative">
           <div className="flex-1 min-h-0 flex flex-col">

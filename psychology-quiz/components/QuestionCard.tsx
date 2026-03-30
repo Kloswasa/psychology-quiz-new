@@ -77,7 +77,7 @@ export default function QuestionCard({
         transition={{ duration: 0.6, ease: 'easeOut' }}
       />
       {/* Content pinned to bottom */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 space-y-4 w-full max-h-[85dvh] overflow-y-auto p-4 pb-safe">
+      <div className="absolute bottom-0 left-0 right-0 z-10 space-y-4 w-full max-h-[85vh] overflow-y-auto p-4 pb-safe">
         {/* Question text */}
         <motion.h2 
           style={{ 
