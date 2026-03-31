@@ -50,7 +50,7 @@ export function IntroPage1({ isActive = false }: IntroPage1Props) {
   }, []);
 
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-[85dvh] px-6 py-8 overflow-y-auto ">
+    <div className="relative flex flex-col items-center justify-center min-h-[100dvh] px-6 py-8 overflow-y-auto">
       {/* Sound toggle – glassmorphic, top right */}
       <SoundToggleButton className="absolute right-3 top-3 z-30" />
       {/* Upper card – stacked, centered */}
@@ -76,7 +76,7 @@ export function IntroPage1({ isActive = false }: IntroPage1Props) {
 
       {/* Lower card – continues below upper, centered */}
       <motion.div
-        className="w-full max-w-[260px] -mt6 rounded-2xl bg-[#FFF9D9] p-4 sm:p-7 md:p-10 shadow-lg max-h-[55vh] overflow-y-auto"
+        className="w-full max-w-[260px] -mt6 rounded-2xl bg-[#FFF9D9] p-4 sm:p-7 md:p-10 shadow-lg max-h-[55dvh] overflow-y-auto"
         initial="hiddenRight"
         animate={isActive ? 'visible' : 'hiddenRight'}
         variants={cardVariants}
