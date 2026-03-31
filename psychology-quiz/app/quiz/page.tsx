@@ -214,7 +214,7 @@ export default function QuizPage() {
 
   if (!showQuiz) {
     return (
-      <div className="min-h-[100dvh] w-full bg-neutral-200 flex items-center justify-center">
+      <div className=" w-full bg-neutral-200 flex items-center justify-center">
         <div className="mx-auto max-w-[430px] w-full min-h-[100dvh] flex flex-col items-center justify-center px-6 bg-[#adbb45]">
           <img
             src="/images/results/quiz-loading.gif"
