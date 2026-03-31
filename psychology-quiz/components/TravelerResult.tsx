@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect, useMemo } from 'react';
 import ShareButton from '@/components/ShareButton';
+import { SoundToggleButton } from '@/components/SoundToggleButton';
 
 type Destination = { name: string; reason: string; url?: string; imageUrl?: string };
 
@@ -283,8 +284,11 @@ export default function TravelerResult({
           className={`${SECTION_RADIUS} overflow-hidden bg-[#FFF5E5] shadow-lg`}
           data-result-card
         >
-          {/* Result image – full image shown at natural aspect ratio */}
-          <div className="w-full bg-[#E8E4DC]">
+          {/* Result image – full image shown at natural aspect ratio, with sound toggle */}
+          <div className="relative w-full bg-[#E8E4DC]">
+            <div className="absolute right-2 top-2 z-10">
+              <SoundToggleButton />
+            </div>
             {resultImageSrc ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img

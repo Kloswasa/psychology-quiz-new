@@ -81,7 +81,7 @@ export function IntroPage3({ isActive = false }: IntroPage3Props) {
         <motion.button
           type="button"
           onClick={() => router.push('/quiz')}
-          className="my-2 w-full max-w-[200px] rounded-xl bg-[#0088ff] text-white font-semibold py-3 px-6 shadow-md transition-transform"
+          className="my-2 w-full max-w-[200px] rounded-xl bg-[#0088ff] text-white text-base font-semibold py-3 px-6 shadow-md transition-transform"
           animate={
             isActive
               ? { scale: [1, 0.95, 0.7] }
