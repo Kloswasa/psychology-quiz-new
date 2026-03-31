@@ -195,7 +195,7 @@ export function HomePage() {
 
   return (
     <div
-      className="relative mx-auto flex min-h-screen max-w-[430px] w-full flex-col overflow-hidden bg-white"
+      className="relative mx-auto flex min-h-[100dvh] max-w-[430px] w-full flex-col overflow-hidden bg-white"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >

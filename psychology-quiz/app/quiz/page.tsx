@@ -222,7 +222,7 @@ export default function QuizPage() {
             aria-hidden
             className="w-40 h-40 object-contain"
           />
-          <p className="text-white/90 text-lg font-medium">
+          <p className="text-white/90 text-lg font-medium" style={{ fontFamily: 'var(--font-permanent-marker), cursive' }}>
             {!currentQuestion ? 'Loading questions…' : 'Preparing your quiz…'}
           </p>
         </div>

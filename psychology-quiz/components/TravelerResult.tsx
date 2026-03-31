@@ -74,8 +74,8 @@ function RecommendationCarousel({ destinations, themeColor }: { destinations: De
             <button
               type="button"
               className="mt-2 w-fit 
-              flex-1 rounded-full 
-              border border-neutral-300 
+              flex-1 rounded-xl 
+              border-2 border-neutral-300 
               bg-white px-4 py-1.5 
               text-base font-semibold 
               transition 
@@ -154,7 +154,7 @@ function TextCarousel({
   return (
     <div className="mt-3">
       <div
-        className="flex min-h-[4.5rem] items-center justify-center overflow-hidden rounded-xl bg-white/80 px-4 py-3 shadow-sm"
+        className="flex h-[5rem] items-center justify-center overflow-hidden rounded-xl bg-white/80 px-4 py-12 shadow-sm"
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
       >

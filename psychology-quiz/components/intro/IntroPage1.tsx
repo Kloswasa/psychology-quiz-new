@@ -50,7 +50,7 @@ export function IntroPage1({ isActive = false }: IntroPage1Props) {
   }, []);
 
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-full px-6 py-8 overflow-y-auto">
+    <div className="relative flex flex-col items-center justify-center min-h-[100dvh] px-6 py-8 overflow-y-auto">
       {/* Sound toggle – glassmorphic, top right */}
       <SoundToggleButton className="absolute right-3 top-3 z-30" />
       {/* Upper card – stacked, centered */}
