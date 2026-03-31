@@ -66,8 +66,11 @@ w-full min-h-[140px] sm:min-h-[160px] md:h-[182px] h-auto        rounded-2xl
       {/* Text */}
       <div className="w-full  shrink-0 px-4">
         <p 
-          style={{ color: textColor }}
-          className="text-center text-base font-medium font-semibold leading-tight "
+          style={{ 
+            color: textColor,
+            fontFamily: 'var(--font-bitter), serif',
+          }}
+          className="text-center text-sm font-medium font-semibold leading-tight "
         >
           {text}
         </p>

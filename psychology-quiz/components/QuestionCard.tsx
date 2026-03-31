@@ -82,7 +82,7 @@ export default function QuestionCard({
         <motion.h2 
           style={{ 
             color: getTextColor(questionIndex),
-            fontFamily: 'var(--font-bitter), sans-serif',
+            fontFamily: 'var(--font-inter), system-ui, sans-serif',
             fontWeight: '800',
           }}
           className="text-lg font-bold leading-tight drop-shadow-lg text-center w-full"
@@ -198,7 +198,10 @@ export default function QuestionCard({
                   
                   {/* Answer text */}
                   <span 
-                    style={{ color: getTextColor(questionIndex) }}
+                    style={{ 
+                      color: getTextColor(questionIndex),
+                      fontFamily: 'var(--font-bitter), serif',
+                    }}
                     className={`
                       relative z-10
                       drop-shadow-lg

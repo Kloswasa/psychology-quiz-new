@@ -71,8 +71,8 @@ export function IntroPage2({ isActive = false }: IntroPage2Props) {
         style={{ fontFamily: 'var(--font-bitter), sans-serif', fontWeight: '800' }}
       >
         <p className="text-white text-center text-md mt-6 " >
-          It is the golden rule to play this quiz, more intuition you use, the best
-          result it be.
+          "It is the golden rule to play this quiz, more intuition you use, the best
+          result it be."
         </p>
         <motion.img
           src="/intro/buself.png"
