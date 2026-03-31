@@ -19,7 +19,7 @@ export function IntroPage3({ isActive = false }: IntroPage3Props) {
   const router = useRouter();
 
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-[100dvh] max-h-[85dvh]">
+    <div className="relative flex flex-col items-center justify-center max-h-[85dvh]">
     <SoundToggleButton className="absolute right-3 top-3 z-30" />
     <div className="flex flex-col items-center justify-center py-6  bg-white mx-8 my-6">
       {/* Header */}
